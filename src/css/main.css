@@ -1,0 +1,32 @@
+/**
+ * Main CSS Entry Point
+ * Imports all modular CSS files in the correct order
+ * 
+ * Structure:
+ * 1. Base - Reset, variables, typography
+ * 2. Layout - Grid, containers, sections
+ * 3. Components - Reusable UI components
+ * 4. Sections - Page-specific section styles
+ * 5. Utilities - Animations, effects, helpers
+ */
+
+/* ==================== BASE ==================== */
+@import './base/_reset.css';
+@import './base/_variables.css';
+@import './base/_typography.css';
+
+/* ==================== LAYOUT ==================== */
+@import './layout/_layout.css';
+
+/* ==================== COMPONENTS ==================== */
+@import './components/_navbar.css';
+@import './components/_cards.css';
+@import './components/_buttons.css';
+
+/* ==================== SECTIONS ==================== */
+@import './sections/_hero.css';
+@import './sections/_sections.css';
+
+/* ==================== UTILITIES ==================== */
+@import './utilities/_animations.css';
+@import './utilities/_backgrounds.css';

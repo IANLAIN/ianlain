@@ -1,0 +1,238 @@
+/**
+ * Hero Section Styles
+ * Hero, profile, and landing section styles
+ */
+
+/* ==================== HERO SECTION ==================== */
+
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    background: var(--background);
+}
+
+.hypercube-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: var(--gradient-bg-radial);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.hero-content {
+    text-align: center;
+    z-index: 2;
+    max-width: 1200px;
+    padding: 0 var(--space-8);
+    animation: fadeInUp 1s var(--ease-smooth);
+}
+
+/* ==================== PROFILE ==================== */
+
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-10);
+}
+
+.profile-image-wrapper {
+    position: relative;
+    margin-bottom: var(--space-6);
+}
+
+.profile-image {
+    width: 220px;
+    height: 220px;
+    border-radius: var(--radius-full);
+    object-fit: cover;
+    border: 4px solid transparent;
+    background: linear-gradient(var(--background), var(--background)) padding-box,
+                var(--gradient-secondary) border-box;
+    box-shadow: var(--shadow-glow), 0 20px 40px rgba(0, 0, 0, 0.5);
+    transition: transform var(--transition-slow);
+    animation: profileFloat 6s ease-in-out infinite;
+    will-change: transform;
+}
+
+@keyframes profileFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.profile-image:hover {
+    transform: scale(1.1);
+}
+
+.profile-glow {
+    position: absolute;
+    inset: -15px;
+    border-radius: var(--radius-full);
+    background: var(--gradient-secondary);
+    opacity: 0.3;
+    z-index: -1;
+    animation: pulseGlow 3s ease-in-out infinite;
+    filter: blur(15px);
+    pointer-events: none;
+}
+
+@keyframes pulseGlow {
+    0%, 100% { transform: scale(1); opacity: 0.3; }
+    50% { transform: scale(1.1); opacity: 0.5; }
+}
+
+.profile-game-link {
+    display: block;
+    cursor: default;
+}
+
+/* Profile Orbit Rings */
+.profile-image-wrapper::before,
+.profile-image-wrapper::after {
+    content: '';
+    position: absolute;
+    border: 2px solid transparent;
+    border-radius: var(--radius-full);
+    pointer-events: none;
+}
+
+.profile-image-wrapper::before {
+    inset: -30px;
+    border-top-color: var(--primary);
+    animation: orbit 8s linear infinite;
+}
+
+.profile-image-wrapper::after {
+    inset: -20px;
+    border-bottom-color: var(--secondary);
+    animation: orbit 6s linear infinite reverse;
+}
+
+@keyframes orbit {
+    to { transform: rotate(360deg); }
+}
+
+/* ==================== HERO TEXT ==================== */
+
+.hero-text {
+    text-align: center;
+}
+
+.hero-title {
+    margin-bottom: var(--space-4);
+}
+
+.nickname {
+    display: block;
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-extrabold);
+    background: var(--gradient-secondary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: var(--letter-spacing-tight);
+}
+
+.hero-subtitle {
+    font-size: var(--font-size-lg);
+    background: var(--gradient-tech);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--space-4);
+}
+
+.hero-description {
+    font-size: var(--font-size-lg);
+    color: var(--text-muted);
+    margin-bottom: var(--space-10);
+    line-height: var(--line-height-relaxed);
+}
+
+/* ==================== SCROLL INDICATOR ==================== */
+
+.scroll-indicator {
+    position: absolute;
+    bottom: var(--space-12);
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.scroll-arrow {
+    color: var(--primary);
+    font-size: 2rem;
+    animation: bounce 2.5s ease-in-out infinite;
+    cursor: pointer;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-15px); }
+    60% { transform: translateY(-8px); }
+}
+
+/* ==================== RESPONSIVE ==================== */
+
+@media (max-width: 768px) {
+    .hero-content {
+        padding: 0 var(--space-4);
+    }
+    
+    .nickname {
+        font-size: 2.2rem;
+    }
+    
+    .hero-subtitle {
+        font-size: var(--font-size-base);
+    }
+    
+    .hero-description {
+        font-size: var(--font-size-sm);
+        padding: 0 var(--space-4);
+    }
+    
+    .profile-image {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .profile-image-wrapper::before,
+    .profile-image-wrapper::after,
+    .profile-glow {
+        display: none;
+    }
+    
+    .scroll-indicator {
+        bottom: var(--space-6);
+    }
+    
+    .hypercube-bg {
+        opacity: 0.7;
+    }
+}
+
+@media (max-width: 480px) {
+    .nickname {
+        font-size: 1.8rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 0.9rem;
+    }
+    
+    .profile-image {
+        width: 120px;
+        height: 120px;
+    }
+}

@@ -1,0 +1,320 @@
+/**
+ * Galaga Game Styles
+ * Modular CSS for the Galaga mini-game
+ */
+
+/* ========================================
+   CSS Variables
+======================================== */
+:root {
+    --game-cyan: #06b6d4;
+    --game-purple: #8b5cf6;
+    --game-emerald: #10b981;
+    --game-red: #ef4444;
+    --game-yellow: #fbbf24;
+    --game-dark: #0a0a1a;
+}
+
+/* ========================================
+   Reset
+======================================== */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ========================================
+   Base
+======================================== */
+body {
+    background: #000;
+    overflow: hidden;
+    font-family: 'Press Start 2P', 'Courier New', monospace;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* ========================================
+   Game Container & Canvas
+======================================== */
+#gameContainer {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(ellipse at center, var(--game-dark) 0%, #000 100%);
+}
+
+#gameCanvas {
+    background: transparent;
+    display: block;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+/* ========================================
+   HUD (Heads Up Display)
+======================================== */
+#hud {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
+}
+
+.hud-item {
+    color: var(--game-cyan);
+    font-size: 14px;
+    text-shadow: 0 0 10px var(--game-cyan);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.hud-item span {
+    color: #fff;
+}
+
+/* Lives Display */
+#lives {
+    display: flex;
+    gap: 8px;
+}
+
+.life-icon {
+    width: 20px;
+    height: 20px;
+    background: var(--game-cyan);
+    clip-path: polygon(50% 0%, 100% 100%, 50% 75%, 0% 100%);
+    box-shadow: 0 0 10px var(--game-cyan);
+    transition: all 0.3s ease;
+}
+
+.life-icon.lost {
+    background: #333;
+    box-shadow: none;
+}
+
+/* HUD Buttons */
+.hud-btn {
+    background: transparent;
+    border: 1px solid var(--game-cyan);
+    color: var(--game-cyan);
+    padding: 5px 10px;
+    cursor: pointer;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 10px;
+    margin-right: 10px;
+    transition: all 0.2s ease;
+}
+
+.hud-btn:hover,
+.hud-btn:focus {
+    background: rgba(6, 182, 212, 0.2);
+    box-shadow: 0 0 10px var(--game-cyan);
+    outline: none;
+}
+
+/* ========================================
+   Screens (Start, Pause, Game Over)
+======================================== */
+.screen {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 200;
+    transition: opacity 0.5s ease;
+    padding: 20px;
+}
+
+.screen.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.screen h1 {
+    font-family: 'Press Start 2P', monospace;
+    font-size: clamp(24px, 5vw, 48px);
+    color: var(--game-cyan);
+    text-shadow: 
+        0 0 20px var(--game-cyan), 
+        0 0 40px var(--game-cyan);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.screen h2 {
+    font-family: 'Press Start 2P', monospace;
+    font-size: clamp(16px, 3vw, 24px);
+    color: var(--game-purple);
+    margin-bottom: 30px;
+}
+
+.screen p {
+    font-family: 'Press Start 2P', monospace;
+    font-size: clamp(10px, 2vw, 14px);
+    color: #888;
+    margin: 10px 0;
+    text-align: center;
+    line-height: 2;
+}
+
+/* Buttons */
+.btn {
+    font-family: 'Press Start 2P', monospace;
+    font-size: clamp(12px, 2vw, 16px);
+    padding: 15px 40px;
+    margin: 20px 10px;
+    background: linear-gradient(135deg, var(--game-cyan), var(--game-purple));
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.btn:hover,
+.btn:focus {
+    transform: scale(1.1);
+    box-shadow: 0 0 30px rgba(6, 182, 212, 0.8);
+    outline: none;
+}
+
+.btn-secondary {
+    background: transparent;
+    border: 2px solid var(--game-cyan);
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+    background: rgba(6, 182, 212, 0.2);
+}
+
+/* Score Displays */
+#highScore {
+    color: var(--game-yellow);
+    text-shadow: 0 0 10px var(--game-yellow);
+}
+
+#finalScore {
+    font-size: clamp(20px, 4vw, 36px);
+    color: var(--game-emerald);
+    text-shadow: 0 0 20px var(--game-emerald);
+}
+
+#newHighScore {
+    animation: pulse 0.5s ease infinite alternate;
+}
+
+@keyframes pulse {
+    from { transform: scale(1); }
+    to { transform: scale(1.1); }
+}
+
+/* ========================================
+   Touch Controls
+======================================== */
+#touchControls {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 150px;
+    display: none;
+    z-index: 50;
+}
+
+/* Show touch controls on touch devices */
+@media (pointer: coarse) {
+    #touchControls {
+        display: flex;
+    }
+}
+
+.touch-zone {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(6, 182, 212, 0.1);
+    border: 1px solid rgba(6, 182, 212, 0.3);
+    transition: background 0.2s ease;
+}
+
+.touch-zone:active {
+    background: rgba(6, 182, 212, 0.3);
+}
+
+.touch-zone i {
+    font-size: 40px;
+    color: rgba(6, 182, 212, 0.5);
+}
+
+/* ========================================
+   Responsive Design
+======================================== */
+@media (max-width: 768px) {
+    #hud {
+        padding: 10px 15px;
+    }
+    
+    .hud-item {
+        font-size: 10px;
+    }
+    
+    .life-icon {
+        width: 15px;
+        height: 15px;
+    }
+    
+    .hud-btn {
+        padding: 4px 8px;
+        font-size: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hud-item {
+        font-size: 8px;
+    }
+    
+    .life-icon {
+        width: 12px;
+        height: 12px;
+    }
+    
+    .btn {
+        padding: 12px 30px;
+    }
+}
+
+/* ========================================
+   Accessibility
+======================================== */
+@media (prefers-reduced-motion: reduce) {
+    .screen,
+    .btn,
+    .hud-btn {
+        transition: none;
+    }
+    
+    #newHighScore {
+        animation: none;
+    }
+}

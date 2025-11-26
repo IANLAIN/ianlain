@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="description" content="Ian's Galaga - A retro space shooter game">
+    <meta name="theme-color" content="#06b6d4">
+    <title>Ian's Galaga</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+    <link rel="alternate icon" type="image/png" href="../../../images/favicon-32.png" sizes="32x32">
+    
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/galaga.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+</head>
+<body>
+    <!-- Game Container -->
+    <div id="gameContainer">
+        <canvas id="gameCanvas"></canvas>
+    </div>
+
+    <!-- HUD (Heads Up Display) -->
+    <div id="hud">
+        <div class="hud-item">
+            SCORE: <span id="scoreDisplay">0</span>
+        </div>
+        <div class="hud-item" id="lives">
+            <div class="life-icon"></div>
+            <div class="life-icon"></div>
+            <div class="life-icon"></div>
+        </div>
+        <div class="hud-item">
+            <button id="muteBtn" class="hud-btn" aria-label="Toggle sound">
+                <i class="fas fa-volume-up"></i>
+            </button>
+            <button id="pauseBtn" class="hud-btn" aria-label="Pause game">
+                <i class="fas fa-pause"></i>
+            </button>
+            HIGH: <span id="highScoreDisplay">0</span>
+        </div>
+    </div>
+
+    <!-- Pause Screen -->
+    <div id="pauseScreen" class="screen hidden">
+        <h1>PAUSED</h1>
+        <button class="btn" id="resumeBtn">RESUME</button>
+        <button class="btn btn-secondary" id="quitBtn">QUIT</button>
+    </div>
+
+    <!-- Start Screen -->
+    <div id="startScreen" class="screen">
+        <h1>Ian's Galaga</h1>
+        <p>Use ← → arrows or touch sides to move</p>
+        <p>Auto-fire enabled</p>
+        <p>Destroy aliens & asteroids!</p>
+        <p style="margin-top: 20px;">HIGH SCORE: <span id="highScore">0</span></p>
+        <button class="btn" id="startBtn">START GAME</button>
+        <button class="btn btn-secondary" id="backBtn">← BACK TO SITE</button>
+    </div>
+
+    <!-- Game Over Screen -->
+    <div id="gameOverScreen" class="screen hidden">
+        <h1>GAME OVER</h1>
+        <p>YOUR SCORE</p>
+        <h2 id="finalScore">0</h2>
+        <p id="newHighScore" style="color: #fbbf24; display: none;">🎉 NEW HIGH SCORE! 🎉</p>
+        <button class="btn" id="restartBtn">PLAY AGAIN</button>
+        <button class="btn btn-secondary" id="backBtn2">← BACK TO SITE</button>
+    </div>
+
+    <!-- Touch Controls -->
+    <div id="touchControls">
+        <div class="touch-zone" id="touchLeft" aria-label="Move left">
+            <i class="fas fa-chevron-left"></i>
+        </div>
+        <div class="touch-zone" id="touchRight" aria-label="Move right">
+            <i class="fas fa-chevron-right"></i>
+        </div>
+    </div>
+
+    <!-- Modular JavaScript -->
+    <script type="module" src="js/game.js"></script>
+</body>
+</html>
