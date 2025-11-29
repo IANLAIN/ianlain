@@ -1,7 +1,4 @@
-/**
- * Animations Module
- * Scroll animations, reveal effects, and scroll-to-top functionality
- */
+// Módulo de animaciones de scroll
 
 import { APP_CONFIG, SELECTORS, CLASSES } from '../core/constants.js';
 import { DOM } from '../core/dom.js';
@@ -18,9 +15,7 @@ import {
     $$
 } from '../core/utils.js';
 
-/**
- * Initialize scroll animations for elements
- */
+// Inicializar animaciones de scroll
 export function initAnimations() {
     if (prefersReducedMotion()) {
         Logger.log('Animations', 'Reduced motion preferred, skipping');
@@ -62,9 +57,7 @@ export function initAnimations() {
     Logger.log('Animations', `Initialized for ${animatedElements.length} elements`);
 }
 
-/**
- * Initialize staggered animation for interest cards
- */
+// Animación escalonada para cards
 function initCardStaggerAnimation() {
     const interestCards = DOM.interestCards;
     
@@ -89,14 +82,11 @@ function initCardStaggerAnimation() {
     interestCards.forEach(card => cardObserver.observe(card));
 }
 
-/**
- * Reveal sections on scroll
- */
+// Revelar secciones en scroll
 export function revealSections() {
     if (prefersReducedMotion()) return;
     
     const sections = $$('section');
-    
     if (!sections.length) return;
     
     const revealOnScroll = (entries) => {
@@ -116,7 +106,6 @@ export function revealSections() {
         sectionObserver.observe(section);
     });
     
-    // Hero section is immediately visible
     const heroSection = $('#home');
     if (heroSection) {
         heroSection.style.opacity = '1';
@@ -124,11 +113,8 @@ export function revealSections() {
     }
 }
 
-/**
- * Create and initialize scroll-to-top button
- */
+// Crear botón scroll-to-top
 export function createScrollToTop() {
-    // Create button element with explicit type to prevent form submission behavior
     const scrollBtn = createElement('button', {
         className: 'scroll-to-top',
         type: 'button',
@@ -137,17 +123,13 @@ export function createScrollToTop() {
     
     document.body.appendChild(scrollBtn);
     
-    // Update button visibility on scroll
     const updateVisibility = throttle(() => {
         toggleClass(scrollBtn, CLASSES.visible, window.scrollY > 300);
     }, APP_CONFIG.performance.throttleDelay);
     
     window.addEventListener('scroll', updateVisibility, { passive: true });
-    
-    // Initial check
     updateVisibility();
     
-    // Scroll to top on click
     scrollBtn.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();

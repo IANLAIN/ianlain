@@ -1,14 +1,9 @@
-/**
- * Spaceship Manager Feature
- * Manages animated spaceships flying across the screen
- */
+// Naves animadas decorativas
 
 import { throttle, random } from '../core/utils.js';
 
-/** Ship types available */
 const SHIP_TYPES = ['fighter', 'cruiser', 'scout', 'bomber'];
 
-/** Ship color schemes */
 const SHIP_COLORS = {
     fighter: { primary: '#06b6d4', secondary: '#0891b2', accent: '#67e8f9', engine: '#10b981' },
     cruiser: { primary: '#8b5cf6', secondary: '#7c3aed', accent: '#a78bfa', engine: '#ec4899' },
@@ -23,14 +18,15 @@ export class SpaceshipManager {
         this.ships = [];
         this.lastChaseTime = 0;
         this.chaseInterval = 10000;
+        this.isVisible = true;
+        this.animationId = null;
         
         this.createOverlayCanvas();
+        this.setupVisibilityObserver();
         this.initShips();
     }
     
-    /**
-     * Create overlay canvas for spaceships
-     */
+    // Crear canvas overlay
     createOverlayCanvas() {
         this.canvas = document.createElement('canvas');
         this.canvas.id = 'spaceship-canvas';
@@ -50,26 +46,25 @@ export class SpaceshipManager {
         window.addEventListener('resize', throttle(() => this.resize(), 250));
     }
     
-    /**
-     * Resize canvas to window
-     */
+    // Observer para pausar cuando no es visible
+    setupVisibilityObserver() {
+        document.addEventListener('visibilitychange', () => {
+            this.isVisible = !document.hidden;
+        });
+    }
+    
+    // Redimensionar canvas
     resize() {
         this.canvas.width = window.innerWidth;
         this.canvas.height = window.innerHeight;
     }
     
-    /**
-     * Get color scheme for ship type
-     * @param {string} type - Ship type
-     * @returns {Object} Color scheme
-     */
+    // Obtener colores del tipo de nave
     getShipColors(type) {
         return SHIP_COLORS[type] || SHIP_COLORS.fighter;
     }
     
-    /**
-     * Initialize ship fleet
-     */
+    // Inicializar flota
     initShips() {
         const shipCount = random.int(2, 3);
         
@@ -79,12 +74,7 @@ export class SpaceshipManager {
         }
     }
     
-    /**
-     * Create a new ship
-     * @param {string} type - Ship type
-     * @param {boolean} isChasing - Is part of chase event
-     * @returns {Object} Ship object
-     */
+    // Crear nueva nave
     createShip(type, isChasing) {
         const startEdge = random.int(0, 3);
         let x, y, vx, vy;
@@ -132,9 +122,7 @@ export class SpaceshipManager {
         };
     }
     
-    /**
-     * Start a chase event between two ships
-     */
+    // Iniciar evento de persecución
     startChaseEvent() {
         const now = Date.now();
         if (now - this.lastChaseTime < this.chaseInterval) return;
@@ -224,10 +212,7 @@ export class SpaceshipManager {
         this.ships.push(chaserShip);
     }
     
-    /**
-     * Draw a single ship
-     * @param {Object} ship - Ship to draw
-     */
+    // Dibujar nave individual
     drawShip(ship) {
         const ctx = this.ctx;
         const s = ship.scale * 3;
@@ -249,9 +234,7 @@ export class SpaceshipManager {
         ctx.restore();
     }
     
-    /**
-     * Update all ships
-     */
+    // Actualizar todas las naves
     update() {
         this.startChaseEvent();
         
@@ -281,18 +264,15 @@ export class SpaceshipManager {
         });
     }
     
-    /**
-     * Draw all ships
-     */
+    // Dibujar todas las naves
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ships.forEach(ship => this.drawShip(ship));
     }
     
-    /**
-     * Animation frame
-     */
+    // Frame de animación (solo si es visible)
     animate() {
+        if (!this.isVisible) return;
         this.update();
         this.draw();
     }

@@ -1,7 +1,4 @@
-/**
- * Translations Dictionary
- * Internationalization text content for all supported languages
- */
+// Diccionario de traducciones para ES/EN
 
 export const translations = {
     en: {

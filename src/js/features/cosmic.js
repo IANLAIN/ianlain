@@ -1,7 +1,4 @@
-/**
- * Cosmic Background Feature
- * Renders stars, planets, and shooting stars
- */
+// Fondo cósmico con estrellas y planetas
 
 import { random } from '../core/utils.js';
 
@@ -17,14 +14,9 @@ export class CosmicBackground {
         this.initPlanets();
     }
     
-    /**
-     * Initialize star field
-     */
     initStars() {
         this.stars = [];
-        const starCount = 50;
-        
-        for (let i = 0; i < starCount; i++) {
+        for (let i = 0; i < 50; i++) {
             this.stars.push({
                 x: random.between(0, this.canvas.width),
                 y: random.between(0, this.canvas.height),
@@ -37,24 +29,21 @@ export class CosmicBackground {
         }
     }
     
-    /**
-     * Initialize planets
-     */
     initPlanets() {
-        const planetConfigs = [
+        const configs = [
             { baseSize: 30, color: '#ff6b6b', ringColor: '#feca57', hasRing: true },
             { baseSize: 20, color: '#54a0ff', ringColor: null, hasRing: false },
             { baseSize: 45, color: '#5f27cd', ringColor: '#a29bfe', hasRing: true }
         ];
         
-        this.planets = planetConfigs.map((config, i) => ({
+        this.planets = configs.map((c, i) => ({
             x: random.between(0, this.canvas.width),
             y: random.between(0, this.canvas.height),
-            baseSize: config.baseSize,
-            size: config.baseSize,
-            color: config.color,
-            ringColor: config.ringColor,
-            hasRing: config.hasRing,
+            baseSize: c.baseSize,
+            size: c.baseSize,
+            color: c.color,
+            ringColor: c.ringColor,
+            hasRing: c.hasRing,
             orbitSpeed: random.between(0.0002, 0.0007) * (i % 2 === 0 ? 1 : -1),
             orbitRadius: random.between(50, 150),
             orbitAngle: random.between(0, Math.PI * 2),
@@ -65,24 +54,17 @@ export class CosmicBackground {
         }));
     }
     
-    /**
-     * Handle canvas resize
-     */
     resize() {
         this.stars.forEach(star => {
             star.x = random.between(0, this.canvas.width);
             star.y = random.between(0, this.canvas.height);
         });
-        
         this.planets.forEach(planet => {
             planet.centerX = random.between(0, this.canvas.width);
             planet.centerY = random.between(0, this.canvas.height);
         });
     }
     
-    /**
-     * Randomly add shooting stars
-     */
     addShootingStar() {
         if (random.bool(0.003) && this.shootingStars.length < 2) {
             this.shootingStars.push({
@@ -96,10 +78,7 @@ export class CosmicBackground {
         }
     }
     
-    /**
-     * Main draw method
-     * @param {number} time - Animation time
-     */
+    // Método principal de renderizado
     draw(time) {
         this.drawStars(time);
         this.drawPlanets(time);
@@ -107,10 +86,7 @@ export class CosmicBackground {
         this.addShootingStar();
     }
     
-    /**
-     * Draw star field with twinkling
-     * @param {number} time - Animation time
-     */
+    // Dibujar estrellas con parpadeo
     drawStars(time) {
         this.stars.forEach(star => {
             const twinkle = Math.sin(time * star.twinkleSpeed + star.twinkleOffset);
@@ -124,19 +100,15 @@ export class CosmicBackground {
         });
     }
     
-    /**
-     * Draw orbiting planets
-     * @param {number} time - Animation time
-     */
+    // Dibujar planetas en órbita
     drawPlanets(time) {
         this.planets.forEach(planet => {
-            // Update orbit position
             planet.orbitAngle += planet.orbitSpeed;
             planet.x = planet.centerX + Math.cos(planet.orbitAngle) * planet.orbitRadius * planet.depth;
             planet.y = planet.centerY + Math.sin(planet.orbitAngle) * planet.orbitRadius * planet.depth * 0.3;
             planet.size = planet.baseSize * planet.depth;
             
-            // Draw glow
+            // Resplandor
             const glowGradient = this.ctx.createRadialGradient(
                 planet.x, planet.y, planet.size * 0.5,
                 planet.x, planet.y, planet.size * 2
@@ -146,7 +118,7 @@ export class CosmicBackground {
             this.ctx.fillStyle = glowGradient;
             this.ctx.fillRect(planet.x - planet.size * 2, planet.y - planet.size * 2, planet.size * 4, planet.size * 4);
             
-            // Draw planet body
+            // Cuerpo del planeta
             const bodyGradient = this.ctx.createRadialGradient(
                 planet.x - planet.size * 0.3, planet.y - planet.size * 0.3, 0,
                 planet.x, planet.y, planet.size
@@ -159,7 +131,7 @@ export class CosmicBackground {
             this.ctx.fillStyle = bodyGradient;
             this.ctx.fill();
             
-            // Draw ring if applicable
+            // Anillo si aplica
             if (planet.hasRing && planet.ringColor) {
                 this.ctx.save();
                 this.ctx.translate(planet.x, planet.y);
@@ -175,9 +147,7 @@ export class CosmicBackground {
         });
     }
     
-    /**
-     * Draw and update shooting stars
-     */
+    // Dibujar y actualizar estrellas fugaces
     drawShootingStars() {
         this.shootingStars = this.shootingStars.filter(star => {
             star.x += Math.cos(star.angle) * star.speed;
@@ -188,7 +158,7 @@ export class CosmicBackground {
                 return false;
             }
             
-            // Draw trail
+            // Estela
             const gradient = this.ctx.createLinearGradient(
                 star.x, star.y,
                 star.x - Math.cos(star.angle) * star.length,
@@ -207,7 +177,7 @@ export class CosmicBackground {
             this.ctx.lineWidth = 2;
             this.ctx.stroke();
             
-            // Draw head
+            // Cabeza
             this.ctx.beginPath();
             this.ctx.arc(star.x, star.y, 2, 0, Math.PI * 2);
             this.ctx.fillStyle = `rgba(255, 255, 255, ${star.life})`;
@@ -217,12 +187,7 @@ export class CosmicBackground {
         });
     }
     
-    /**
-     * Darken a hex color
-     * @param {string} color - Hex color
-     * @param {number} factor - Darkening factor (0-1)
-     * @returns {string} RGB color string
-     */
+    // Oscurecer color hex
     darkenColor(color, factor) {
         const hex = color.replace('#', '');
         const r = Math.floor(parseInt(hex.substring(0, 2), 16) * factor);

@@ -1,14 +1,8 @@
-/**
- * Visual Effects Module
- * Floating particles and enhanced visual effects
- */
+// Efectos visuales mejorados
 
 import { createElement, prefersReducedMotion, isMobile, random, Logger } from '../core/utils.js';
 
-/**
- * Create floating particle elements
- * @private
- */
+// Crear partículas flotantes
 function createMinimalParticles() {
     const container = createElement('div', {
         className: 'floating-particles',
@@ -23,7 +17,6 @@ function createMinimalParticles() {
     
     document.body.appendChild(container);
     
-    // Create 10 floating particles
     for (let i = 0; i < 10; i++) {
         const size = random.between(2, 6);
         const particle = createElement('div', {
@@ -47,17 +40,13 @@ function createMinimalParticles() {
     Logger.log('Effects', 'Particles created');
 }
 
-/**
- * Initialize enhanced visual effects
- * Only runs on desktop and when reduced motion is not preferred
- */
+// Inicializar efectos (solo desktop y sin reduced motion)
 export function initEnhancedEffects() {
     if (prefersReducedMotion()) {
         Logger.log('Effects', 'Skipped - reduced motion preferred');
         return;
     }
     
-    // Only run particles on desktop (1024px+)
     if (!isMobile() && window.matchMedia('(min-width: 1024px)').matches) {
         createMinimalParticles();
     }

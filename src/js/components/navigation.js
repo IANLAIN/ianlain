@@ -1,7 +1,4 @@
-/**
- * Navigation Module
- * Handles navbar, hamburger menu, scroll behavior, and active section highlighting
- */
+// Módulo de navegación
 
 import { APP_CONFIG, SELECTORS, CLASSES } from '../core/constants.js';
 import { DOM } from '../core/dom.js';
@@ -17,9 +14,7 @@ import {
 
 let lastScrollPosition = 0;
 
-/**
- * Update active navigation link based on scroll position
- */
+// Actualizar link activo según scroll
 function updateActiveSection() {
     const sections = DOM.sections;
     const navLinks = DOM.navLinks;
@@ -41,19 +36,15 @@ function updateActiveSection() {
     });
 }
 
-/**
- * Handle scroll events for navbar
- */
+// Manejar eventos de scroll
 function handleScroll() {
     const currentScroll = window.pageYOffset;
     const navbar = DOM.navbar;
     
     if (!navbar) return;
     
-    // Add scrolled class when scrolled past threshold
     toggleClass(navbar, CLASSES.scrolled, currentScroll > APP_CONFIG.scroll.threshold);
     
-    // Hide navbar when scrolling down, show when scrolling up
     if (currentScroll > lastScrollPosition && currentScroll > APP_CONFIG.scroll.hideNavThreshold) {
         navbar.style.transform = 'translateY(-100%)';
     } else {
@@ -64,9 +55,7 @@ function handleScroll() {
     updateActiveSection();
 }
 
-/**
- * Close mobile menu
- */
+// Cerrar menú móvil
 function closeMenu() {
     const hamburger = DOM.hamburger;
     const navMenu = DOM.navMenu;
@@ -76,9 +65,7 @@ function closeMenu() {
     document.body.style.overflow = '';
 }
 
-/**
- * Toggle mobile menu
- */
+// Toggle menú móvil
 function toggleMenu() {
     const hamburger = DOM.hamburger;
     const navMenu = DOM.navMenu;
@@ -89,9 +76,7 @@ function toggleMenu() {
     document.body.style.overflow = navMenu.classList.contains(CLASSES.active) ? 'hidden' : '';
 }
 
-/**
- * Initialize navigation functionality
- */
+// Inicializar navegación
 export function initNavigation() {
     const hamburger = DOM.hamburger;
     const navMenu = DOM.navMenu;
