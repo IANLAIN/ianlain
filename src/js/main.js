@@ -17,10 +17,10 @@ function init() {
     revealSections();
     initHypercube();
     
-    // Efectos no críticos (diferidos)
-    setTimeout(() => {
-        initEnhancedEffects();
-    }, 2000);
+    // Efectos no críticos deshabilitados para optimización
+    // setTimeout(() => {
+    //     initEnhancedEffects();
+    // }, 2000);
     
     Logger.log('App', 'Initialization complete');
 }

@@ -13,21 +13,14 @@
     position: relative;
     overflow: hidden;
     background: var(--background);
-    padding-top: 140px; /* Increased padding to prevent header overlap */
+    padding-top: 100px;
 }
 
 .hypercube-bg {
     position: absolute;
     inset: 0;
     z-index: 0;
-}
-
-.hero-overlay {
-    position: absolute;
-    inset: 0;
-    background: transparent;
-    z-index: 1;
-    pointer-events: none;
+    opacity: 0.5;
 }
 
 .hero-content {
@@ -44,12 +37,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--space-6);
+    gap: var(--space-8);
 }
 
 .profile-image-wrapper {
     position: relative;
-    margin-bottom: var(--space-4);
+    margin-bottom: var(--space-2);
 }
 
 .profile-image {
@@ -67,10 +60,6 @@
     transform: scale(1.05);
 }
 
-.profile-glow {
-    display: none;
-}
-
 .profile-game-link {
     display: block;
     cursor: default;
@@ -84,10 +73,6 @@
     border: 2px solid var(--border-color);
     border-radius: var(--radius-full);
     pointer-events: none;
-}
-
-.profile-image-wrapper::after {
-    display: none;
 }
 
 /* ==================== HERO TEXT ==================== */
@@ -150,8 +135,8 @@
 
 @media (max-width: 768px) {
     .hero {
-        padding-top: 70px;
-        min-height: 100svh; /* Small viewport height para móvil */
+        padding-top: 80px;
+        min-height: 100svh;
     }
     
     .hero-content {
@@ -159,7 +144,7 @@
     }
     
     .profile-container {
-        gap: var(--space-4);
+        gap: var(--space-5);
     }
     
     .nickname {

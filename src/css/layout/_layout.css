@@ -31,7 +31,7 @@ section {
     font-size: var(--font-size-3xl);
     font-weight: var(--font-weight-extrabold);
     text-align: center;
-    margin-bottom: var(--space-10);
+    margin-bottom: var(--space-12);
     color: var(--text);
     position: relative;
     padding-bottom: var(--space-4);
@@ -43,8 +43,8 @@ section {
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 60px;
-    height: 3px;
+    width: 80px;
+    height: 4px;
     background: var(--primary);
     border-radius: var(--radius-full);
 }

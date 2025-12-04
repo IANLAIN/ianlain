@@ -123,13 +123,13 @@
     --border-color-hover: #353548;
     --border-color-accent: var(--color-cyan-600);
     
-    /* ==================== SHADOWS (Matte - no glow) ==================== */
+    /* ==================== SHADOWS (Matte - subtle depth) ==================== */
     
-    --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.4);
-    --shadow-md: 0 4px 8px -1px rgba(0, 0, 0, 0.5);
-    --shadow-lg: 0 10px 20px -3px rgba(0, 0, 0, 0.5);
-    --shadow-xl: 0 20px 35px -5px rgba(0, 0, 0, 0.6);
-    --shadow-card: 0 4px 16px rgba(0, 0, 0, 0.4);
+    --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.5);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.6);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.6);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.7);
+    --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.5);
     
     /* ==================== TRANSITIONS ==================== */
     

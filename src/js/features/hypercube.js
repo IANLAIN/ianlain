@@ -150,10 +150,11 @@ export class Hypercube {
     }
     
     draw() {
-        this.ctx.fillStyle = 'rgba(0, 0, 0, 1)';
+        this.ctx.fillStyle = 'rgba(10, 10, 15, 1)';
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
         
-        if (this.cosmic) this.cosmic.draw(this.time);
+        // Cosmic background simplificado - solo estrellas estáticas
+        if (this.cosmic) this.cosmic.drawSimplified(this.time);
         
         const projected = this.vertices4D.map(v => this.transformVertex(v));
         
@@ -189,7 +190,8 @@ export class Hypercube {
             this.autoRotation += 0.008;
             this.time += 16;
             this.draw();
-            if (this.spaceshipManager) this.spaceshipManager.animate();
+            // Spaceships deshabilitados para optimización
+            // if (this.spaceshipManager) this.spaceshipManager.animate();
         }
         this.animationId = requestAnimationFrame(() => this.animate());
     }

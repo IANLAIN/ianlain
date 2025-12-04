@@ -86,6 +86,11 @@ export class CosmicBackground {
         this.addShootingStar();
     }
     
+    // Método simplificado solo con estrellas (optimizado)
+    drawSimplified(time) {
+        this.drawStars(time);
+    }
+    
     // Dibujar estrellas con parpadeo
     drawStars(time) {
         this.stars.forEach(star => {
