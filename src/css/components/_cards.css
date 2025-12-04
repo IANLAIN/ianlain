@@ -3,54 +3,37 @@
  * Card styles for interests, education, and content cards
  */
 
-/* ==================== BASE CARD ==================== */
-
-.card {
-    background: var(--surface);
-    border: var(--border-width) solid var(--border-color);
-    border-radius: var(--radius-xl);
-    padding: var(--space-10) var(--space-8);
-    backdrop-filter: blur(15px);
-    transition: all var(--transition-slow);
-}
-
-.card:hover {
-    transform: translateY(-10px);
-    border-color: var(--primary);
-    box-shadow: var(--shadow-glow);
-}
-
 /* ==================== INTEREST CARD ==================== */
 
 .interest-card {
     background: var(--surface);
     border: var(--border-width) solid var(--border-color);
     border-radius: var(--radius-xl);
-    padding: var(--space-10) var(--space-8);
+    padding: var(--space-8) var(--space-6);
     text-align: center;
-    backdrop-filter: blur(15px);
-    min-width: 280px;
-    max-width: 320px;
+    min-width: 260px;
+    max-width: 280px;
+    flex: 1;
     transition: all var(--transition-slow);
 }
 
 .interest-card:hover {
-    transform: translateY(-15px);
+    transform: translateY(-8px);
     border-color: var(--primary);
-    box-shadow: var(--shadow-glow);
+    box-shadow: var(--shadow-lg);
 }
 
 .interest-icon {
-    width: 90px;
-    height: 90px;
-    margin: 0 auto var(--space-6);
-    background: var(--gradient-tech);
+    width: 80px;
+    height: 80px;
+    margin: 0 auto var(--space-5);
+    background: var(--primary);
     border-radius: var(--radius-full);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 2.2rem;
-    color: white;
+    font-size: 2rem;
+    color: var(--color-bg-primary);
     transition: transform var(--transition-slow);
 }
 
@@ -59,9 +42,9 @@
 }
 
 .interest-title {
-    font-size: var(--font-size-xl);
+    font-size: var(--font-size-lg);
     color: var(--text);
-    margin-bottom: var(--space-4);
+    margin-bottom: var(--space-3);
     font-weight: var(--font-weight-bold);
 }
 
@@ -69,13 +52,14 @@
     color: var(--text-muted);
     line-height: var(--line-height-relaxed);
     font-size: var(--font-size-sm);
+    margin: 0;
 }
 
 /* ==================== EDUCATION CARD ==================== */
 
 .education {
-    margin-top: var(--space-12);
-    padding: var(--space-10) var(--space-8);
+    margin-top: var(--space-8);
+    padding: var(--space-8) var(--space-6);
     background: var(--surface);
     border-radius: var(--radius-lg);
     border: var(--border-width) solid var(--border-color);
@@ -83,16 +67,13 @@
 }
 
 .education:hover {
-    transform: translateY(-10px);
+    transform: translateY(-5px);
     border-color: var(--primary);
 }
 
 .education-title {
     font-size: var(--font-size-xl);
-    background: var(--gradient-tech);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--primary);
     margin-bottom: var(--space-4);
 }
 
@@ -110,8 +91,8 @@
 .education-status {
     display: inline-block;
     padding: 0.4rem 1.2rem;
-    background: var(--gradient-tech);
-    color: white;
+    background: var(--primary);
+    color: var(--color-bg-primary);
     border-radius: var(--radius-full);
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-semibold);
@@ -120,55 +101,67 @@
 /* ==================== INTERESTS GRID ==================== */
 
 .interests-grid {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--space-10);
-    margin-top: var(--space-8);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: var(--space-6);
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-6);
+    justify-items: center;
 }
 
-.interests-row {
-    display: flex;
-    justify-content: center;
-    gap: var(--space-8);
-    flex-wrap: wrap;
-    width: 100%;
-}
+/* Removed .interests-row styles as we are using CSS Grid now */
 
 /* ==================== RESPONSIVE ==================== */
 
 @media (max-width: 768px) {
-    .interests-row {
-        flex-direction: column;
-        align-items: center;
-        gap: var(--space-6);
+    .interests-grid {
+        gap: var(--space-4);
+        padding: 0 var(--space-4);
     }
     
     .interest-card {
-        width: 90%;
-        max-width: 320px;
+        width: 100%;
+        max-width: 320px; /* Better width for mobile */
+    }
+}
+    .interest-card {
+        width: 100%;
+        max-width: 340px;
+        min-width: unset;
         padding: var(--space-6) var(--space-5);
     }
     
     .interest-icon {
-        width: 70px;
-        height: 70px;
-        font-size: 1.8rem;
+        width: 65px;
+        height: 65px;
+        font-size: 1.6rem;
+        margin-bottom: var(--space-4);
+    }
+    
+    .interest-title {
+        font-size: var(--font-size-base);
     }
     
     .education {
-        padding: var(--space-6);
+        padding: var(--space-5);
+        margin-top: var(--space-6);
     }
 }
 
 @media (max-width: 480px) {
     .interest-card {
-        width: 95%;
+        max-width: 100%;
+        padding: var(--space-5) var(--space-4);
     }
     
     .interest-icon {
-        width: 60px;
-        height: 60px;
-        font-size: 1.5rem;
+        width: 55px;
+        height: 55px;
+        font-size: 1.4rem;
+    }
+    
+    .interest-description {
+        font-size: 0.85rem;
     }
 }

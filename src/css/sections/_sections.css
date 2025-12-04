@@ -6,26 +6,18 @@
 /* ==================== ABOUT SECTION ==================== */
 
 .about {
-    padding: var(--section-padding-y) 0;
-    background: var(--background);
+    padding: var(--space-20) 0;
+    background: var(--color-bg-secondary);
     position: relative;
 }
 
-/* Gradient overlay defined via .bg-gradient-subtle in _backgrounds.css */
-.about::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: var(--gradient-bg-subtle);
-    pointer-events: none;
-}
-
 .about-content {
-    max-width: 850px;
+    max-width: 800px;
     margin: 0 auto;
     text-align: center;
     position: relative;
     z-index: 1;
+    padding: 0 var(--space-6);
 }
 
 .about-paragraph {
@@ -44,39 +36,31 @@
 /* ==================== INTERESTS SECTION ==================== */
 
 .interests {
-    padding: var(--section-padding-y) 0;
+    padding: var(--space-20) 0;
     background: var(--background);
 }
 
 /* ==================== CONTACT SECTION ==================== */
 
 .contact {
-    padding: var(--section-padding-y) 0;
-    background: var(--background);
+    padding: var(--space-20) 0 var(--space-16);
+    background: var(--color-bg-secondary);
     position: relative;
-}
-
-/* Gradient overlay defined via .bg-gradient-accent in _backgrounds.css */
-.contact::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: var(--gradient-bg-accent);
-    pointer-events: none;
 }
 
 .contact-content {
     text-align: center;
-    max-width: 650px;
+    max-width: 600px;
     margin: 0 auto;
     position: relative;
     z-index: 1;
+    padding: 0 var(--space-6);
 }
 
 .contact-text {
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-base);
     color: var(--text-muted);
-    margin-bottom: var(--space-10);
+    margin-bottom: var(--space-8);
     line-height: var(--line-height-relaxed);
 }
 
@@ -91,18 +75,37 @@
 
 @media (max-width: 768px) {
     .about,
-    .interests,
-    .contact {
+    .interests {
         padding: var(--space-16) 0;
     }
     
+    .contact {
+        padding: var(--space-16) 0 var(--space-12);
+    }
+    
+    .about-content,
+    .contact-content {
+        padding: 0 var(--space-4);
+    }
+    
     .about-paragraph {
-        font-size: var(--font-size-base);
-        padding: 0 var(--space-2);
+        font-size: var(--font-size-sm);
+        margin-bottom: var(--space-4);
     }
     
     .contact-text {
-        font-size: var(--font-size-base);
-        padding: 0 var(--space-4);
+        font-size: var(--font-size-sm);
+        margin-bottom: var(--space-6);
+    }
+}
+
+@media (max-width: 480px) {
+    .about,
+    .interests {
+        padding: var(--space-12) 0;
+    }
+    
+    .contact {
+        padding: var(--space-12) 0 var(--space-10);
     }
 }

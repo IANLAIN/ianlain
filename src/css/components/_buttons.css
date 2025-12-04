@@ -1,99 +1,36 @@
 /**
- * Button Component
- * Button styles and social link buttons
+ * Button & Link Component
+ * Social links, contact links and interactive elements
  */
-
-/* ==================== BASE BUTTON ==================== */
-
-.btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-2);
-    padding: var(--space-3) var(--space-6);
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-semibold);
-    border-radius: var(--radius-md);
-    transition: all var(--transition-normal);
-    cursor: pointer;
-}
-
-.btn--primary {
-    background: var(--gradient-tech);
-    color: white;
-    border: none;
-}
-
-.btn--primary:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-glow-lg);
-}
-
-.btn--secondary {
-    background: transparent;
-    color: var(--text);
-    border: 2px solid var(--border-color);
-}
-
-.btn--secondary:hover {
-    border-color: var(--primary);
-    background: rgba(6, 182, 212, 0.1);
-}
-
-.btn--ghost {
-    background: transparent;
-    color: var(--text-muted);
-}
-
-.btn--ghost:hover {
-    color: var(--text);
-    background: rgba(6, 182, 212, 0.1);
-}
 
 /* ==================== SOCIAL LINKS ==================== */
 
 .social-links {
     display: flex;
     justify-content: center;
-    gap: var(--space-8);
-    margin-bottom: var(--space-12);
+    gap: var(--space-6);
+    margin-bottom: var(--space-8);
 }
 
 .social-link {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 65px;
-    height: 65px;
-    background: var(--color-bg-glass);
-    border: 2px solid var(--border-color-hover);
+    width: 56px;
+    height: 56px;
+    background: var(--surface);
+    border: 2px solid var(--border-color);
     border-radius: var(--radius-full);
     color: var(--text);
-    font-size: 1.6rem;
-    position: relative;
-    overflow: hidden;
+    font-size: 1.4rem;
     transition: all var(--transition-normal);
 }
 
-.social-link::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: var(--gradient-secondary);
-    border-radius: var(--radius-full);
-    transform: scale(0);
-    transition: transform var(--transition-slow);
-    z-index: -1;
-}
-
-.social-link:hover::before {
-    transform: scale(1);
-}
-
 .social-link:hover {
-    color: white;
-    transform: translateY(-8px) scale(1.1);
-    border-color: transparent;
+    background: var(--primary);
+    border-color: var(--primary);
+    color: var(--color-bg-primary);
+    transform: translateY(-5px);
 }
 
 /* ==================== CONTACT LINKS ==================== */
@@ -101,70 +38,56 @@
 .contact-links {
     display: flex;
     justify-content: center;
-    gap: var(--space-10);
+    gap: var(--space-6);
     flex-wrap: wrap;
 }
 
 .contact-link {
     display: flex;
     align-items: center;
-    gap: var(--space-4);
-    padding: var(--space-4) var(--space-10);
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-8);
     background: var(--surface);
-    border: 2px solid var(--border-color-hover);
+    border: 2px solid var(--border-color);
     border-radius: var(--radius-md);
     color: var(--text);
     font-weight: var(--font-weight-semibold);
-    min-width: 180px;
+    font-size: var(--font-size-sm);
+    min-width: 160px;
     justify-content: center;
-    position: relative;
-    overflow: hidden;
     transition: all var(--transition-slow);
 }
 
-.contact-link::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: var(--gradient-tech);
-    transform: translateX(-100%);
-    transition: transform var(--transition-slow);
-    z-index: -1;
-}
-
-.contact-link:hover::before {
-    transform: translateX(0);
-}
-
 .contact-link:hover {
-    transform: translateY(-8px);
+    background: var(--primary);
     border-color: var(--primary);
-    color: white;
+    color: var(--color-bg-primary);
+    transform: translateY(-3px);
 }
 
 .contact-link i {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
 }
 
 /* ==================== SCROLL TO TOP ==================== */
 
 .scroll-to-top {
     position: fixed;
-    bottom: var(--space-8);
-    right: var(--space-8);
-    width: 55px;
-    height: 55px;
-    background: var(--gradient-tech);
+    bottom: var(--space-6);
+    right: var(--space-6);
+    width: 48px;
+    height: 48px;
+    background: var(--primary);
     border: none;
     border-radius: var(--radius-full);
-    color: white;
-    font-size: 1.3rem;
+    color: var(--color-bg-primary);
+    font-size: 1.2rem;
     cursor: pointer;
     opacity: 0;
     visibility: hidden;
     transition: all var(--transition-normal);
     z-index: var(--z-fixed);
-    box-shadow: var(--shadow-glow);
+    box-shadow: var(--shadow-md);
 }
 
 .scroll-to-top.visible {
@@ -173,8 +96,8 @@
 }
 
 .scroll-to-top:hover {
-    transform: translateY(-5px) scale(1.1);
-    box-shadow: var(--shadow-glow-lg);
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
 }
 
 /* ==================== RESPONSIVE ==================== */
@@ -182,41 +105,46 @@
 @media (max-width: 768px) {
     .social-links {
         gap: var(--space-4);
-        margin-bottom: var(--space-8);
+        margin-bottom: var(--space-6);
     }
     
     .social-link {
-        width: 50px;
-        height: 50px;
+        width: 48px;
+        height: 48px;
         font-size: 1.2rem;
     }
     
     .contact-links {
         flex-direction: column;
         align-items: center;
-        gap: var(--space-4);
+        gap: var(--space-3);
     }
     
     .contact-link {
-        min-width: 200px;
-        width: 90%;
-        max-width: 280px;
-        padding: var(--space-4) var(--space-6);
+        min-width: 180px;
+        width: 100%;
+        max-width: 260px;
+        padding: var(--space-3) var(--space-5);
     }
     
     .scroll-to-top {
         bottom: var(--space-4);
         right: var(--space-4);
-        width: 45px;
-        height: 45px;
-        font-size: 1.1rem;
+        width: 44px;
+        height: 44px;
+        font-size: 1rem;
     }
 }
 
 @media (max-width: 480px) {
     .social-link {
-        width: 45px;
-        height: 45px;
+        width: 44px;
+        height: 44px;
         font-size: 1.1rem;
+    }
+    
+    .contact-link {
+        max-width: 240px;
+        font-size: var(--font-size-sm);
     }
 }

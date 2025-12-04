@@ -13,6 +13,7 @@
     position: relative;
     overflow: hidden;
     background: var(--background);
+    padding-top: 140px; /* Increased padding to prevent header overlap */
 }
 
 .hypercube-bg {
@@ -24,7 +25,7 @@
 .hero-overlay {
     position: absolute;
     inset: 0;
-    background: var(--gradient-bg-radial);
+    background: transparent;
     z-index: 1;
     pointer-events: none;
 }
@@ -33,7 +34,7 @@
     text-align: center;
     z-index: 2;
     max-width: 1200px;
-    padding: 0 var(--space-8);
+    padding: var(--space-8) var(--space-8) var(--space-16);
     animation: fadeInUp 1s var(--ease-smooth);
 }
 
@@ -43,12 +44,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--space-10);
+    gap: var(--space-6);
 }
 
 .profile-image-wrapper {
     position: relative;
-    margin-bottom: var(--space-6);
+    margin-bottom: var(--space-4);
 }
 
 .profile-image {
@@ -56,39 +57,18 @@
     height: 220px;
     border-radius: var(--radius-full);
     object-fit: cover;
-    border: 4px solid transparent;
-    background: linear-gradient(var(--background), var(--background)) padding-box,
-                var(--gradient-secondary) border-box;
-    box-shadow: var(--shadow-glow), 0 20px 40px rgba(0, 0, 0, 0.5);
+    border: 4px solid var(--primary);
+    box-shadow: var(--shadow-xl);
     transition: transform var(--transition-slow);
-    animation: profileFloat 6s ease-in-out infinite;
     will-change: transform;
 }
 
-@keyframes profileFloat {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-}
-
 .profile-image:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 .profile-glow {
-    position: absolute;
-    inset: -15px;
-    border-radius: var(--radius-full);
-    background: var(--gradient-secondary);
-    opacity: 0.3;
-    z-index: -1;
-    animation: pulseGlow 3s ease-in-out infinite;
-    filter: blur(15px);
-    pointer-events: none;
-}
-
-@keyframes pulseGlow {
-    0%, 100% { transform: scale(1); opacity: 0.3; }
-    50% { transform: scale(1.1); opacity: 0.5; }
+    display: none;
 }
 
 .profile-game-link {
@@ -96,30 +76,18 @@
     cursor: default;
 }
 
-/* Profile Orbit Rings */
-.profile-image-wrapper::before,
-.profile-image-wrapper::after {
+/* Profile decoration - clean border accent */
+.profile-image-wrapper::before {
     content: '';
     position: absolute;
-    border: 2px solid transparent;
+    inset: -12px;
+    border: 2px solid var(--border-color);
     border-radius: var(--radius-full);
     pointer-events: none;
 }
 
-.profile-image-wrapper::before {
-    inset: -30px;
-    border-top-color: var(--primary);
-    animation: orbit 8s linear infinite;
-}
-
 .profile-image-wrapper::after {
-    inset: -20px;
-    border-bottom-color: var(--secondary);
-    animation: orbit 6s linear infinite reverse;
-}
-
-@keyframes orbit {
-    to { transform: rotate(360deg); }
+    display: none;
 }
 
 /* ==================== HERO TEXT ==================== */
@@ -136,19 +104,13 @@
     display: block;
     font-size: var(--font-size-4xl);
     font-weight: var(--font-weight-extrabold);
-    background: var(--gradient-secondary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--text);
     letter-spacing: var(--letter-spacing-tight);
 }
 
 .hero-subtitle {
     font-size: var(--font-size-lg);
-    background: var(--gradient-tech);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--primary);
     font-weight: var(--font-weight-semibold);
     margin-bottom: var(--space-4);
 }
@@ -156,22 +118,24 @@
 .hero-description {
     font-size: var(--font-size-lg);
     color: var(--text-muted);
-    margin-bottom: var(--space-10);
+    margin-bottom: var(--space-8);
     line-height: var(--line-height-relaxed);
+    max-width: 600px;
+    margin-inline: auto;
 }
 
 /* ==================== SCROLL INDICATOR ==================== */
 
 .scroll-indicator {
     position: absolute;
-    bottom: var(--space-12);
+    bottom: var(--space-8);
     left: 50%;
     transform: translateX(-50%);
 }
 
 .scroll-arrow {
     color: var(--primary);
-    font-size: 2rem;
+    font-size: 1.8rem;
     animation: bounce 2.5s ease-in-out infinite;
     cursor: pointer;
 }
@@ -185,12 +149,21 @@
 /* ==================== RESPONSIVE ==================== */
 
 @media (max-width: 768px) {
+    .hero {
+        padding-top: 70px;
+        min-height: 100svh; /* Small viewport height para móvil */
+    }
+    
     .hero-content {
-        padding: 0 var(--space-4);
+        padding: var(--space-6) var(--space-4) var(--space-12);
+    }
+    
+    .profile-container {
+        gap: var(--space-4);
     }
     
     .nickname {
-        font-size: 2.2rem;
+        font-size: 2rem;
     }
     
     .hero-subtitle {
@@ -199,22 +172,25 @@
     
     .hero-description {
         font-size: var(--font-size-sm);
-        padding: 0 var(--space-4);
+        padding: 0 var(--space-2);
+        margin-bottom: var(--space-6);
     }
     
     .profile-image {
-        width: 150px;
-        height: 150px;
+        width: 140px;
+        height: 140px;
     }
     
-    .profile-image-wrapper::before,
-    .profile-image-wrapper::after,
-    .profile-glow {
+    .profile-image-wrapper::before {
         display: none;
     }
     
     .scroll-indicator {
-        bottom: var(--space-6);
+        bottom: var(--space-4);
+    }
+    
+    .scroll-arrow {
+        font-size: 1.5rem;
     }
     
     .hypercube-bg {
@@ -224,7 +200,7 @@
 
 @media (max-width: 480px) {
     .nickname {
-        font-size: 1.8rem;
+        font-size: 1.7rem;
     }
     
     .hero-subtitle {
@@ -234,5 +210,9 @@
     .profile-image {
         width: 120px;
         height: 120px;
+    }
+    
+    .social-links {
+        gap: var(--space-3);
     }
 }

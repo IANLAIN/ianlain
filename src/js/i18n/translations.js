@@ -45,9 +45,6 @@ export const translations = {
         contact: {
             title: "Let's Connect",
             description: "Interested in collaborating or discussing technology? Reach out through my social channels."
-        },
-        footer: {
-            text: "© 2025 IanLain. Crafted with passion for technology and the cosmos."
         }
     },
     
@@ -95,9 +92,6 @@ export const translations = {
         contact: {
             title: "Conectemos",
             description: "¿Interesado en colaborar o discutir sobre tecnología? Contáctame a través de mis redes sociales."
-        },
-        footer: {
-            text: "© 2025 IanLain. Creado con pasión por la tecnología y el cosmos."
         }
     },
     
@@ -145,9 +139,6 @@ export const translations = {
         contact: {
             title: "Connectons-nous",
             description: "Intéressé par une collaboration ou discuter de technologie? Contactez-moi via mes réseaux sociaux."
-        },
-        footer: {
-            text: "© 2025 IanLain. Créé avec passion pour la technologie et le cosmos."
         }
     },
     
@@ -195,9 +186,6 @@ export const translations = {
         contact: {
             title: "联系我",
             description: "有兴趣合作或讨论技术？请通过我的社交渠道联系我。"
-        },
-        footer: {
-            text: "© 2025 IanLain。用对技术和宇宙的热情精心打造。"
         }
     }
 };

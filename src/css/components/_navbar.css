@@ -11,12 +11,10 @@
     left: 0;
     right: 0;
     z-index: var(--z-fixed);
-    background: var(--color-bg-glass);
-    backdrop-filter: var(--backdrop-blur);
-    -webkit-backdrop-filter: var(--backdrop-blur);
+    background: var(--color-bg-secondary);
     border-bottom: var(--border-width) solid var(--border-color);
     transition: all var(--transition-slow);
-    box-shadow: var(--shadow-card);
+    box-shadow: var(--shadow-md);
 }
 
 .navbar::before {
@@ -26,14 +24,14 @@
     left: 0;
     right: 0;
     height: 2px;
-    background: var(--gradient-secondary);
+    background: var(--primary);
     transform: scaleX(0);
     transition: transform var(--transition-slow);
 }
 
 .navbar.scrolled {
-    background: rgba(5, 8, 16, 0.95);
-    box-shadow: 0 8px 32px rgba(6, 182, 212, 0.15);
+    background: var(--color-bg-elevated);
+    box-shadow: var(--shadow-lg);
     border-bottom-color: var(--border-color-hover);
 }
 
@@ -44,13 +42,13 @@
 /* ==================== NAV CONTAINER ==================== */
 
 .nav-container {
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: var(--space-4) var(--space-8);
+    padding: var(--space-3) var(--space-6);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: var(--space-8);
+    gap: var(--space-6);
 }
 
 /* ==================== LOGO ==================== */
@@ -77,15 +75,11 @@
 
 .logo-bracket {
     color: var(--primary);
-    animation: pulse 2s ease-in-out infinite;
 }
 
 .logo-letter {
     margin: 0 0.1rem;
-    background: var(--gradient-secondary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--text);
     font-size: 1.6rem;
 }
 
@@ -119,7 +113,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: var(--gradient-secondary);
+    background: var(--color-bg-elevated);
     opacity: 0;
     transition: opacity var(--transition-normal);
     z-index: -1;
@@ -134,11 +128,10 @@
 .nav-link:hover {
     color: var(--text);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(6, 182, 212, 0.2);
 }
 
 .nav-link:hover::before {
-    opacity: 0.15;
+    opacity: 1;
 }
 
 .nav-link:hover .nav-icon {
@@ -147,12 +140,12 @@
 
 .nav-link.active {
     color: var(--text);
-    background: rgba(6, 182, 212, 0.2);
-    box-shadow: var(--shadow-glow), inset 0 0 20px rgba(6, 182, 212, 0.1);
+    background: var(--color-bg-elevated);
+    border: 1px solid var(--border-color-accent);
 }
 
 .nav-link.active::before {
-    opacity: 0.3;
+    opacity: 0;
 }
 
 /* ==================== NAV RIGHT ==================== */
@@ -169,10 +162,9 @@
     display: flex;
     gap: 0.3rem;
     padding: 0.3rem;
-    background: rgba(6, 182, 212, 0.08);
+    background: var(--color-bg-elevated);
     border-radius: var(--radius-md);
     border: 1px solid var(--border-color);
-    backdrop-filter: blur(10px);
 }
 
 .lang-btn {
@@ -181,34 +173,17 @@
     color: var(--text-muted);
     font-weight: var(--font-weight-semibold);
     font-size: var(--font-size-xs);
-    position: relative;
-    overflow: hidden;
     transition: all var(--transition-normal);
-}
-
-.lang-btn::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: var(--gradient-tech);
-    opacity: 0;
-    transition: opacity var(--transition-normal);
-    z-index: -1;
 }
 
 .lang-btn:hover {
     color: var(--text);
-    transform: translateY(-2px);
-}
-
-.lang-btn:hover::before {
-    opacity: 0.2;
+    background: var(--color-bg-card);
 }
 
 .lang-btn.active {
-    background: var(--gradient-tech);
-    color: white;
-    box-shadow: 0 4px 12px rgba(6, 182, 212, 0.4);
+    background: var(--primary);
+    color: var(--color-bg-primary);
 }
 
 /* ==================== HAMBURGER MENU ==================== */
@@ -219,29 +194,27 @@
     padding: var(--space-3);
     z-index: calc(var(--z-fixed) + 1);
     border-radius: var(--radius-md);
-    background: rgba(6, 182, 212, 0.05);
+    background: var(--color-bg-elevated);
     border: 1px solid var(--border-color);
     transition: all var(--transition-normal);
 }
 
 .hamburger:hover {
-    background: rgba(6, 182, 212, 0.15);
-    transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(6, 182, 212, 0.2);
+    background: var(--color-bg-card);
+    border-color: var(--border-color-hover);
 }
 
 .bar {
     width: 24px;
     height: 3px;
-    background: var(--gradient-secondary);
+    background: var(--primary);
     margin: 3px 0;
     border-radius: var(--radius-full);
     transition: all var(--transition-normal);
-    box-shadow: 0 0 8px rgba(6, 182, 212, 0.5);
 }
 
 .hamburger.active {
-    background: rgba(6, 182, 212, 0.2);
+    background: var(--color-bg-card);
 }
 
 .hamburger.active .bar:nth-child(1) {
@@ -285,13 +258,11 @@
         flex-direction: column;
         width: 100%;
         padding: var(--space-8) var(--space-6);
-        background: rgba(5, 10, 20, 0.98);
-        backdrop-filter: var(--backdrop-blur-lg);
-        -webkit-backdrop-filter: var(--backdrop-blur-lg);
+        background: var(--color-bg-secondary);
         gap: var(--space-3);
         z-index: var(--z-fixed);
         border-bottom: 2px solid var(--border-color-hover);
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        box-shadow: var(--shadow-lg);
         transition: top var(--transition-slow);
     }
     
