@@ -13,19 +13,24 @@ const supabaseRest = async (endpoint, options = {}) => {
         'Prefer': options.prefer || 'return=representation'
     };
     
-    const response = await fetch(url, {
-        ...options,
-        headers: { ...headers, ...options.headers }
-    });
-    
-    if (!response.ok) {
-        const error = await response.json().catch(() => ({}));
-        throw new Error(error.message || `HTTP ${response.status}`);
+    try {
+        const response = await fetch(url, {
+            ...options,
+            headers: { ...headers, ...options.headers }
+        });
+        
+        if (!response.ok) {
+            const error = await response.json().catch(() => ({}));
+            throw new Error(error.message || `HTTP ${response.status}`);
+        }
+        
+        // Handle empty responses
+        const text = await response.text();
+        return text ? JSON.parse(text) : null;
+    } catch (error) {
+        console.error('Supabase API Error:', error);
+        throw error;
     }
-    
-    // Handle empty responses
-    const text = await response.text();
-    return text ? JSON.parse(text) : null;
 };
 
 // Cookie names
