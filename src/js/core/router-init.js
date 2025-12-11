@@ -1,11 +1,6 @@
 // Minimal router initialization for sub-pages
 
-/** Route mappings (must match constants.js) */
-const ROUTES = {
-    '/': '/index.html',
-    '/game': '/src/pages/galaga/index.html',
-    '/galaga': '/src/pages/galaga/index.html'
-};
+import { ROUTES } from './constants.js';
 
 /** Restores clean URL from session storage */
 function restoreCleanUrl() {

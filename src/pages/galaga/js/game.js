@@ -37,6 +37,7 @@ import {
     fetchStats,
     checkApiHealth
 } from './api.js';
+import { throttle } from '../../../js/core/utils.js';
 
 /**
  * Main Game Class
@@ -101,29 +102,61 @@ class GalagaGame {
         this.frameInterval = 1000 / this.targetFPS;
         
         // Bind methods
+        this.handleResize = throttle(this.handleResize.bind(this), 250);
         this.loop = this.loop.bind(this);
-        this.handleInput = this.handleInput.bind(this);
-        this.resize = this.resize.bind(this);
-        this.handleVisibility = this.handleVisibility.bind(this);
         
         this.init();
     }
-
+    
+    /** Initialize game */
     init() {
         this.resize();
-        this.createStars();
         this.setupEventListeners();
-        this.setupVisibilityHandler();
-        this.initLeaderboard();
+        this.createStars();
         
-        // Initial render
-        this.ctx.fillStyle = '#000000';
-        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-        this.drawStars();
-        this.drawUI();
+        // Check API health
+        checkApiHealth().then(isHealthy => {
+            this.isApiAvailable = isHealthy;
+            if (isHealthy) {
+                this.loadLeaderboard();
+            }
+        });
         
         // Start loop
+        this.lastTime = performance.now();
         requestAnimationFrame(this.loop);
+    }
+    
+    /** Handle window resize */
+    handleResize() {
+        this.resize();
+    }
+    
+    /** Resize canvas */
+    resize() {
+        const container = this.canvas.parentElement;
+        this.canvas.width = container.clientWidth;
+        this.canvas.height = container.clientHeight;
+    }
+    
+    /** Setup event listeners */
+    setupEventListeners() {
+        window.addEventListener('resize', this.handleResize);
+        
+        // Keyboard controls
+        window.addEventListener('keydown', (e) => this.handleInput(e, true));
+        window.addEventListener('keyup', (e) => this.handleInput(e, false));
+        
+        // Touch controls
+        this.setupTouchControls();
+        
+        // Visibility change
+        document.addEventListener('visibilitychange', () => {
+            this.isVisible = !document.hidden;
+            if (this.isVisible) {
+                this.lastTime = performance.now();
+            }
+        });
     }
     
     /** Initialize leaderboard system and check first visit */
@@ -149,27 +182,7 @@ class GalagaGame {
         }
     }
 
-    resize() {
-        this.canvas.width = window.innerWidth;
-        this.canvas.height = window.innerHeight;
-        
-        // Reset player position on resize
-        if (this.player) {
-            this.player.y = this.canvas.height - 50;
-            if (this.state === 'MENU') {
-                this.player.x = this.canvas.width / 2;
-            }
-        }
-    }
-
-    setupEventListeners() {
-        window.addEventListener('resize', this.resize);
-        
-        // Keyboard
-        document.addEventListener('keydown', (e) => this.handleInput(e, true));
-        document.addEventListener('keyup', (e) => this.handleInput(e, false));
-        
-        // Touch
+    setupTouchControls() {
         const touchLeft = document.getElementById(SELECTORS.TOUCH.LEFT);
         const touchRight = document.getElementById(SELECTORS.TOUCH.RIGHT);
         const touchFire = document.getElementById(SELECTORS.TOUCH.FIRE);
@@ -185,58 +198,6 @@ class GalagaGame {
         if (touchFire) {
             touchFire.addEventListener('touchstart', (e) => { e.preventDefault(); this.keys.fire = true; this.tryFire(); });
             touchFire.addEventListener('touchend', (e) => { e.preventDefault(); this.keys.fire = false; });
-        }
-
-        // UI Buttons
-        const startBtn = document.getElementById(SELECTORS.BUTTONS.START);
-        if (startBtn) startBtn.addEventListener('click', () => this.startGame());
-        
-        const muteBtn = document.getElementById(SELECTORS.BUTTONS.MUTE);
-        if (muteBtn) muteBtn.addEventListener('click', () => this.toggleMute());
-        
-        // Leaderboard Buttons
-        const viewLeaderboardBtn = document.getElementById('viewLeaderboardBtn');
-        if (viewLeaderboardBtn) {
-            viewLeaderboardBtn.addEventListener('click', () => this.showLeaderboard());
-        }
-        
-        const closeLeaderboardBtn = document.getElementById('closeLeaderboardBtn');
-        if (closeLeaderboardBtn) {
-            closeLeaderboardBtn.addEventListener('click', () => this.hideLeaderboard());
-        }
-        
-        // Game Over Buttons
-        const playAgainBtn = document.getElementById('playAgainBtn');
-        if (playAgainBtn) {
-            playAgainBtn.addEventListener('click', () => this.restartGame());
-        }
-        
-        const viewScoresBtn = document.getElementById('viewScoresBtn');
-        if (viewScoresBtn) {
-            viewScoresBtn.addEventListener('click', () => {
-                this.hideGameOver();
-                this.showLeaderboard();
-            });
-        }
-        
-        // Username Input Validation
-        const usernameInput = document.getElementById('usernameInput');
-        if (usernameInput) {
-            usernameInput.addEventListener('input', (e) => {
-                e.target.value = e.target.value.replace(/[^a-zA-Z0-9_]/g, '').toUpperCase().slice(0, 12);
-            });
-        }
-    }
-
-    /** Pauses game when tab is hidden for performance */
-    setupVisibilityHandler() {
-        document.addEventListener('visibilitychange', this.handleVisibility);
-    }
-    
-    handleVisibility() {
-        this.isVisible = !document.hidden;
-        if (!this.isVisible && this.state === 'PLAYING') {
-            audio.stopMusic();
         }
     }
 

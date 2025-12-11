@@ -85,6 +85,12 @@ class GalagaAudio {
         osc.start(now);
         osc.stop(now + duration);
         
+        // Clean up nodes after sound finishes
+        setTimeout(() => {
+            osc.disconnect();
+            gainNode.disconnect();
+        }, (duration + 0.1) * 1000);
+        
         return { osc, gainNode };
     }
 

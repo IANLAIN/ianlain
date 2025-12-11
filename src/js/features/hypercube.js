@@ -188,8 +188,6 @@ export class Hypercube {
             this.autoRotation += 0.008;
             this.time += 16;
             this.draw();
-            // Spaceships deshabilitados para optimización
-            // if (this.spaceshipManager) this.spaceshipManager.animate();
         }
         this.animationId = requestAnimationFrame(() => this.animate());
     }
