@@ -1,0 +1,42 @@
+/* Background and scrollbar styles */
+
+/* ==================== SUBTLE GRID BACKGROUND ==================== */
+
+/* Grid background removed for matte style */
+body::before {
+    display: none;
+}
+
+/* Floating particles disabled for matte style */
+
+/* ==================== ADDITIONAL EFFECTS ==================== */
+/* Clases utilitarias disponibles para uso futuro:
+   .gradient-overlay, .gradient-overlay--radial, .gradient-overlay--top,
+   .gradient-overlay--bottom, .glow, .glow--lg, 
+   .bg-gradient-subtle, .bg-gradient-accent
+   Los gradientes ya están aplicados via ::before en las secciones */
+
+/* ==================== SCROLLBAR ==================== */
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-bg-elevated);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+}
+
+/* Firefox scrollbar */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-bg-elevated) var(--background);
+}

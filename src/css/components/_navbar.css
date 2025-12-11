@@ -1,0 +1,287 @@
+/* Navigation bar and mobile menu */
+
+/* ==================== NAVBAR ==================== */
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: var(--z-fixed);
+    background: var(--color-bg-secondary);
+    border-bottom: var(--border-width) solid var(--border-color);
+    transition: all var(--transition-slow);
+    box-shadow: var(--shadow-sm);
+}
+
+.navbar.scrolled {
+    background: var(--color-bg-elevated);
+    box-shadow: var(--shadow-md);
+    border-bottom-color: var(--border-color-hover);
+}
+
+/* ==================== NAV CONTAINER ==================== */
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--space-4) var(--space-8);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-6);
+}
+
+/* ==================== LOGO ==================== */
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    z-index: calc(var(--z-fixed) + 1);
+    transition: transform var(--transition-normal);
+}
+
+.logo:hover {
+    transform: translateY(-2px);
+}
+
+.logo-icon {
+    display: flex;
+    align-items: center;
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    font-family: var(--font-family-mono);
+}
+
+.logo-bracket {
+    color: var(--primary);
+}
+
+.logo-letter {
+    margin: 0 0.1rem;
+    color: var(--text);
+    font-size: 1.6rem;
+}
+
+/* Note: @keyframes pulse is defined in _animations.css */
+
+/* ==================== NAV MENU ==================== */
+
+.nav-menu {
+    display: flex;
+    gap: var(--space-2);
+    flex: 1;
+    justify-content: center;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-4);
+    color: var(--text-muted);
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-sm);
+    letter-spacing: var(--letter-spacing-wide);
+    border-radius: var(--radius-md);
+    position: relative;
+    overflow: hidden;
+    transition: all var(--transition-normal);
+}
+
+.nav-link::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--color-bg-elevated);
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+    z-index: -1;
+    border-radius: var(--radius-md);
+}
+
+.nav-icon {
+    font-size: 0.9rem;
+    transition: transform var(--transition-normal);
+}
+
+.nav-link:hover {
+    color: var(--text);
+    transform: translateY(-2px);
+}
+
+.nav-link:hover::before {
+    opacity: 1;
+}
+
+.nav-link:hover .nav-icon {
+    transform: scale(1.2);
+}
+
+.nav-link.active {
+    color: var(--text);
+    background: var(--color-bg-elevated);
+    border: 1px solid var(--border-color-accent);
+}
+
+.nav-link.active::before {
+    opacity: 0;
+}
+
+/* ==================== NAV RIGHT ==================== */
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+}
+
+/* ==================== LANGUAGE SELECTOR ==================== */
+
+.language-selector {
+    display: flex;
+    gap: 0.3rem;
+    padding: 0.3rem;
+    background: var(--color-bg-elevated);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+}
+
+.lang-btn {
+    padding: 0.45rem 0.75rem;
+    border-radius: var(--radius-sm);
+    color: var(--text-muted);
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-xs);
+    transition: all var(--transition-normal);
+}
+
+.lang-btn:hover {
+    color: var(--text);
+    background: var(--color-bg-card);
+}
+
+.lang-btn.active {
+    background: var(--primary);
+    color: var(--color-bg-primary);
+}
+
+/* ==================== HAMBURGER MENU ==================== */
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    padding: var(--space-3);
+    z-index: calc(var(--z-fixed) + 1);
+    border-radius: var(--radius-md);
+    background: var(--color-bg-elevated);
+    border: 1px solid var(--border-color);
+    transition: all var(--transition-normal);
+}
+
+.hamburger:hover {
+    background: var(--color-bg-card);
+    border-color: var(--border-color-hover);
+}
+
+.bar {
+    width: 24px;
+    height: 3px;
+    background: var(--primary);
+    margin: 3px 0;
+    border-radius: var(--radius-full);
+    transition: all var(--transition-normal);
+}
+
+.hamburger.active {
+    background: var(--color-bg-card);
+}
+
+.hamburger.active .bar:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+    background: var(--primary);
+}
+
+.hamburger.active .bar:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+
+.hamburger.active .bar:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+    background: var(--primary);
+}
+
+/* ==================== MOBILE NAVIGATION ==================== */
+
+@media (max-width: 768px) {
+    .nav-container {
+        padding: var(--space-3) var(--space-4);\n    }\n    \n    .logo-icon {
+        font-size: 1.2rem;
+    }
+    
+    .logo-letter {
+        font-size: 1.3rem;
+    }
+    
+    .hamburger {
+        display: flex;
+    }
+    
+    .nav-menu {
+        position: fixed;
+        left: 0;
+        top: -100vh;
+        flex-direction: column;
+        width: 100%;
+        padding: var(--space-8) var(--space-6);
+        background: var(--color-bg-secondary);
+        gap: var(--space-3);
+        z-index: var(--z-fixed);
+        border-bottom: 2px solid var(--border-color-hover);
+        box-shadow: var(--shadow-lg);
+        transition: top var(--transition-slow);
+    }
+    
+    .nav-menu.active {
+        top: 68px;
+        animation: slideDown var(--transition-slow);
+    }
+    
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .nav-item {
+        width: 100%;
+    }
+    
+    .nav-link {
+        font-size: var(--font-size-base);
+        padding: var(--space-4) var(--space-6);
+        justify-content: center;
+        width: 100%;
+    }
+    
+    .language-selector {
+        padding: 0.25rem;
+        gap: 0.2rem;
+    }
+    
+    .lang-btn {
+        padding: 0.4rem 0.55rem;
+        font-size: 0.7rem;
+    }
+    
+    .nav-right {
+        gap: var(--space-3);
+    }
+}

@@ -1,0 +1,606 @@
+/**
+ * Galaga 1981 Arcade Clone - Styles
+ * Authentic arcade cabinet look with CRT effects
+ */
+
+/* ========================================
+   Fonts
+======================================== */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+:root {
+    --bg-color: #050505;
+    --crt-curvature: 3px;
+    --crt-scanline-opacity: 0.15;
+    --crt-glow: 0 0 10px rgba(6, 182, 212, 0.5);
+}
+
+/* ========================================
+   Reset & Base
+======================================== */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: #fff;
+    font-family: 'Press Start 2P', monospace;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* ========================================
+   Game Container (Arcade Screen)
+======================================== */
+#gameContainer {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    overflow: hidden;
+}
+
+canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    image-rendering: pixelated; /* Crisp pixels */
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+}
+
+/* ========================================
+   Top Controls (Back & Mute)
+======================================== */
+.top-controls {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    display: flex;
+    justify-content: space-between;
+    z-index: 25;
+    pointer-events: none;
+}
+
+.control-btn {
+    width: 40px;
+    height: 40px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    pointer-events: auto;
+    text-decoration: none;
+}
+
+.control-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.control-btn.muted {
+    color: #ef4444;
+}
+
+/* ========================================
+   CRT Effects
+======================================== */
+/* Scanlines */
+#gameContainer::before {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(18, 16, 16, 0) 50%,
+        rgba(0, 0, 0, 0.25) 50%
+    );
+    background-size: 100% 4px;
+    z-index: 10;
+    pointer-events: none;
+}
+
+/* Screen Glow & Vignette */
+#gameContainer::after {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: radial-gradient(
+        circle,
+        rgba(0, 0, 0, 0) 60%,
+        rgba(0, 0, 0, 0.4) 100%
+    );
+    box-shadow: inset 0 0 50px rgba(0,0,0,0.7);
+    z-index: 10;
+    pointer-events: none;
+}
+
+/* ========================================
+   Touch Controls (Mobile)
+======================================== */
+#touchControls {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    z-index: 20;
+    pointer-events: none; /* Let clicks pass through to canvas if needed */
+}
+
+.touch-zone {
+    width: 100px;
+    height: 100px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: auto;
+    touch-action: none;
+    transition: background 0.1s;
+}
+
+.touch-zone:active {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.touch-zone i {
+    font-size: 24px;
+    opacity: 0.5;
+}
+
+#touchFire {
+    position: absolute;
+    bottom: 40px;
+    right: 40px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba(255, 0, 0, 0.2);
+    border: 2px solid rgba(255, 0, 0, 0.4);
+    pointer-events: auto;
+}
+
+#touchFire:active {
+    background: rgba(255, 0, 0, 0.5);
+}
+
+/* Hide touch controls on desktop */
+@media (min-width: 768px) {
+    #touchControls {
+        display: none;
+    }
+}
+
+/* ========================================
+   UI Overlay (Minimal)
+======================================== */
+.galaga-menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 15;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.btn {
+    background: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+    font-family: 'Press Start 2P', monospace;
+    padding: 15px 30px;
+    font-size: 16px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    margin-top: 20px;
+}
+
+.btn:hover {
+    background: #fff;
+    color: #000;
+    box-shadow: 0 0 15px #fff;
+}
+
+.back-link {
+    transition: color 0.2s ease;
+}
+
+.back-link:hover {
+    color: #06b6d4 !important;
+}
+
+/* ========================================
+   Responsive Adjustments
+======================================== */
+@media (max-height: 500px) {
+    .galaga-menu h1 {
+        font-size: 28px !important;
+        margin-bottom: 10px !important;
+    }
+    
+    .galaga-menu p {
+        margin-bottom: 20px !important;
+    }
+    
+    .btn {
+        padding: 10px 20px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .top-controls {
+        top: 10px;
+        left: 10px;
+        right: 10px;
+    }
+    
+    .control-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 14px;
+    }
+    
+    .galaga-menu h1 {
+        font-size: 28px !important;
+    }
+    
+    #touchControls {
+        bottom: 10px;
+        padding: 0 10px;
+    }
+    
+    .touch-zone {
+        width: 70px;
+        height: 70px;
+    }
+    
+    #touchFire {
+        width: 60px;
+        height: 60px;
+        bottom: 25px;
+        right: 25px;
+    }
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ========================================
+   Menu Screen Styles
+======================================== */
+.galaga-title {
+    color: #ff0000;
+    font-size: 40px;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px #ff0000;
+}
+
+.galaga-subtitle {
+    color: #06b6d4;
+    margin-bottom: 30px;
+    font-size: 12px;
+}
+
+.controls-hint {
+    margin-top: 20px;
+    font-size: 10px;
+    color: #888;
+}
+
+.back-link {
+    margin-top: 30px;
+    color: #666;
+    font-size: 10px;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+/* ========================================
+   Username Input
+======================================== */
+.username-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.input-label {
+    color: #ffff00;
+    font-size: 10px;
+    margin-bottom: 10px;
+}
+
+.username-input {
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid #06b6d4;
+    color: #06b6d4;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 14px;
+    padding: 12px 20px;
+    text-align: center;
+    text-transform: uppercase;
+    width: 200px;
+    outline: none;
+    transition: all 0.2s;
+}
+
+.username-input::placeholder {
+    color: rgba(6, 182, 212, 0.4);
+}
+
+.username-input:focus {
+    border-color: #ffff00;
+    color: #ffff00;
+    box-shadow: 0 0 15px rgba(255, 255, 0, 0.3);
+}
+
+.username-input.error {
+    border-color: #ff0000;
+    animation: shake 0.3s ease-in-out;
+}
+
+.input-hint {
+    color: #555;
+    font-size: 8px;
+    margin-top: 8px;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+/* ========================================
+   Secondary Button
+======================================== */
+.btn-secondary {
+    background: transparent;
+    border: 2px solid #06b6d4;
+    color: #06b6d4;
+    margin-top: 15px;
+    font-size: 12px;
+    padding: 12px 25px;
+}
+
+.btn-secondary:hover {
+    background: #06b6d4;
+    color: #000;
+    box-shadow: 0 0 15px #06b6d4;
+}
+
+/* ========================================
+   Leaderboard Screen
+======================================== */
+.leaderboard-screen {
+    background: rgba(0, 0, 0, 0.9);
+}
+
+.leaderboard-title {
+    color: #ffff00;
+    font-size: 24px;
+    margin-bottom: 25px;
+    text-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
+}
+
+.leaderboard-container {
+    max-height: 50vh;
+    overflow-y: auto;
+    width: 90%;
+    max-width: 450px;
+    padding: 10px;
+}
+
+.leaderboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 10px;
+}
+
+.leaderboard-table th {
+    color: #06b6d4;
+    padding: 10px 5px;
+    border-bottom: 2px solid #06b6d4;
+    text-align: center;
+}
+
+.leaderboard-table td {
+    padding: 8px 5px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.leaderboard-table tr:nth-child(1) td { color: #ffd700; } /* Gold */
+.leaderboard-table tr:nth-child(2) td { color: #c0c0c0; } /* Silver */
+.leaderboard-table tr:nth-child(3) td { color: #cd7f32; } /* Bronze */
+
+.leaderboard-table tr.current-user td {
+    color: #00ff00 !important;
+    text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+}
+
+.loading-text {
+    color: #888;
+    padding: 30px !important;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.leaderboard-stats {
+    margin-top: 20px;
+    font-size: 8px;
+    color: #666;
+    text-align: center;
+}
+
+.leaderboard-stats span {
+    margin: 0 10px;
+}
+
+/* ========================================
+   Game Over Screen
+======================================== */
+.game-over-screen {
+    background: rgba(0, 0, 0, 0.85);
+}
+
+.game-over-title {
+    color: #ff0000;
+    font-size: 32px;
+    margin-bottom: 30px;
+    text-shadow: 0 0 20px rgba(255, 0, 0, 0.7);
+    animation: gameOverPulse 1s ease-in-out infinite;
+}
+
+@keyframes gameOverPulse {
+    0%, 100% { opacity: 1; text-shadow: 0 0 20px rgba(255, 0, 0, 0.7); }
+    50% { opacity: 0.8; text-shadow: 0 0 30px rgba(255, 0, 0, 0.9); }
+}
+
+.score-display {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.score-label {
+    color: #888;
+    font-size: 10px;
+    margin-bottom: 10px;
+}
+
+.score-value {
+    color: #ffff00;
+    font-size: 36px;
+    text-shadow: 0 0 15px rgba(255, 255, 0, 0.5);
+}
+
+.rank-display {
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 15px 25px;
+    background: rgba(0, 255, 0, 0.1);
+    border: 1px solid rgba(0, 255, 0, 0.3);
+    border-radius: 5px;
+}
+
+.rank-text {
+    color: #00ff00;
+    font-size: 12px;
+}
+
+.rank-text.new-record {
+    color: #ffd700;
+    animation: newRecord 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes newRecord {
+    from { transform: scale(1); }
+    to { transform: scale(1.05); }
+}
+
+.game-over-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+/* ========================================
+   Responsive for Leaderboard
+======================================== */
+@media (max-width: 480px) {
+    .leaderboard-title {
+        font-size: 18px;
+    }
+    
+    .leaderboard-table {
+        font-size: 8px;
+    }
+    
+    .leaderboard-table th,
+    .leaderboard-table td {
+        padding: 6px 3px;
+    }
+    
+    .username-input {
+        width: 160px;
+        font-size: 12px;
+        padding: 10px 15px;
+    }
+    
+    .galaga-title {
+        font-size: 28px;
+    }
+    
+    .score-value {
+        font-size: 28px;
+    }
+    
+    .game-over-title {
+        font-size: 24px;
+    }
+}
+
+@media (max-height: 500px) {
+    .leaderboard-container {
+        max-height: 40vh;
+    }
+    
+    .leaderboard-title {
+        font-size: 16px;
+        margin-bottom: 15px;
+    }
+    
+    .score-display {
+        margin-bottom: 10px;
+    }
+    
+    .score-value {
+        font-size: 24px;
+    }
+}
+

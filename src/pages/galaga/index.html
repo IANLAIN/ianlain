@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Galaga 1981 Arcade Clone">
+    <meta name="theme-color" content="#000000">
+    <title>Galaga 1981</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/src/assets/images/favicon.svg">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/galaga.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Router for clean URLs -->
+    <script type="module" src="../../js/core/router-init.js"></script>
+</head>
+<body>
+    <!-- Game Container -->
+    <div id="gameContainer">
+        <canvas id="gameCanvas"></canvas>
+        
+        <!-- Minimal Menu Overlay -->
+        <div class="galaga-menu" id="startScreen">
+            <h1 class="galaga-title">GALAGA</h1>
+            <p class="galaga-subtitle">1981 NAMCO LTD.</p>
+            
+            <!-- Username Input -->
+            <div class="username-section" id="usernameSection">
+                <label for="usernameInput" class="input-label">ENTER YOUR NAME</label>
+                <input type="text" id="usernameInput" class="username-input" 
+                    maxlength="12" minlength="3" placeholder="PILOT" 
+                    autocomplete="off" spellcheck="false">
+                <p class="input-hint">3-12 characters (A-Z, 0-9, _)</p>
+            </div>
+            
+            <button class="btn" id="startBtn">INSERT COIN</button>
+            <button class="btn btn-secondary" id="viewLeaderboardBtn">TOP PILOTS</button>
+            
+            <div class="controls-hint">
+                ARROWS to Move • SPACE to Fire
+            </div>
+            <a href="/" class="back-link">
+                &larr; Back to Portfolio
+            </a>
+        </div>
+        
+        <!-- Leaderboard Overlay -->
+        <div class="galaga-menu leaderboard-screen" id="leaderboardScreen" style="display: none;">
+            <h2 class="leaderboard-title">TOP PILOTS</h2>
+            <div class="leaderboard-container" id="leaderboardContainer">
+                <table class="leaderboard-table">
+                    <thead>
+                        <tr>
+                            <th>RANK</th>
+                            <th>PILOT</th>
+                            <th>SCORE</th>
+                            <th>WAVE</th>
+                        </tr>
+                    </thead>
+                    <tbody id="leaderboardBody">
+                        <tr><td colspan="4" class="loading-text">LOADING...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="leaderboard-stats" id="leaderboardStats"></div>
+            <button class="btn" id="closeLeaderboardBtn">BACK</button>
+        </div>
+        
+        <!-- Game Over Overlay -->
+        <div class="galaga-menu game-over-screen" id="gameOverScreen" style="display: none;">
+            <h2 class="game-over-title">GAME OVER</h2>
+            <div class="score-display" id="finalScoreDisplay">
+                <p class="score-label">FINAL SCORE</p>
+                <p class="score-value" id="finalScore">0</p>
+            </div>
+            <div class="rank-display" id="rankDisplay" style="display: none;">
+                <p class="rank-text" id="rankText"></p>
+            </div>
+            <div class="game-over-buttons">
+                <button class="btn" id="playAgainBtn">PLAY AGAIN</button>
+                <button class="btn btn-secondary" id="viewScoresBtn">TOP PILOTS</button>
+            </div>
+        </div>
+
+        <!-- Touch Controls -->
+        <div id="touchControls">
+            <div class="touch-zone" id="touchLeft">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+            <div class="touch-zone" id="touchRight">
+                <i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="touch-zone" id="touchFire">
+                <i class="fas fa-crosshairs"></i>
+            </div>
+        </div>
+        
+        <!-- Top Controls -->
+        <div class="top-controls">
+            <a href="/" id="backBtn" class="control-btn" title="Back to Portfolio">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+            <button id="muteBtn" class="control-btn" title="Toggle Sound">
+                <i class="fas fa-volume-up" id="muteIcon"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Modular JavaScript -->
+    <script type="module" src="js/game.js"></script>
+</body>
+</html>

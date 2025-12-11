@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Redirecting...</title>
+    <script>
+        // SPA routing fallback for GitHub Pages
+        // Converts clean URLs to real paths
+        const ROUTES = {
+            '/': '/index.html',
+            '/game': '/src/pages/galaga/index.html',
+            '/galaga': '/src/pages/galaga/index.html'
+        };
+        
+        const path = window.location.pathname;
+        const realPath = ROUTES[path];
+        
+        if (realPath) {
+            // Store intended route and redirect to real path
+            sessionStorage.setItem('spa_route', path);
+            window.location.replace(realPath);
+        } else {
+            // Unknown route - redirect to home
+            window.location.replace('/');
+        }
+    </script>
+</head>
+<body>
+    <p>Redirecting...</p>
+</body>
+</html>

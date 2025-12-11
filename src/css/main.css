@@ -1,0 +1,22 @@
+/* CSS entry point - imports all style modules */
+
+/* Base: reset, variables, typography */
+@import './base/_reset.css';
+@import './base/_variables.css';
+@import './base/_typography.css';
+
+/* Layout: containers and grid */
+@import './layout/_layout.css';
+
+/* Components: reusable UI elements */
+@import './components/_navbar.css';
+@import './components/_cards.css';
+@import './components/_buttons.css';
+
+/* Sections: page-specific styles */
+@import './sections/_hero.css';
+@import './sections/_sections.css';
+
+/* Utilities: animations and helpers */
+@import './utilities/_animations.css';
+@import './utilities/_backgrounds.css';

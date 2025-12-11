@@ -1,0 +1,181 @@
+/* Design tokens and CSS custom properties */
+
+:root {
+    /* ==================== COLORS ==================== */
+    
+    /* Primary Palette */
+    --color-cyan-400: #22d3ee;
+    --color-cyan-500: #06b6d4;
+    --color-cyan-600: #0891b2;
+    --color-cyan-700: #0e7490;
+    
+    /* Secondary Palette */
+    --color-blue-400: #60a5fa;
+    --color-blue-500: #0ea5e9;
+    --color-blue-600: #0284c7;
+    
+    /* Accent Palette */
+    --color-purple-400: #a78bfa;
+    --color-purple-500: #8b5cf6;
+    --color-purple-600: #7c3aed;
+    
+    /* Success/Emerald */
+    --color-emerald-400: #34d399;
+    --color-emerald-500: #10b981;
+    --color-emerald-600: #059669;
+    
+    /* Neutral/Dark */
+    --color-slate-900: #0f172a;
+    --color-slate-800: #1e293b;
+    --color-slate-700: #334155;
+    --color-slate-600: #475569;
+    
+    /* Text Colors */
+    --color-text-primary: #f0f9ff;
+    --color-text-secondary: #bae6fd;
+    --color-text-muted: #94a3b8;
+    
+    /* Background Colors - Solid Matte */
+    --color-bg-primary: #0a0a0f;
+    --color-bg-secondary: #12121a;
+    --color-bg-card: #16161f;
+    --color-bg-elevated: #1c1c28;
+    
+    /* Semantic aliases */
+    --primary: var(--color-cyan-500);
+    --secondary: var(--color-purple-500);
+    --accent: var(--color-emerald-500);
+    --background: var(--color-bg-primary);
+    --surface: var(--color-bg-card);
+    --surface-elevated: var(--color-bg-elevated);
+    --text: var(--color-text-primary);
+    --text-muted: var(--color-text-secondary);
+    
+    /* ==================== TYPOGRAPHY ==================== */
+    
+    --font-family-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-family-mono: 'Courier New', Consolas, Monaco, monospace;
+    
+    /* Font Sizes (fluid typography) */
+    --font-size-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+    --font-size-sm: clamp(0.875rem, 0.8rem + 0.3vw, 1rem);
+    --font-size-base: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);
+    --font-size-lg: clamp(1.125rem, 1rem + 0.6vw, 1.25rem);
+    --font-size-xl: clamp(1.25rem, 1.1rem + 0.8vw, 1.5rem);
+    --font-size-2xl: clamp(1.5rem, 1.3rem + 1vw, 2rem);
+    --font-size-3xl: clamp(2rem, 1.5rem + 2.5vw, 2.8rem);
+    --font-size-4xl: clamp(2.5rem, 2rem + 3vw, 3.5rem);
+    
+    /* Font Weights */
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --font-weight-extrabold: 800;
+    
+    /* Line Heights */
+    --line-height-tight: 1.25;
+    --line-height-normal: 1.6;
+    --line-height-relaxed: 1.75;
+    
+    /* Letter Spacing */
+    --letter-spacing-tight: -0.025em;
+    --letter-spacing-normal: 0;
+    --letter-spacing-wide: 0.025em;
+    
+    /* ==================== SPACING ==================== */
+    
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-5: 1.25rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --space-10: 2.5rem;
+    --space-12: 3rem;
+    --space-16: 4rem;
+    --space-20: 5rem;
+    --space-24: 6rem;
+    
+    /* Section Spacing */
+    --section-padding-y: clamp(4rem, 5vw, 6rem);
+    --section-padding-x: clamp(1rem, 3vw, 2rem);
+    
+    /* Container */
+    --container-max-width: 1200px;
+    --container-padding: var(--space-8);
+    
+    /* ==================== BORDERS ==================== */
+    
+    --radius-sm: 0.5rem;
+    --radius-md: 0.75rem;
+    --radius-lg: 1.25rem;
+    --radius-xl: 1.5rem;
+    --radius-2xl: 2rem;
+    --radius-full: 9999px;
+    
+    --border-width: 1px;
+    --border-color: #252532;
+    --border-color-hover: #353548;
+    --border-color-accent: var(--color-cyan-600);
+    
+    /* ==================== SHADOWS (Matte - subtle depth) ==================== */
+    
+    --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.5);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.6);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.6);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.7);
+    --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.5);
+    
+    /* ==================== TRANSITIONS ==================== */
+    
+    --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --ease-in: cubic-bezier(0.4, 0, 1, 1);
+    --ease-out: cubic-bezier(0, 0, 0.2, 1);
+    
+    --duration-fast: 150ms;
+    --duration-normal: 300ms;
+    --duration-slow: 500ms;
+    
+    --transition-fast: var(--duration-fast) var(--ease-smooth);
+    --transition-normal: var(--duration-normal) var(--ease-smooth);
+    --transition-slow: var(--duration-slow) var(--ease-smooth);
+    
+    /* ==================== EFFECTS (Matte - minimal) ==================== */
+    
+    /* ==================== Z-INDEX ==================== */
+    
+    --z-negative: -1;
+    --z-base: 0;
+    --z-dropdown: 100;
+    --z-sticky: 500;
+    --z-fixed: 1000;
+    --z-modal-backdrop: 1400;
+    --z-modal: 1500;
+    --z-popover: 1600;
+    --z-tooltip: 1700;
+    --z-decorative: 50;  /* For non-interactive overlays like spaceships */
+}
+
+/* ==================== THEME BODY ==================== */
+
+body {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--line-height-normal);
+    color: var(--text);
+    background-color: var(--background);
+}
+
+/* ==================== BREAKPOINTS ==================== */
+/* Usage: @media (--bp-mobile) { ... } */
+/* Note: @custom-media requires postcss-custom-media plugin */
+/* Fallback values for direct use: */
+/* Mobile: max-width: 480px */
+/* Tablet: max-width: 768px */
+/* Desktop: min-width: 769px */
+/* Large: min-width: 1024px */
+/* XLarge: min-width: 1280px */

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IanLain - Systems & Computer Engineering Student passionate about Computer Science, Mathematics & Astronomy">
+    <meta name="keywords" content="portfolio, engineering, computer science, mathematics, astronomy, developer">
+    <meta name="author" content="IanLain">
+    <meta name="theme-color" content="#06b6d4">
+    <title>IanLain</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="src/assets/images/favicon.svg">
+    <link rel="alternate icon" type="image/png" href="src/assets/images/favicon-32.png" sizes="32x32">
+    <link rel="apple-touch-icon" href="src/assets/images/favicon-192.png" sizes="192x192">
+    <link rel="manifest" href="src/config/manifest.json">
+    <meta name="application-name" content="IanLain">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" href="src/css/main.css" as="style">
+    <link rel="stylesheet" href="src/css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#home" class="logo">
+                <div class="logo-icon">
+                    <span class="logo-bracket">&lt;</span>
+                    <span class="logo-letter">I</span>
+                    <span class="logo-bracket">/&gt;</span>
+                </div>
+            </a>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link" data-i18n="nav.home">
+                        <i class="fas fa-home nav-icon"></i>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#about" class="nav-link" data-i18n="nav.about">
+                        <i class="fas fa-user nav-icon"></i>
+                        <span>About</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#interests" class="nav-link" data-i18n="nav.interests">
+                        <i class="fas fa-star nav-icon"></i>
+                        <span>Interests</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contact" class="nav-link" data-i18n="nav.contact">
+                        <i class="fas fa-envelope nav-icon"></i>
+                        <span>Contact</span>
+                    </a>
+                </li>
+            </ul>
+            
+            <div class="nav-right">
+                <div class="language-selector">
+                    <button class="lang-btn active" data-lang="en" title="English">EN</button>
+                    <button class="lang-btn" data-lang="es" title="Español">ES</button>
+                    <button class="lang-btn" data-lang="fr" title="Français">FR</button>
+                    <button class="lang-btn" data-lang="zh" title="中文">ZH</button>
+                </div>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <canvas id="hypercube-canvas" class="hypercube-bg"></canvas>
+        <div class="hero-content">
+            <div class="profile-container">
+                <div class="profile-image-wrapper">
+                    <a href="/game" class="profile-game-link" data-prefetch="hover">
+                        <img src="src/assets/images/profile.jpg" alt="IanLain Profile" class="profile-image" loading="eager" fetchpriority="high">
+                    </a>
+                </div>
+                <div class="hero-text">
+                    <h1 class="hero-title">
+                        <span class="nickname" data-text="IanLain">IanLain</span>
+                    </h1>
+                    <p class="hero-subtitle" data-i18n="hero.subtitle">Systems & Computer Engineering Student</p>
+                    <p class="hero-description" data-i18n="hero.description">Passionate about Computer Science, Mathematics & Astronomy</p>
+                    <div class="social-links">
+                        <a href="https://github.com/IANLAIN" target="_blank" rel="noopener noreferrer" class="social-link tooltip" data-tooltip="GitHub" aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://www.instagram.com/ian_connected/" target="_blank" rel="noopener noreferrer" class="social-link tooltip" data-tooltip="Instagram" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <div class="scroll-arrow">
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title" data-i18n="about.title">About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p class="about-paragraph" data-i18n="about.paragraph1">
+                        I'm a Systems and Computer Engineering student at the Universidad Tecnológica de Pereira, Colombia. 
+                        My journey in technology is driven by an insatiable curiosity about how computational systems work 
+                        and how they can be used to solve complex problems.
+                    </p>
+                    <p class="about-paragraph" data-i18n="about.paragraph2">
+                        Based in the beautiful coffee region of Colombia, I combine my technical studies with a deep 
+                        appreciation for the mathematical foundations that underpin modern computing. My passion extends 
+                        beyond Earth's boundaries into the vast realm of astronomy and space sciences.
+                    </p>
+                    <div class="education">
+                        <h3 class="education-title" data-i18n="about.education.title">Education</h3>
+                        <div class="education-item">
+                            <h4 data-i18n="about.education.degree">Systems & Computer Engineering</h4>
+                            <p data-i18n="about.education.university">Universidad Tecnológica de Pereira, Colombia</p>
+                            <span class="education-status" data-i18n="about.education.status">Current Student</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="interests" class="interests">
+        <div class="container">
+            <h2 class="section-title" data-i18n="interests.title">Interests & Passions</h2>
+            <div class="interests-grid">
+                <div class="interest-card">
+                    <div class="interest-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3 class="interest-title" data-i18n="interests.computerScience.title">Computer Science</h3>
+                    <p class="interest-description" data-i18n="interests.computerScience.description">
+                        Exploring algorithms, data structures, software engineering, and emerging technologies 
+                        that shape our digital future.
+                    </p>
+                </div>
+                <div class="interest-card">
+                    <div class="interest-icon">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <h3 class="interest-title" data-i18n="interests.mathematics.title">Mathematics</h3>
+                    <p class="interest-description" data-i18n="interests.mathematics.description">
+                        Fascinated by mathematical concepts, from discrete mathematics to calculus, 
+                        and their applications in computational problem-solving.
+                    </p>
+                </div>
+                <div class="interest-card">
+                    <div class="interest-icon">
+                        <i class="fab fa-osi"></i>
+                    </div>
+                    <h3 class="interest-title" data-i18n="interests.openSource.title">Free/Open Software</h3>
+                    <p class="interest-description" data-i18n="interests.openSource.description">
+                        Passionate about free software philosophy, GNU/Linux systems, and the power 
+                        of open-source in development and system administration.
+                    </p>
+                </div>
+                <div class="interest-card interest-card--centered">
+                    <div class="interest-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3 class="interest-title" data-i18n="interests.astronomy.title">Astronomy</h3>
+                    <p class="interest-description" data-i18n="interests.astronomy.description">
+                        Captivated by the cosmos, celestial mechanics, and the intersection of 
+                        computational science with space exploration.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title" data-i18n="contact.title">Let's Connect</h2>
+            <div class="contact-content">
+                <p class="contact-text" data-i18n="contact.description">
+                    Interested in collaborating on projects, discussing technology, or just connecting? 
+                    Feel free to reach out through my social channels.
+                </p>
+                <div class="contact-links">
+                    <a href="https://github.com/IANLAIN" target="_blank" rel="noopener noreferrer" class="contact-link">
+                        <i class="fab fa-github"></i>
+                        <span>GitHub</span>
+                    </a>
+                    <a href="https://www.instagram.com/ian_connected/" target="_blank" rel="noopener noreferrer" class="contact-link">
+                        <i class="fab fa-instagram"></i>
+                        <span>Instagram</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modular JavaScript Bundle -->
+    <script type="module" src="src/js/main.js"></script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/src/js/sw.js').catch(() => {});
+        }
+    </script>
+</body>
+</html>
