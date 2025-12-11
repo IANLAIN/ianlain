@@ -2,7 +2,7 @@
 
 <br>
 
-<img src="images/favicon.svg" alt="IanLain Logo" width="80" height="80">
+<img src="src/assets/images/favicon.svg" alt="IanLain Logo" width="80" height="80">
 
 <br>
 
