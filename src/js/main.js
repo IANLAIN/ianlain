@@ -1,7 +1,7 @@
 // App entry point - orchestrates module initialization
 
 import { DOM } from './core/dom.js';
-import { Logger } from './core/utils.js';
+import { Logger, debounce } from './core/utils.js';
 import { initPrefetch } from './core/prefetch.js';
 import { Router } from './core/router.js';
 import { initNavigation } from './components/navigation.js';
@@ -22,6 +22,14 @@ function init() {
     revealSections();
     initHypercube();
     initPrefetch();
+    
+    // Handle resize events globally
+    window.addEventListener('resize', debounce(() => {
+        Logger.log('App', 'Window resized');
+        // Trigger any necessary updates
+        DOM.refresh('navbar', '.navbar');
+    }, 200));
+    
     Logger.log('App', 'Initialization complete');
 }
 
