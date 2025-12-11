@@ -99,30 +99,33 @@ class GalagaAudio {
      * @param {OscillatorType} type - Waveform type
      * @param {number} startFreq - Starting frequency
      * @param {number} endFreq - Ending frequency
-     * @param {number} gain - Gain value
      * @param {number} duration - Duration in seconds
-     * @param {AudioNode} [dest] - Destination node
+     * @param {number} [gain=0.1] - Volume
      */
-    createSweep(type, startFreq, endFreq, gain, duration, dest) {
+    createSweep(type, startFreq, endFreq, duration, gain = 0.1) {
         if (!this.ctx || this.isMuted) return;
         
         const osc = this.ctx.createOscillator();
         const gainNode = this.ctx.createGain();
         
         osc.type = type;
-        osc.frequency.value = startFreq;
+        osc.frequency.setValueAtTime(startFreq, this.ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(endFreq, this.ctx.currentTime + duration);
+        
+        gainNode.gain.setValueAtTime(gain, this.ctx.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + duration);
         
         osc.connect(gainNode);
-        gainNode.connect(dest || this.sfxGain);
+        gainNode.connect(this.sfxGain);
         
-        const now = this.ctx.currentTime;
-        gainNode.gain.setValueAtTime(gain, now);
-        gainNode.gain.exponentialRampToValueAtTime(0.001, now + duration);
+        osc.start();
+        osc.stop(this.ctx.currentTime + duration);
         
-        osc.frequency.exponentialRampToValueAtTime(endFreq, now + duration * 0.8);
-        
-        osc.start(now);
-        osc.stop(now + duration);
+        // Clean up nodes
+        setTimeout(() => {
+            osc.disconnect();
+            gainNode.disconnect();
+        }, (duration + 0.1) * 1000);
     }
 
     /**
@@ -173,7 +176,7 @@ class GalagaAudio {
      */
     shoot() {
         // High-pitched laser sound
-        this.createSweep('square', 1200, 200, 0.12, 0.08);
+        this.createSweep('square', 1200, 200, 0.08);
         this.createOsc('square', 880, 0.08, 0.05);
     }
 
@@ -252,15 +255,15 @@ class GalagaAudio {
      * Enemy diving attack sound - descending whoosh
      */
     dive() {
-        this.createSweep('sawtooth', 400, 150, 0.1, 0.3);
-        this.createSweep('square', 300, 100, 0.05, 0.25);
+        this.createSweep('sawtooth', 400, 150, 0.3);
+        this.createSweep('square', 300, 100, 0.25);
     }
 
     /**
      * Enemy shooting sound
      */
     enemyShoot() {
-        this.createSweep('square', 600, 200, 0.08, 0.1);
+        this.createSweep('square', 600, 200, 0.1);
     }
 
     // ========================================================================

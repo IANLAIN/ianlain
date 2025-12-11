@@ -103,6 +103,21 @@ export const ENTRY_PATTERNS = Object.freeze({
 });
 
 // ============================================================================
+// COOKIE MANAGER
+// ============================================================================
+
+export const CookieManager = {
+    get: () => {
+        const match = document.cookie.split('; ').find(row => row.startsWith('galaga_highscore='));
+        return match ? parseInt(decodeURIComponent(match.split('=')[1])) || 0 : 0;
+    },
+    set: (score) => {
+        const expires = new Date(Date.now() + 365 * 864e5).toUTCString();
+        document.cookie = `galaga_highscore=${score}; expires=${expires}; path=/; SameSite=Lax`;
+    }
+};
+
+// ============================================================================
 // DIVING ATTACK CONFIGURATION
 // ============================================================================
 
