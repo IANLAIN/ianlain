@@ -25,7 +25,7 @@
     z-index: 2;
     max-width: 1200px;
     padding: var(--space-8) var(--space-8) var(--space-16);
-    animation: fadeInUp 1s var(--ease-smooth);
+    animation: fadeInUp 1.2s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* ==================== PROFILE ==================== */
@@ -34,27 +34,29 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--space-8);
+    gap: var(--space-6);
 }
 
 .profile-image-wrapper {
     position: relative;
-    margin-bottom: var(--space-2);
+    margin-bottom: var(--space-4);
 }
 
 .profile-image {
-    width: 220px;
-    height: 220px;
+    width: 180px;
+    height: 180px;
     border-radius: var(--radius-full);
     object-fit: cover;
-    border: 4px solid var(--primary);
-    box-shadow: var(--shadow-xl);
-    transition: transform var(--transition-slow);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.6);
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), filter 0.6s ease;
     will-change: transform;
+    filter: grayscale(20%) contrast(1.1);
 }
 
 .profile-image:hover {
-    transform: scale(1.05);
+    transform: scale(1.02);
+    filter: grayscale(0%) contrast(1);
 }
 
 .profile-game-link {
@@ -66,8 +68,8 @@
 .profile-image-wrapper::before {
     content: '';
     position: absolute;
-    inset: -12px;
-    border: 2px solid var(--border-color);
+    inset: -8px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: var(--radius-full);
     pointer-events: none;
 }
@@ -76,34 +78,45 @@
 
 .hero-text {
     text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .hero-title {
-    margin-bottom: var(--space-4);
+    margin-bottom: var(--space-2);
 }
 
 .nickname {
     display: block;
-    font-size: var(--font-size-4xl);
-    font-weight: var(--font-weight-extrabold);
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 800;
     color: var(--text);
-    letter-spacing: var(--letter-spacing-tight);
+    letter-spacing: -0.03em;
+    background: linear-gradient(to bottom right, #fff, #94a3b8);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: var(--space-2);
 }
 
 .hero-subtitle {
     font-size: var(--font-size-lg);
     color: var(--primary);
-    font-weight: var(--font-weight-semibold);
+    font-weight: 500;
     margin-bottom: var(--space-4);
+    opacity: 0.9;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    font-size: 0.9rem;
 }
 
 .hero-description {
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-xl);
+    line-height: 1.5;
     color: var(--text-muted);
-    margin-bottom: var(--space-8);
-    line-height: var(--line-height-relaxed);
+    font-weight: 300;
     max-width: 600px;
-    margin-inline: auto;
+    margin: 0 auto;
 }
 
 /* ==================== SCROLL INDICATOR ==================== */

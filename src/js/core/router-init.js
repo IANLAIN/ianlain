@@ -1,4 +1,4 @@
-// Minimal router initialization for sub-pages
+// Minimal router for sub-pages - Keep ROUTES synced with constants.js and 404.html
 
 import { ROUTES } from './constants.js';
 

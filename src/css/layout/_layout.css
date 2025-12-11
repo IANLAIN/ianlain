@@ -25,13 +25,14 @@ section {
 }
 
 .section-title {
-    font-size: var(--font-size-3xl);
-    font-weight: var(--font-weight-extrabold);
+    font-size: clamp(2rem, 3vw, 2.5rem);
+    font-weight: 700;
     text-align: center;
     margin-bottom: var(--space-12);
     color: var(--text);
     position: relative;
     padding-bottom: var(--space-4);
+    letter-spacing: -0.02em;
 }
 
 .section-title::after {
@@ -40,10 +41,11 @@ section {
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 80px;
-    height: 4px;
+    width: 40px;
+    height: 2px;
     background: var(--primary);
     border-radius: var(--radius-full);
+    opacity: 0.7;
 }
 
 /* ==================== UTILITY CLASSES ==================== */

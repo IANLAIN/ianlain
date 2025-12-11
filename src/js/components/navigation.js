@@ -94,10 +94,13 @@ export function initNavigation() {
     // Navigation links - smooth scroll and close menu
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
+            const href = link.getAttribute('href');
+            
+            // Skip external pages (not hash links)
+            if (!href.startsWith('#')) return;
+            
             e.preventDefault();
             closeMenu();
-            
-            const href = link.getAttribute('href');
             smoothScrollTo(href, APP_CONFIG.scroll.offset);
         });
     });
@@ -113,10 +116,6 @@ export function initNavigation() {
             smoothScrollTo(0);
         });
     }
-    
-    // Scroll handler with throttle for performance
-    const throttledScrollHandler = throttle(handleScroll, APP_CONFIG.performance.throttleDelay);
-    window.addEventListener('scroll', throttledScrollHandler, { passive: true });
     
     // Close menu on Escape key
     document.addEventListener('keydown', (e) => {

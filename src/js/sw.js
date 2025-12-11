@@ -1,6 +1,6 @@
 // Service Worker - PWA resource caching
 
-const CACHE_NAME = 'ianlain-v3';
+const CACHE_NAME = 'ianlain-v5';
 const STATIC_ASSETS = [
     '/',
     '/index.html',
@@ -34,6 +34,13 @@ const STATIC_ASSETS = [
     '/src/pages/news/index.html',
     '/src/pages/news/css/news.css',
     '/src/pages/news/js/news.js',
+    '/src/pages/galaga/index.html',
+    '/src/pages/galaga/css/galaga.css',
+    '/src/pages/galaga/js/game.js',
+    '/src/pages/galaga/js/config.js',
+    '/src/pages/galaga/js/audio.js',
+    '/src/pages/galaga/js/renderers.js',
+    '/src/pages/galaga/js/api.js',
     '/src/assets/images/favicon.svg',
     '/src/assets/images/favicon-32.png',
     '/src/assets/images/favicon-192.png',

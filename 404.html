@@ -5,11 +5,12 @@
     <title>Redirecting...</title>
     <script>
         // SPA routing fallback for GitHub Pages
-        // Converts clean URLs to real paths
+        // Keep ROUTES synced with constants.js and router-init.js
         const ROUTES = {
             '/': '/index.html',
             '/game': '/src/pages/galaga/index.html',
-            '/galaga': '/src/pages/galaga/index.html'
+            '/galaga': '/src/pages/galaga/index.html',
+            '/news': '/src/pages/news/index.html'
         };
         
         const path = window.location.pathname;

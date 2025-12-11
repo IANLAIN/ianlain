@@ -1,30 +1,19 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
-  <!-- Background transparent so it adapts to dark theme -->
-  <defs>
-    <linearGradient id="gradRing" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#06b6d4"/>
-      <stop offset="50%" stop-color="#0ea5e9"/>
-      <stop offset="100%" stop-color="#8b5cf6"/>
-    </linearGradient>
-    <linearGradient id="gradI" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#22d3ee"/>
-      <stop offset="100%" stop-color="#8b5cf6"/>
-    </linearGradient>
-    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="2" result="blur"/>
-      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.03  0 0 0 0 0.55  0 0 0 0 0.63  0 0 0 1 0"/>
-    </filter>
-  </defs>
-  <!-- Outer ring representing orbit / astronomy -->
-  <circle cx="32" cy="32" r="28" stroke="url(#gradRing)" stroke-width="4" fill="none"/>
-  <!-- Subtle inner glow -->
-  <circle cx="32" cy="32" r="20" fill="url(#gradRing)" opacity="0.08" filter="url(#glow)"/>
-  <!-- Stylized I (engineering + code) -->
-  <rect x="29" y="18" width="6" height="28" rx="2" fill="url(#gradI)" />
-  <!-- Small orbiting node (math + graph theory) -->
-  <circle cx="40" cy="24" r="5" fill="#0ea5e9" stroke="#8b5cf6" stroke-width="1"/>
-  <!-- Tiny Linux/open-source hint: terminal caret shape -->
-  <path d="M18 40 L26 36 L26 38 L20 41 Z" fill="#06b6d4" opacity="0.85" />
-  <!-- Name initial subtly encoded in path (hidden semantic) -->
-  <title>IanLain Favicon</title>
+<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <!-- Logo: <I/> with transparent background -->
+  <g transform="translate(32, 32)">
+    <!-- Left bracket < -->
+    <text x="-24" y="10" font-family="'Courier New', monospace" font-size="28" font-weight="bold" fill="#06b6d4" text-anchor="middle">
+      &lt;
+    </text>
+    
+    <!-- Letter I -->
+    <text x="-8" y="10" font-family="'Courier New', monospace" font-size="32" font-weight="bold" fill="#f0f9ff" text-anchor="middle">
+      I
+    </text>
+    
+    <!-- Right bracket / -->
+    <text x="16" y="10" font-family="'Courier New', monospace" font-size="28" font-weight="bold" fill="#06b6d4" text-anchor="middle">
+      /&gt;
+    </text>
+  </g>
 </svg>

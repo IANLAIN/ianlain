@@ -4,104 +4,104 @@ export const translations = {
     en: {
         nav: {
             home: "Home",
-            about: "About",
-            interests: "Interests",
+            about: "Profile",
+            interests: "Focus Areas",
             news: "News",
             contact: "Contact"
         },
         hero: {
-            subtitle: "Systems & Computer Engineering Student",
-            description: "Passionate about Computer Science, Mathematics & Astronomy"
+            subtitle: "Systems & Computer Engineering",
+            description: "Exploring the intersection of Computer Science, Mathematics & Astronomy."
         },
         about: {
-            title: "About Me",
-            paragraph1: "Systems and Computer Engineering student at Universidad Tecnológica de Pereira, Colombia. Driven by curiosity about computational systems and solving complex problems.",
-            paragraph2: "Based in Colombia's coffee region, combining technical studies with appreciation for mathematics and astronomy.",
+            title: "Profile",
+            paragraph1: "Pursuing Systems and Computer Engineering at Universidad Tecnológica de Pereira. Focused on the theoretical foundations of computation and their practical applications in solving complex systemic problems.",
+            paragraph2: "Based in the Colombian coffee region, my work integrates rigorous technical study with a profound appreciation for mathematical structures and celestial mechanics.",
             education: {
-                title: "Education",
+                title: "Academic Background",
                 degree: "Systems & Computer Engineering",
-                university: "Universidad Tecnológica de Pereira, Colombia",
-                status: "Current Student"
+                university: "Universidad Tecnológica de Pereira",
+                status: "In Progress"
             }
         },
         interests: {
-            title: "Interests & Passions",
+            title: "Focus Areas",
             computerScience: {
                 title: "Computer Science",
-                description: "Algorithms, data structures, software engineering, and emerging technologies shaping our digital future."
+                description: "Deep dive into algorithmic complexity, software architecture, and the cutting-edge technologies defining the next era of computing."
             },
             mathematics: {
                 title: "Mathematics",
-                description: "Mathematical concepts from discrete mathematics to calculus, applied to computational problem-solving."
+                description: "Exploring the elegant structures of discrete mathematics and calculus as the fundamental language of computational logic."
             },
             openSource: {
-                title: "Free/Open Software",
-                description: "Free software philosophy, GNU/Linux systems, and the power of open-source in development and system administration."
+                title: "Open Source Ecosystem",
+                description: "Advocating for the open-source ecosystem and GNU/Linux environments as the bedrock of transparent and secure software development."
             },
             cybersecurity: {
                 title: "Cybersecurity",
-                description: "Defensive security, Kali Linux, Parrot OS, and the critical role of protectors in our digital world."
+                description: "Focusing on defensive security strategies and ethical hacking methodologies to safeguard digital infrastructures."
             },
             astronomy: {
-                title: "Astronomy",
-                description: "The cosmos, celestial mechanics, and the intersection of computational science with space exploration."
+                title: "Computational Astronomy",
+                description: "Bridging the gap between celestial mechanics and data science to unravel the mysteries of the cosmos through computational astrophysics."
             }
         },
         contact: {
-            title: "Let's Connect",
-            description: "Interested in collaborating or discussing technology? Reach out through my social channels."
+            title: "Connect",
+            description: "Open to collaboration on technical projects and research discussions."
         }
     },
     
     es: {
         nav: {
             home: "Inicio",
-            about: "Acerca de",
-            interests: "Intereses",
-            news: "Noticias",
+            about: "Perfil",
+            interests: "Áreas de Enfoque",
+            news: "Insights",
             contact: "Contacto"
         },
         hero: {
-            subtitle: "Estudiante de Ingeniería de Sistemas y Computación",
-            description: "Apasionado por las Ciencias de la Computación, las Matemáticas y la Astronomía"
+            subtitle: "Ingeniería de Sistemas y Computación",
+            description: "Explorando la intersección entre Ciencias de la Computación, Matemáticas y Astronomía."
         },
         about: {
-            title: "Acerca de Mí",
-            paragraph1: "Estudiante de Ingeniería de Sistemas y Computación en la Universidad Tecnológica de Pereira, Colombia. Impulsado por la curiosidad sobre sistemas computacionales y la resolución de problemas complejos.",
-            paragraph2: "Ubicado en la región cafetera de Colombia, combinando estudios técnicos con apreciación por las matemáticas y la astronomía.",
+            title: "Perfil",
+            paragraph1: "Cursando Ingeniería de Sistemas y Computación en la Universidad Tecnológica de Pereira. Enfocado en los fundamentos teóricos de la computación y sus aplicaciones prácticas en la resolución de problemas sistémicos complejos.",
+            paragraph2: "Desde la región cafetera colombiana, mi trabajo integra el estudio técnico riguroso con una profunda apreciación por las estructuras matemáticas y la mecánica celeste.",
             education: {
-                title: "Educación",
+                title: "Formación Académica",
                 degree: "Ingeniería de Sistemas y Computación",
-                university: "Universidad Tecnológica de Pereira, Colombia",
-                status: "Estudiante Actual"
+                university: "Universidad Tecnológica de Pereira",
+                status: "En Curso"
             }
         },
         interests: {
-            title: "Intereses y Pasiones",
+            title: "Áreas de Enfoque",
             computerScience: {
                 title: "Ciencias de la Computación",
-                description: "Algoritmos, estructuras de datos, ingeniería de software y tecnologías emergentes que dan forma al futuro digital."
+                description: "Profundización en la complejidad algorítmica, arquitectura de software y tecnologías de vanguardia que definen la próxima era de la computación."
             },
             mathematics: {
                 title: "Matemáticas",
-                description: "Conceptos matemáticos desde las matemáticas discretas hasta el cálculo, aplicados a la resolución de problemas computacionales."
+                description: "Exploración de las estructuras elegantes de las matemáticas discretas y el cálculo como lenguaje fundamental de la lógica computacional."
             },
             openSource: {
-                title: "Software Libre",
-                description: "Filosofía del software libre, sistemas GNU/Linux y el poder del código abierto en el desarrollo y administración de sistemas."
+                title: "Ecosistema Open Source",
+                description: "Defensa del ecosistema de código abierto y entornos GNU/Linux como base del desarrollo de software transparente y seguro."
             },
             cybersecurity: {
                 title: "Ciberseguridad",
-                description: "Seguridad defensiva, Kali Linux, Parrot OS y el rol crítico de los protectores en nuestro mundo digital."
+                description: "Enfoque en estrategias de seguridad defensiva y metodologías de hacking ético para salvaguardar infraestructuras digitales."
             },
             astronomy: {
-                title: "Astronomía",
-                description: "El cosmos, la mecánica celeste y la intersección de las ciencias computacionales con la exploración espacial."
+                title: "Astronomía Computacional",
+                description: "Uniendo la mecánica celeste y la ciencia de datos para desentrañar los misterios del cosmos a través de la astrofísica computacional."
             }
         },
         contact: {
-            title: "Conectemos",
-            description: "¿Interesado en colaborar o discutir sobre tecnología? Contáctame a través de mis redes sociales."
+            title: "Conectar",
+            description: "Abierto a la colaboración en proyectos técnicos y discusiones de investigación."
         }
     },
     
@@ -132,23 +132,23 @@ export const translations = {
             title: "Intérêts et Passions",
             computerScience: {
                 title: "Informatique",
-                description: "Algorithmes, structures de données, génie logiciel et technologies émergentes qui façonnent l'avenir numérique."
+                description: "Immersion dans la complexité algorithmique, l'architecture logicielle et les technologies de pointe définissant la prochaine ère informatique."
             },
             mathematics: {
                 title: "Mathématiques",
-                description: "Concepts mathématiques des mathématiques discrètes au calcul, appliqués à la résolution de problèmes informatiques."
+                description: "Exploration des structures élégantes des mathématiques discrètes et du calcul comme langage fondamental de la logique informatique."
             },
             openSource: {
-                title: "Logiciel Libre",
-                description: "Philosophie du logiciel libre, systèmes GNU/Linux et la puissance de l'open-source dans le développement et l'administration système."
+                title: "Écosystème Open Source",
+                description: "Promotion de l'écosystème open source et des environnements GNU/Linux comme fondement d'un développement logiciel transparent et sécurisé."
             },
             cybersecurity: {
                 title: "Cybersécurité",
-                description: "Sécurité défensive, Kali Linux, Parrot OS et le rôle critique des protecteurs dans notre monde numérique."
+                description: "Concentration sur les stratégies de sécurité défensive et les méthodologies de hacking éthique pour protéger les infrastructures numériques."
             },
             astronomy: {
-                title: "Astronomie",
-                description: "Le cosmos, la mécanique céleste et l'intersection de l'informatique avec l'exploration spatiale."
+                title: "Astronomie Computationnelle",
+                description: "Combler le fossé entre la mécanique céleste et la science des données pour percer les mystères du cosmos grâce à l'astrophysique computationnelle."
             }
         },
         contact: {
@@ -184,23 +184,23 @@ export const translations = {
             title: "兴趣爱好",
             computerScience: {
                 title: "计算机科学",
-                description: "算法、数据结构、软件工程以及塑造数字未来的新兴技术。"
+                description: "深入研究算法复杂性、软件架构以及定义下一个计算时代的前沿技术。"
             },
             mathematics: {
                 title: "数学",
-                description: "从离散数学到微积分的数学概念，应用于计算问题的解决。"
+                description: "探索离散数学和微积分的优雅结构，将其作为计算逻辑的基础语言。"
             },
             openSource: {
-                title: "自由软件",
-                description: "自由软件哲学、GNU/Linux系统以及开源在开发和系统管理中的应用。"
+                title: "开源生态系统",
+                description: "倡导开源生态系统和GNU/Linux环境，将其作为透明和安全软件开发的基石。"
             },
             cybersecurity: {
                 title: "网络安全",
-                description: "防御性安全、Kali Linux、Parrot OS以及保护者在数字世界中的关键作用。"
+                description: "专注于防御性安全策略和道德黑客方法，以保护日益互联世界中的数字基础设施。"
             },
             astronomy: {
-                title: "天文学",
-                description: "宇宙、天体力学以及计算科学与太空探索的交汇。"
+                title: "计算天文学",
+                description: "通过计算天体物理学，弥合天体力学与数据科学之间的鸿沟，揭开宇宙的奥秘。"
             }
         },
         contact: {

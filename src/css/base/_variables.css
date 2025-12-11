@@ -36,10 +36,10 @@
     --color-text-muted: #94a3b8;
     
     /* Background Colors - Solid Matte */
-    --color-bg-primary: #0a0a0f;
-    --color-bg-secondary: #12121a;
-    --color-bg-card: #16161f;
-    --color-bg-elevated: #1c1c28;
+    --color-bg-primary: #0f0f12;
+    --color-bg-secondary: #14141a;
+    --color-bg-card: #1a1a22;
+    --color-bg-elevated: #20202a;
     
     /* Semantic aliases */
     --primary: var(--color-cyan-500);
@@ -48,7 +48,7 @@
     --background: var(--color-bg-primary);
     --surface: var(--color-bg-card);
     --surface-elevated: var(--color-bg-elevated);
-    --text: var(--color-text-primary);
+    --text: #e2e8f0;
     --text-muted: var(--color-text-secondary);
     
     /* ==================== TYPOGRAPHY ==================== */
