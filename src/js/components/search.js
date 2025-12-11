@@ -68,6 +68,8 @@ class SearchController {
     open() {
         this._overlay.classList.add(CLASSES.active);
         document.body.style.overflow = 'hidden';
+        this._overlay.setAttribute('aria-hidden', 'false');
+        this._toggle.setAttribute('aria-expanded', 'true');
         
         // Focus input after animation
         setTimeout(() => this._input?.focus(), 100);
@@ -78,6 +80,11 @@ class SearchController {
     close() {
         this._overlay.classList.remove(CLASSES.active);
         document.body.style.overflow = '';
+        this._overlay.setAttribute('aria-hidden', 'true');
+        this._toggle.setAttribute('aria-expanded', 'false');
+        
+        // Return focus to toggle button
+        this._toggle.focus();
         
         // Clear input
         if (this._input) this._input.value = '';

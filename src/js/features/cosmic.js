@@ -1,6 +1,6 @@
 // Cosmic background: animated stars, planets and shooting stars
 
-import { random } from '../core/utils.js';
+import { random, hexToRgba, adjustBrightness } from '../core/utils.js';
 
 /** Renders animated cosmic background elements */
 export class CosmicBackground {
@@ -120,7 +120,7 @@ export class CosmicBackground {
                 planet.x, planet.y, planet.size * 0.5,
                 planet.x, planet.y, planet.size * 2
             );
-            glowGradient.addColorStop(0, planet.color.replace(')', `, ${planet.glowIntensity * 0.3})`).replace('rgb', 'rgba'));
+            glowGradient.addColorStop(0, hexToRgba(planet.color, planet.glowIntensity * 0.3));
             glowGradient.addColorStop(1, 'transparent');
             this.ctx.fillStyle = glowGradient;
             this.ctx.fillRect(planet.x - planet.size * 2, planet.y - planet.size * 2, planet.size * 4, planet.size * 4);
@@ -131,7 +131,7 @@ export class CosmicBackground {
                 planet.x, planet.y, planet.size
             );
             bodyGradient.addColorStop(0, planet.color);
-            bodyGradient.addColorStop(1, this.darkenColor(planet.color, 0.5));
+            bodyGradient.addColorStop(1, adjustBrightness(planet.color, 0.5));
             
             this.ctx.beginPath();
             this.ctx.arc(planet.x, planet.y, planet.size, 0, Math.PI * 2);
@@ -192,14 +192,5 @@ export class CosmicBackground {
             
             return true;
         });
-    }
-    
-    /** Darkens hex color by factor */
-    darkenColor(color, factor) {
-        const hex = color.replace('#', '');
-        const r = Math.floor(parseInt(hex.substring(0, 2), 16) * factor);
-        const g = Math.floor(parseInt(hex.substring(2, 4), 16) * factor);
-        const b = Math.floor(parseInt(hex.substring(4, 6), 16) * factor);
-        return `rgb(${r}, ${g}, ${b})`;
     }
 }

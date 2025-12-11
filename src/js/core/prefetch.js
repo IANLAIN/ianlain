@@ -34,8 +34,12 @@ export function initPrefetch() {
         link.addEventListener('mouseenter', () => {
             timeoutId = setTimeout(() => {
                 // Use pathname to match clean routes
-                const path = new URL(link.href).pathname;
-                prefetch(path);
+                try {
+                    const path = new URL(link.href).pathname;
+                    prefetch(path);
+                } catch (e) {
+                    Logger.warn('Prefetch', `Invalid URL: ${link.href}`);
+                }
             }, 100);
         }, { passive: true });
         
@@ -45,8 +49,12 @@ export function initPrefetch() {
         
         // Touch devices: prefetch on first touch
         link.addEventListener('touchstart', () => {
-            const path = new URL(link.href).pathname;
-            prefetch(path);
+            try {
+                const path = new URL(link.href).pathname;
+                prefetch(path);
+            } catch (e) {
+                Logger.warn('Prefetch', `Invalid URL: ${link.href}`);
+            }
         }, { passive: true, once: true });
     });
     

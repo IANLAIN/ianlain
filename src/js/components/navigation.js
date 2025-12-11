@@ -101,6 +101,9 @@ export function initNavigation() {
             smoothScrollTo(href, APP_CONFIG.scroll.offset);
         });
     });
+
+    // Scroll event listener
+    window.addEventListener('scroll', throttle(handleScroll, APP_CONFIG.performance.throttleDelay), { passive: true });
     
     // Logo click - scroll to top
     if (logo) {
@@ -130,6 +133,13 @@ export function initNavigation() {
             closeMenu();
         }
     });
+    
+    // Close menu on resize if screen becomes large
+    window.addEventListener('resize', throttle(() => {
+        if (window.innerWidth > 768 && navMenu.classList.contains(CLASSES.active)) {
+            closeMenu();
+        }
+    }, 200));
     
     Logger.log('Navigation', 'Initialized');
 }

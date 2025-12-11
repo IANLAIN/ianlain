@@ -1,6 +1,6 @@
 // 4D Hypercube visualization with 3D projection
 
-import { throttle } from '../core/utils.js';
+import { throttle, hexToRgba } from '../core/utils.js';
 import { CosmicBackground } from './cosmic.js';
 
 /** Renders rotating 4D hypercube projected to 2D canvas */
@@ -62,6 +62,12 @@ export class Hypercube {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 this.isVisible = entry.isIntersecting;
+                if (this.isVisible && !this.animationId) {
+                    this.animate();
+                } else if (!this.isVisible && this.animationId) {
+                    cancelAnimationFrame(this.animationId);
+                    this.animationId = null;
+                }
             });
         }, { threshold: 0.1 });
         
@@ -142,9 +148,9 @@ export class Hypercube {
     getEdgeColor(index, depth) {
         const alpha = 0.3 + depth * 0.4;
         
-        if (index < 12) return `rgba(6, 182, 212, ${alpha})`;
-        if (index < 24) return `rgba(139, 92, 246, ${alpha})`;
-        return `rgba(16, 185, 129, ${alpha})`;
+        if (index < 12) return hexToRgba(this.primaryColor, alpha);
+        if (index < 24) return hexToRgba(this.secondaryColor, alpha);
+        return hexToRgba(this.tertiaryColor, alpha);
     }
     
     draw() {
@@ -172,9 +178,13 @@ export class Hypercube {
         projected.forEach((point, index) => {
             const size = 2 + point[2] * 3;
             const alpha = 0.5 + point[2] * 0.5;
-            const color = index < 8 
-                ? `rgba(6, 182, 212, ${alpha})`
-                : `rgba(139, 92, 246, ${alpha})`;
+            let color;
+            
+            if (index < 8) {
+                color = hexToRgba(this.primaryColor, alpha);
+            } else {
+                color = hexToRgba(this.secondaryColor, alpha);
+            }
             
             this.ctx.beginPath();
             this.ctx.arc(point[0], point[1], size, 0, Math.PI * 2);

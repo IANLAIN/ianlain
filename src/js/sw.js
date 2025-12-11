@@ -23,6 +23,7 @@ const STATIC_ASSETS = [
     '/src/js/core/utils.js',
     '/src/js/core/prefetch.js',
     '/src/js/core/router.js',
+    '/src/js/core/router-init.js',
     '/src/js/components/navigation.js',
     '/src/js/components/animations.js',
     '/src/js/components/search.js',

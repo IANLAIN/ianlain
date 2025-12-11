@@ -2,7 +2,7 @@
 
 import { APP_CONFIG, SELECTORS, CLASSES } from '../core/constants.js';
 import { translations } from './translations.js';
-import { getNestedValue, toggleClass, Logger, $$ } from '../core/utils.js';
+import { getNestedValue, toggleClass, Logger, $$, setStorage, getStorage } from '../core/utils.js';
 import { DOM } from '../core/dom.js';
 
 /** Singleton i18n manager */
@@ -14,11 +14,7 @@ class I18NManager {
     
     /** Loads saved language or returns default */
     _loadSavedLanguage() {
-        try {
-            return localStorage.getItem(APP_CONFIG.storage.language) || APP_CONFIG.defaults.language;
-        } catch {
-            return APP_CONFIG.defaults.language;
-        }
+        return getStorage(APP_CONFIG.storage.language, APP_CONFIG.defaults.language);
     }
     
     get currentLanguage() {
@@ -73,11 +69,7 @@ class I18NManager {
     
     /** Saves language preference to storage */
     _saveLanguage(lang) {
-        try {
-            localStorage.setItem(APP_CONFIG.storage.language, lang);
-        } catch (e) {
-            Logger.warn('i18n', 'Could not save language preference');
-        }
+        setStorage(APP_CONFIG.storage.language, lang);
     }
     
     /** Updates document lang attribute */

@@ -26,12 +26,13 @@ export function initAnimations() {
     if (!animatedElements.length) return;
     
     // Observer callback for fade-in animations
-    const animateOnScroll = (entries) => {
+    const animateOnScroll = (entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 addClasses(entry.target, CLASSES.fadeInUp);
                 entry.target.style.opacity = '1';
                 entry.target.style.transform = 'translateY(0)';
+                observer.unobserve(entry.target);
             }
         });
     };
@@ -69,11 +70,12 @@ function initCardStaggerAnimation() {
         card.style.transitionDelay = `${index * APP_CONFIG.animation.staggerDelay}s`;
     });
     
-    const cardObserver = createObserver((entries) => {
+    const cardObserver = createObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.style.opacity = '1';
                 entry.target.style.transform = 'translateY(0)';
+                observer.unobserve(entry.target);
             }
         });
     }, { threshold: APP_CONFIG.animation.cardThreshold });
@@ -88,10 +90,11 @@ export function revealSections() {
     const sections = $$('section');
     if (!sections.length) return;
     
-    const revealOnScroll = (entries) => {
+    const revealOnScroll = (entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 addClasses(entry.target, CLASSES.sectionVisible);
+                observer.unobserve(entry.target);
             }
         });
     };

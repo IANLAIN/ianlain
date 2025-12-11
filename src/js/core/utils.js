@@ -155,3 +155,31 @@ export const Logger = {
         console.error(`[${module}]`, ...args);
     }
 };
+
+/** Converts hex color to RGB object */
+export const hexToRgb = (hex) => {
+    const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+    hex = hex.replace(shorthandRegex, (m, r, g, b) => r + r + g + g + b + b);
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+    } : null;
+};
+
+/** Converts hex to RGBA string */
+export const hexToRgba = (hex, alpha = 1) => {
+    const rgb = hexToRgb(hex);
+    return rgb ? `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${alpha})` : `rgba(0, 0, 0, ${alpha})`;
+};
+
+/** Adjusts brightness of hex color */
+export const adjustBrightness = (hex, factor) => {
+    const rgb = hexToRgb(hex);
+    if (!rgb) return hex;
+    const r = Math.min(255, Math.floor(rgb.r * factor));
+    const g = Math.min(255, Math.floor(rgb.g * factor));
+    const b = Math.min(255, Math.floor(rgb.b * factor));
+    return `rgb(${r}, ${g}, ${b})`;
+};

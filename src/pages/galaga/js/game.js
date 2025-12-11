@@ -120,6 +120,9 @@ class GalagaGame {
             if (isHealthy) {
                 this.loadLeaderboard();
             }
+        }).catch(err => {
+            console.warn('API Health check failed', err);
+            this.isApiAvailable = false;
         });
         
         // Start loop

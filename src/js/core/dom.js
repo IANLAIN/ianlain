@@ -81,6 +81,32 @@ class DOMManager {
         this._initialized = false;
     }
     
+    /**
+     * Checks if an element exists in the DOM
+     * @param {string} selector - CSS selector
+     * @returns {boolean}
+     */
+    exists(selector) {
+        return !!$(selector);
+    }
+
+    /**
+     * Removes an element from the DOM
+     * @param {string} selector - CSS selector
+     */
+    remove(selector) {
+        const element = $(selector);
+        if (element && element.parentNode) {
+            element.parentNode.removeChild(element);
+            // Remove from cache if present
+            this._cache.forEach((value, key) => {
+                if (value === element) {
+                    this._cache.delete(key);
+                }
+            });
+        }
+    }
+
     // Convenience getters
     get navbar() { return this.get('navbar'); }
     get hamburger() { return this.get('hamburger'); }
