@@ -149,14 +149,14 @@
     
     --z-negative: -1;
     --z-base: 0;
+    --z-decorative: 50;  /* For non-interactive overlays */
+    --z-fixed: 100;      /* Fixed elements like navbar */
     --z-dropdown: 100;
     --z-sticky: 500;
-    --z-fixed: 100;      /* Fixed elements like navbar */
     --z-modal-backdrop: 1400;
     --z-modal: 1000;     /* Modals and overlays */
     --z-popover: 1600;
     --z-tooltip: 1700;
-    --z-decorative: 50;  /* For non-interactive overlays */
 }
 
 /* ==================== THEME BODY ==================== */
