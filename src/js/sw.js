@@ -1,6 +1,6 @@
 // Service Worker - PWA resource caching
 
-const CACHE_NAME = 'ianlain-v2';
+const CACHE_NAME = 'ianlain-v3';
 const STATIC_ASSETS = [
     '/',
     '/index.html',
@@ -12,6 +12,7 @@ const STATIC_ASSETS = [
     '/src/css/components/_navbar.css',
     '/src/css/components/_cards.css',
     '/src/css/components/_buttons.css',
+    '/src/css/components/_search.css',
     '/src/css/sections/_hero.css',
     '/src/css/sections/_sections.css',
     '/src/css/utilities/_animations.css',
@@ -24,6 +25,7 @@ const STATIC_ASSETS = [
     '/src/js/core/router.js',
     '/src/js/components/navigation.js',
     '/src/js/components/animations.js',
+    '/src/js/components/search.js',
     '/src/js/features/hypercube.js',
     '/src/js/features/cosmic.js',
     '/src/js/i18n/i18n.js',
