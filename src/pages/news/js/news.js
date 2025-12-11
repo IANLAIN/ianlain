@@ -34,6 +34,18 @@ const SOURCES = {
             type: 'rss',
             url: 'https://www.sciencedaily.com/rss/top/science.xml'
         }
+    ],
+    security: [
+        {
+            name: 'The Hacker News',
+            type: 'rss',
+            url: 'https://feeds.feedburner.com/TheHackersNews'
+        },
+        {
+            name: 'Krebs on Security',
+            type: 'rss',
+            url: 'https://krebsonsecurity.com/feed/'
+        }
     ]
 };
 
@@ -41,14 +53,17 @@ class NewsFeed {
     constructor() {
         this.grid = document.getElementById('newsGrid');
         this.filters = document.querySelectorAll('.filter-btn');
+        this.sortSelect = document.getElementById('sortSelect');
         this.articles = [];
         this.currentCategory = 'all';
+        this.currentSort = 'date-desc';
         
         this.init();
     }
 
     init() {
         this.setupFilters();
+        this.setupSort();
         this.fetchAllNews();
     }
 
@@ -64,6 +79,15 @@ class NewsFeed {
                 this.render();
             });
         });
+    }
+
+    setupSort() {
+        if (this.sortSelect) {
+            this.sortSelect.addEventListener('change', (e) => {
+                this.currentSort = e.target.value;
+                this.render();
+            });
+        }
     }
 
     async fetchAllNews() {
@@ -87,7 +111,10 @@ class NewsFeed {
             this.articles = results
                 .filter(r => r.status === 'fulfilled')
                 .flatMap(r => r.value)
-                .sort((a, b) => new Date(b.date) - new Date(a.date));
+                .map(article => ({
+                    ...article,
+                    readTime: Math.ceil(article.summary.length / 1000) // Rough estimate: 1 min per 1000 chars
+                }));
 
             this.render();
         } catch (error) {
@@ -136,9 +163,24 @@ class NewsFeed {
     render() {
         this.grid.innerHTML = '';
         
-        const filtered = this.currentCategory === 'all' 
+        let filtered = this.currentCategory === 'all' 
             ? this.articles 
             : this.articles.filter(a => a.category === this.currentCategory);
+
+        // Sort
+        filtered.sort((a, b) => {
+            switch (this.currentSort) {
+                case 'date-asc':
+                    return new Date(a.date) - new Date(b.date);
+                case 'read-asc':
+                    return a.readTime - b.readTime;
+                case 'read-desc':
+                    return b.readTime - a.readTime;
+                case 'date-desc':
+                default:
+                    return new Date(b.date) - new Date(a.date);
+            }
+        });
 
         if (filtered.length === 0) {
             this.grid.innerHTML = '<p class="no-results">No articles found.</p>';
@@ -162,6 +204,7 @@ class NewsFeed {
                     <div class="news-meta">
                         <span class="news-source">${article.source}</span>
                         <span class="news-date">${date}</span>
+                        <span class="news-read-time"><i class="far fa-clock"></i> ${article.readTime} min</span>
                     </div>
                     <h3 class="news-heading">${article.title}</h3>
                     <p class="news-excerpt">${article.summary.substring(0, 120)}...</p>
@@ -185,7 +228,8 @@ class NewsFeed {
         const images = {
             space: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=500&q=80',
             tech: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=500&q=80',
-            science: 'https://images.unsplash.com/photo-1507413245164-6160d8298b31?w=500&q=80'
+            science: 'https://images.unsplash.com/photo-1507413245164-6160d8298b31?w=500&q=80',
+            security: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=500&q=80'
         };
         return images[category] || images.tech;
     }

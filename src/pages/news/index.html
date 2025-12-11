@@ -38,14 +38,26 @@
 
     <main class="news-container">
         <header class="news-header">
-            <h1 class="news-title">Open <span class="highlight">Feed</span></h1>
-            <p class="news-subtitle">Curated updates from Science, Math & Tech</p>
+            <h1 class="news-title">News <span class="highlight">Feed</span></h1>
+            <p class="news-subtitle">Curated updates from Science, Math, Tech & Security</p>
             
-            <div class="news-filters">
-                <button class="filter-btn active" data-category="all">All</button>
-                <button class="filter-btn" data-category="space">Space</button>
-                <button class="filter-btn" data-category="tech">Tech</button>
-                <button class="filter-btn" data-category="science">Science</button>
+            <div class="news-controls">
+                <div class="news-filters">
+                    <button class="filter-btn active" data-category="all">All</button>
+                    <button class="filter-btn" data-category="space">Space</button>
+                    <button class="filter-btn" data-category="tech">Tech</button>
+                    <button class="filter-btn" data-category="science">Science</button>
+                    <button class="filter-btn" data-category="security">Security</button>
+                </div>
+                
+                <div class="news-sort">
+                    <select id="sortSelect" class="sort-select">
+                        <option value="date-desc">Newest First</option>
+                        <option value="date-asc">Oldest First</option>
+                        <option value="read-asc">Short Read</option>
+                        <option value="read-desc">Long Read</option>
+                    </select>
+                </div>
             </div>
         </header>
 

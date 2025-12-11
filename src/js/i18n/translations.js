@@ -38,6 +38,10 @@ export const translations = {
                 title: "Free/Open Software",
                 description: "Free software philosophy, GNU/Linux systems, and the power of open-source in development and system administration."
             },
+            cybersecurity: {
+                title: "Cybersecurity",
+                description: "Defensive security, Kali Linux, Parrot OS, and the critical role of protectors in our digital world."
+            },
             astronomy: {
                 title: "Astronomy",
                 description: "The cosmos, celestial mechanics, and the intersection of computational science with space exploration."
@@ -85,6 +89,10 @@ export const translations = {
             openSource: {
                 title: "Software Libre",
                 description: "Filosofía del software libre, sistemas GNU/Linux y el poder del código abierto en el desarrollo y administración de sistemas."
+            },
+            cybersecurity: {
+                title: "Ciberseguridad",
+                description: "Seguridad defensiva, Kali Linux, Parrot OS y el rol crítico de los protectores en nuestro mundo digital."
             },
             astronomy: {
                 title: "Astronomía",
@@ -134,6 +142,10 @@ export const translations = {
                 title: "Logiciel Libre",
                 description: "Philosophie du logiciel libre, systèmes GNU/Linux et la puissance de l'open-source dans le développement et l'administration système."
             },
+            cybersecurity: {
+                title: "Cybersécurité",
+                description: "Sécurité défensive, Kali Linux, Parrot OS et le rôle critique des protecteurs dans notre monde numérique."
+            },
             astronomy: {
                 title: "Astronomie",
                 description: "Le cosmos, la mécanique céleste et l'intersection de l'informatique avec l'exploration spatiale."
@@ -181,6 +193,10 @@ export const translations = {
             openSource: {
                 title: "自由软件",
                 description: "自由软件哲学、GNU/Linux系统以及开源在开发和系统管理中的应用。"
+            },
+            cybersecurity: {
+                title: "网络安全",
+                description: "防御性安全、Kali Linux、Parrot OS以及保护者在数字世界中的关键作用。"
             },
             astronomy: {
                 title: "天文学",
