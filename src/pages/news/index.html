@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Open Science & Tech News Feed">
+    <title>IanLain | News</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="../../assets/images/favicon.svg">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="css/news.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Router -->
+    <script type="module" src="../../js/core/router-init.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="logo">
+                <div class="logo-icon">
+                    <span class="logo-bracket">&lt;</span>
+                    <span class="logo-letter">I</span>
+                    <span class="logo-bracket">/&gt;</span>
+                </div>
+            </a>
+            
+            <div class="nav-right">
+                <a href="/" class="back-link">
+                    <i class="fas fa-arrow-left"></i> Back
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="news-container">
+        <header class="news-header">
+            <h1 class="news-title">Open <span class="highlight">Feed</span></h1>
+            <p class="news-subtitle">Curated updates from Science, Math & Tech</p>
+            
+            <div class="news-filters">
+                <button class="filter-btn active" data-category="all">All</button>
+                <button class="filter-btn" data-category="space">Space</button>
+                <button class="filter-btn" data-category="tech">Tech</button>
+                <button class="filter-btn" data-category="science">Science</button>
+            </div>
+        </header>
+
+        <div class="news-grid" id="newsGrid">
+            <!-- Loading State -->
+            <div class="loader">
+                <div class="spinner"></div>
+                <p>Fetching open data...</p>
+            </div>
+        </div>
+    </main>
+
+    <script type="module" src="js/news.js"></script>
+</body>
+</html>

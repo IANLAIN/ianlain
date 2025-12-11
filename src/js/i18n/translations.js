@@ -6,6 +6,7 @@ export const translations = {
             home: "Home",
             about: "About",
             interests: "Interests",
+            news: "News",
             contact: "Contact"
         },
         hero: {
@@ -53,6 +54,7 @@ export const translations = {
             home: "Inicio",
             about: "Acerca de",
             interests: "Intereses",
+            news: "Noticias",
             contact: "Contacto"
         },
         hero: {
@@ -100,6 +102,7 @@ export const translations = {
             home: "Accueil",
             about: "À propos",
             interests: "Intérêts",
+            news: "Actualités",
             contact: "Contact"
         },
         hero: {
@@ -147,6 +150,7 @@ export const translations = {
             home: "首页",
             about: "关于",
             interests: "兴趣",
+            news: "新闻",
             contact: "联系"
         },
         hero: {

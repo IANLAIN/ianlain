@@ -4,7 +4,8 @@
 export const ROUTES = {
     '/': '/index.html',
     '/game': '/src/pages/galaga/index.html',
-    '/galaga': '/src/pages/galaga/index.html'
+    '/galaga': '/src/pages/galaga/index.html',
+    '/news': '/src/pages/news/index.html'
 };
 
 /** Global app configuration */
