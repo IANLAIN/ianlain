@@ -16,10 +16,6 @@
 
 <br>
 
-[ianlain.h4ck.me](https://ianlain.h4ck.me)
-
-<br>
-
 ---
 
 <sub>Systems & Computer Engineering · Computer Science · Mathematics · Astronomy</sub>

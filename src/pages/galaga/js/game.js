@@ -7,8 +7,7 @@ import {
     ENEMY_TYPE, 
     SCORING, 
     FORMATION, 
-    ENTRY_PATTERNS,
-    CookieManager 
+    ENTRY_PATTERNS
 } from './config.js';
 import { audio } from './audio.js';
 import { 
@@ -27,15 +26,8 @@ import {
 import {
     isFirstVisit,
     markVisited,
-    getSavedUsername,
-    saveUsername,
     getLocalHighScore,
-    saveLocalHighScore,
-    fetchLeaderboard,
-    fetchUserScore,
-    submitScore,
-    fetchStats,
-    checkApiHealth
+    saveLocalHighScore
 } from './api.js';
 import { throttle } from '../../../js/core/utils.js';
 
@@ -52,15 +44,10 @@ class GalagaGame {
         this.state = 'MENU'; // MENU, READY, PLAYING, LEVEL_TRANSITION, GAME_OVER
         this.level = 1;
         this.score = 0;
-        this.highScore = CookieManager.get();
+        this.highScore = getLocalHighScore();
         this.lives = GAME_CONFIG.INITIAL_LIVES;
         this.frameCount = 0;
         this.lastTime = 0;
-        
-        // Leaderboard & User State
-        this.username = getSavedUsername() || '';
-        this.isApiAvailable = false;
-        this.leaderboard = [];
         
         // Entities
         this.player = {
@@ -89,6 +76,14 @@ class GalagaGame {
         this.enemiesToSpawn = [];
         this.spawnTimer = 0;
         
+        // Enemy attack timing
+        this.lastDiveTime = 0;
+        this.lastEnemyShot = 0;
+        
+        // Difficulty scaling per level
+        this.diveInterval = 2500;      // ms between dive attacks
+        this.enemyFireInterval = 1500;  // ms between enemy shots
+        
         // Input
         this.keys = { left: false, right: false, fire: false };
         this.lastFireTime = 0;
@@ -114,16 +109,10 @@ class GalagaGame {
         this.setupEventListeners();
         this.createStars();
         
-        // Check API health
-        checkApiHealth().then(isHealthy => {
-            this.isApiAvailable = isHealthy;
-            if (isHealthy) {
-                this.loadLeaderboard();
-            }
-        }).catch(err => {
-            console.warn('API Health check failed', err);
-            this.isApiAvailable = false;
-        });
+        // Mark first visit
+        if (isFirstVisit()) {
+            markVisited();
+        }
         
         // Start loop
         this.lastTime = performance.now();
@@ -160,47 +149,65 @@ class GalagaGame {
                 this.lastTime = performance.now();
             }
         });
+        
+        // Button handlers
+        const startBtn = document.getElementById(SELECTORS.BUTTONS.START);
+        const playAgainBtn = document.getElementById('playAgainBtn');
+        const muteBtn = document.getElementById(SELECTORS.BUTTONS.MUTE);
+        
+        if (startBtn) {
+            startBtn.addEventListener('click', () => this.startGame());
+        }
+        if (playAgainBtn) {
+            playAgainBtn.addEventListener('click', () => this.restartGame());
+        }
+        if (muteBtn) {
+            muteBtn.addEventListener('click', () => this.toggleMute());
+        }
     }
     
-    /** Initialize leaderboard system and check first visit */
-    async initLeaderboard() {
-        // Check if this is first visit
-        const firstVisit = isFirstVisit();
-        if (firstVisit) {
-            markVisited();
-        }
-        
-        // Pre-populate username if saved
-        const usernameInput = document.getElementById('usernameInput');
-        if (usernameInput && this.username) {
-            usernameInput.value = this.username;
-        }
-        
-        // Check API availability
-        this.isApiAvailable = await checkApiHealth();
-        
-        // Load initial leaderboard
-        if (this.isApiAvailable) {
-            this.leaderboard = await fetchLeaderboard(10);
-        }
-    }
-
     setupTouchControls() {
         const touchLeft = document.getElementById(SELECTORS.TOUCH.LEFT);
         const touchRight = document.getElementById(SELECTORS.TOUCH.RIGHT);
         const touchFire = document.getElementById(SELECTORS.TOUCH.FIRE);
         
+        // Left movement
         if (touchLeft) {
-            touchLeft.addEventListener('touchstart', (e) => { e.preventDefault(); this.keys.left = true; });
-            touchLeft.addEventListener('touchend', (e) => { e.preventDefault(); this.keys.left = false; });
+            touchLeft.addEventListener('touchstart', (e) => { e.preventDefault(); this.keys.left = true; }, { passive: false });
+            touchLeft.addEventListener('touchend', (e) => { e.preventDefault(); this.keys.left = false; }, { passive: false });
+            touchLeft.addEventListener('touchcancel', (e) => { e.preventDefault(); this.keys.left = false; }, { passive: false });
         }
+        
+        // Right movement
         if (touchRight) {
-            touchRight.addEventListener('touchstart', (e) => { e.preventDefault(); this.keys.right = true; });
-            touchRight.addEventListener('touchend', (e) => { e.preventDefault(); this.keys.right = false; });
+            touchRight.addEventListener('touchstart', (e) => { e.preventDefault(); this.keys.right = true; }, { passive: false });
+            touchRight.addEventListener('touchend', (e) => { e.preventDefault(); this.keys.right = false; }, { passive: false });
+            touchRight.addEventListener('touchcancel', (e) => { e.preventDefault(); this.keys.right = false; }, { passive: false });
         }
+        
+        // Fire button with continuous firing support
         if (touchFire) {
-            touchFire.addEventListener('touchstart', (e) => { e.preventDefault(); this.keys.fire = true; this.tryFire(); });
-            touchFire.addEventListener('touchend', (e) => { e.preventDefault(); this.keys.fire = false; });
+            let fireInterval = null;
+            
+            touchFire.addEventListener('touchstart', (e) => { 
+                e.preventDefault(); 
+                this.keys.fire = true; 
+                this.tryFire();
+                // Enable continuous firing while held
+                fireInterval = setInterval(() => this.tryFire(), 200);
+            }, { passive: false });
+            
+            const stopFiring = (e) => {
+                e.preventDefault();
+                this.keys.fire = false;
+                if (fireInterval) {
+                    clearInterval(fireInterval);
+                    fireInterval = null;
+                }
+            };
+            
+            touchFire.addEventListener('touchend', stopFiring, { passive: false });
+            touchFire.addEventListener('touchcancel', stopFiring, { passive: false });
         }
     }
 
@@ -226,20 +233,6 @@ class GalagaGame {
     }
 
     startGame() {
-        // Validate username
-        const usernameInput = document.getElementById('usernameInput');
-        const username = usernameInput?.value?.trim() || '';
-        
-        if (username.length < 3) {
-            usernameInput?.classList.add('error');
-            setTimeout(() => usernameInput?.classList.remove('error'), 500);
-            return;
-        }
-        
-        // Save username
-        this.username = username;
-        saveUsername(username);
-        
         audio.init();
         audio.gameStart();
         
@@ -251,6 +244,9 @@ class GalagaGame {
         this.player.state = 'ALIVE';
         this.player.x = this.canvas.width / 2;
         this.player.y = this.canvas.height - 50;
+        
+        // Set difficulty based on level
+        this.updateDifficulty();
         
         this.resetLevel();
         
@@ -270,102 +266,30 @@ class GalagaGame {
         if (menu) menu.style.display = 'flex';
     }
     
-    // ========================================================================
-    // LEADERBOARD METHODS
-    // ========================================================================
-    
-    /** Shows the leaderboard overlay */
-    async showLeaderboard() {
-        const screen = document.getElementById('leaderboardScreen');
-        const startScreen = document.getElementById('startScreen');
-        
-        if (screen) screen.style.display = 'flex';
-        if (startScreen) startScreen.style.display = 'none';
-        
-        await this.updateLeaderboardDisplay();
-    }
-    
-    /** Hides the leaderboard overlay */
-    hideLeaderboard() {
-        const screen = document.getElementById('leaderboardScreen');
-        const startScreen = document.getElementById('startScreen');
-        
-        if (screen) screen.style.display = 'none';
-        if (startScreen) startScreen.style.display = 'flex';
-    }
-    
-    /** Updates the leaderboard table with current scores */
-    async updateLeaderboardDisplay() {
-        const tbody = document.getElementById('leaderboardBody');
-        const statsEl = document.getElementById('leaderboardStats');
-        
-        if (!tbody) return;
-        
-        // Fetch fresh data if API is available
-        if (this.isApiAvailable) {
-            this.leaderboard = await fetchLeaderboard(10);
-            const stats = await fetchStats();
-            
-            if (stats && statsEl) {
-                statsEl.innerHTML = `
-                    <span>TOTAL GAMES: ${stats.totalGames}</span>
-                    <span>PILOTS: ${stats.totalPlayers}</span>
-                    <span>TOP SCORE: ${stats.highestScore}</span>
-                `;
-            }
-        }
-        
-        if (this.leaderboard.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="4" class="loading-text">NO SCORES YET</td></tr>';
-            return;
-        }
-        
-        tbody.innerHTML = this.leaderboard.map((score, index) => {
-            const isCurrentUser = score.username === this.username;
-            return `
-                <tr class="${isCurrentUser ? 'current-user' : ''}">
-                    <td>${index + 1}</td>
-                    <td>${score.username}</td>
-                    <td>${score.score.toLocaleString()}</td>
-                    <td>${score.level || '-'}</td>
-                </tr>
-            `;
-        }).join('');
-    }
-    
     /** Hides the game over screen */
     hideGameOver() {
         const screen = document.getElementById('gameOverScreen');
         if (screen) screen.style.display = 'none';
     }
     
-    /** Shows the game over screen with score submission */
-    async showGameOver() {
+    /** Shows the game over screen */
+    showGameOver() {
         const screen = document.getElementById('gameOverScreen');
         const finalScore = document.getElementById('finalScore');
-        const rankDisplay = document.getElementById('rankDisplay');
-        const rankText = document.getElementById('rankText');
+        const highScoreText = document.getElementById('highScoreText');
         
         if (screen) screen.style.display = 'flex';
         if (finalScore) finalScore.textContent = this.score.toLocaleString();
         
-        // Submit score to leaderboard
-        if (this.isApiAvailable && this.username) {
-            const result = await submitScore(this.username, this.score, this.level);
-            
-            if (result.success && rankDisplay && rankText) {
-                rankDisplay.style.display = 'block';
-                
-                if (result.isPersonalBest) {
-                    rankText.className = 'rank-text new-record';
-                    rankText.textContent = `NEW PERSONAL BEST! RANK #${result.rank}`;
-                } else {
-                    rankText.className = 'rank-text';
-                    rankText.textContent = `GLOBAL RANK: #${result.rank}`;
-                }
+        // Display high score status
+        if (highScoreText) {
+            if (this.score >= this.highScore && this.score > 0) {
+                highScoreText.textContent = 'NEW HIGH SCORE!';
+                highScoreText.className = 'high-score-text new-record';
+            } else {
+                highScoreText.textContent = `HIGH SCORE: ${this.highScore.toLocaleString()}`;
+                highScoreText.className = 'high-score-text';
             }
-        } else {
-            if (rankDisplay) rankDisplay.style.display = 'none';
         }
     }
 
@@ -375,6 +299,8 @@ class GalagaGame {
         this.enemies = [];
         this.explosions = [];
         this.waveState = 'ENTRY';
+        this.lastDiveTime = Date.now();
+        this.lastEnemyShot = Date.now();
         this.generateWave();
     }
 
@@ -487,34 +413,81 @@ class GalagaGame {
 
         // Update Enemies
         const time = Date.now() * 0.001;
+        const now = Date.now();
+        
+        // Trigger dive attacks at intervals (based on difficulty)
+        const formationEnemies = this.enemies.filter(e => e.state === 'FORMATION');
+        if (formationEnemies.length > 0 && now - this.lastDiveTime > this.diveInterval) {
+            const diver = formationEnemies[Math.floor(Math.random() * formationEnemies.length)];
+            diver.state = 'DIVING';
+            diver.diveStartX = diver.x;
+            diver.diveStartY = diver.y;
+            diver.diveTime = 0;
+            diver.diveTargetX = this.player.x; // Target player position
+            audio.dive();
+            this.lastDiveTime = now;
+        }
+        
+        // Enemy shooting (diving enemies shoot more)
+        const divingEnemies = this.enemies.filter(e => e.state === 'DIVING');
+        if (now - this.lastEnemyShot > this.enemyFireInterval) {
+            // Diving enemies shoot toward player
+            if (divingEnemies.length > 0 && Math.random() < 0.7) {
+                const shooter = divingEnemies[Math.floor(Math.random() * divingEnemies.length)];
+                this.enemyBullets.push({
+                    x: shooter.x,
+                    y: shooter.y + 15,
+                    vx: (this.player.x - shooter.x) * 0.02,
+                    vy: 4 + this.level * 0.3
+                });
+            } else if (formationEnemies.length > 0) {
+                // Formation enemies occasionally drop straight bullets
+                const shooter = formationEnemies[Math.floor(Math.random() * formationEnemies.length)];
+                this.enemyBullets.push({
+                    x: shooter.x,
+                    y: shooter.y + 15,
+                    vx: 0,
+                    vy: 3 + this.level * 0.2
+                });
+            }
+            this.lastEnemyShot = now;
+        }
+        
         this.enemies.forEach(enemy => {
             // Breathing animation in formation
             if (enemy.state === 'FORMATION') {
                 enemy.x = enemy.targetX + Math.sin(time * 2) * 10;
             }
             
-            // Random diving attacks
-            if (enemy.state === 'FORMATION' && Math.random() < 0.001) {
-                enemy.state = 'DIVING';
-                enemy.diveStartX = enemy.x;
-                enemy.diveStartY = enemy.y;
-                enemy.diveTime = 0;
-                audio.dive();
-            }
-            
             if (enemy.state === 'DIVING') {
                 enemy.diveTime += 0.05;
-                // Simple bezier curve dive
-                enemy.y += 3;
-                enemy.x += Math.sin(enemy.diveTime) * 5;
+                // Improved dive: curves toward player then swoops down
+                const progress = enemy.diveTime;
+                enemy.y += 3 + this.level * 0.2;
+                
+                // S-curve pattern toward player
+                const targetDiff = (enemy.diveTargetX || this.player.x) - enemy.x;
+                enemy.x += Math.sin(progress * 2) * 4 + targetDiff * 0.02;
                 
                 if (enemy.y > this.canvas.height) {
-                    // Return to formation
-                    enemy.y = 0;
-                    enemy.state = 'FORMATION';
+                    // Return to formation from top
+                    enemy.y = -30;
+                    enemy.x = enemy.targetX;
+                    setTimeout(() => {
+                        enemy.state = 'FORMATION';
+                    }, 500);
                 }
             }
         });
+        
+        // Update enemy bullets
+        this.enemyBullets.forEach(b => {
+            b.x += b.vx || 0;
+            b.y += b.vy || 4;
+        });
+        this.enemyBullets = this.enemyBullets.filter(b => 
+            b.y < this.canvas.height + 20 && b.x > -20 && b.x < this.canvas.width + 20
+        );
 
         // Collision Detection
         this.checkCollisions();
@@ -553,16 +526,31 @@ class GalagaGame {
                     this.killPlayer();
                 }
             });
+            
+            // Enemy bullets vs Player
+            this.enemyBullets.forEach((bullet, index) => {
+                const dx = bullet.x - this.player.x;
+                const dy = bullet.y - this.player.y;
+                const dist = Math.sqrt(dx*dx + dy*dy);
+                
+                if (dist < 15) {
+                    this.enemyBullets.splice(index, 1);
+                    this.killPlayer();
+                }
+            });
         }
     }
 
     destroyEnemy(enemy) {
+        // Score based on diving state BEFORE changing state
+        const wasDiving = enemy.state === 'DIVING';
         enemy.state = 'DEAD';
         this.enemies = this.enemies.filter(e => e !== enemy);
         
-        // Score
-        let points = SCORING[enemy.type].FORMATION;
-        if (enemy.state === 'DIVING') points = SCORING[enemy.type].DIVING;
+        // Score - diving enemies worth more
+        let points = wasDiving 
+            ? (SCORING[enemy.type].DIVING || SCORING[enemy.type].DIVING_ALONE || 100)
+            : SCORING[enemy.type].FORMATION;
         this.score += points;
         
         // Explosion
@@ -596,7 +584,8 @@ class GalagaGame {
                 setTimeout(() => this.player.isInvincible = false, 3000);
             } else {
                 this.state = 'GAME_OVER';
-                CookieManager.set(Math.max(this.score, this.highScore));
+                saveLocalHighScore(this.score);
+                this.highScore = getLocalHighScore();
                 this.showGameOver();
             }
         }, 2000);
@@ -604,11 +593,21 @@ class GalagaGame {
 
     levelComplete() {
         this.state = 'LEVEL_TRANSITION';
+        audio.levelClear && audio.levelClear();
+        
         setTimeout(() => {
             this.level++;
+            this.updateDifficulty();
             this.resetLevel();
             this.state = 'PLAYING';
         }, 3000);
+    }
+    
+    /** Updates difficulty parameters based on current level */
+    updateDifficulty() {
+        // Faster attacks as level increases
+        this.diveInterval = Math.max(800, 2500 - (this.level - 1) * 150);
+        this.enemyFireInterval = Math.max(500, 1500 - (this.level - 1) * 100);
     }
 
     draw() {
@@ -643,6 +642,18 @@ class GalagaGame {
         
         this.bullets.forEach(bullet => {
             drawBullet(this.ctx, bullet);
+        });
+        
+        // Draw enemy bullets
+        this.enemyBullets.forEach(bullet => {
+            this.ctx.save();
+            this.ctx.fillStyle = '#FF4500';
+            this.ctx.shadowColor = '#FF4500';
+            this.ctx.shadowBlur = 6;
+            this.ctx.beginPath();
+            this.ctx.arc(bullet.x, bullet.y, 4, 0, Math.PI * 2);
+            this.ctx.fill();
+            this.ctx.restore();
         });
         
         // Draw Explosions

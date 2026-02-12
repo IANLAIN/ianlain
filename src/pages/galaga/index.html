@@ -27,17 +27,7 @@
             <h1 class="galaga-title">GALAGA</h1>
             <p class="galaga-subtitle">1981 NAMCO LTD.</p>
             
-            <!-- Username Input -->
-            <div class="username-section" id="usernameSection">
-                <label for="usernameInput" class="input-label">ENTER YOUR NAME</label>
-                <input type="text" id="usernameInput" class="username-input" 
-                    maxlength="12" minlength="3" placeholder="PILOT" 
-                    autocomplete="off" spellcheck="false">
-                <p class="input-hint">3-12 characters (A-Z, 0-9, _)</p>
-            </div>
-            
             <button class="btn" id="startBtn">INSERT COIN</button>
-            <button class="btn btn-secondary" id="viewLeaderboardBtn">TOP PILOTS</button>
             
             <div class="controls-hint">
                 ARROWS to Move • SPACE to Fire
@@ -47,28 +37,6 @@
             </a>
         </div>
         
-        <!-- Leaderboard Overlay -->
-        <div class="galaga-menu leaderboard-screen" id="leaderboardScreen" style="display: none;">
-            <h2 class="leaderboard-title">TOP PILOTS</h2>
-            <div class="leaderboard-container" id="leaderboardContainer">
-                <table class="leaderboard-table">
-                    <thead>
-                        <tr>
-                            <th>RANK</th>
-                            <th>PILOT</th>
-                            <th>SCORE</th>
-                            <th>WAVE</th>
-                        </tr>
-                    </thead>
-                    <tbody id="leaderboardBody">
-                        <tr><td colspan="4" class="loading-text">LOADING...</td></tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="leaderboard-stats" id="leaderboardStats"></div>
-            <button class="btn" id="closeLeaderboardBtn">BACK</button>
-        </div>
-        
         <!-- Game Over Overlay -->
         <div class="galaga-menu game-over-screen" id="gameOverScreen" style="display: none;">
             <h2 class="game-over-title">GAME OVER</h2>
@@ -76,12 +44,11 @@
                 <p class="score-label">FINAL SCORE</p>
                 <p class="score-value" id="finalScore">0</p>
             </div>
-            <div class="rank-display" id="rankDisplay" style="display: none;">
-                <p class="rank-text" id="rankText"></p>
+            <div class="high-score-display">
+                <p class="high-score-text" id="highScoreText"></p>
             </div>
             <div class="game-over-buttons">
                 <button class="btn" id="playAgainBtn">PLAY AGAIN</button>
-                <button class="btn btn-secondary" id="viewScoresBtn">TOP PILOTS</button>
             </div>
         </div>
 

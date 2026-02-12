@@ -550,6 +550,26 @@ canvas {
 }
 
 /* ========================================
+   High Score Display
+======================================== */
+.high-score-display {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.high-score-text {
+    color: #06b6d4;
+    font-size: 14px;
+    text-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
+}
+
+.high-score-text.new-record {
+    color: #ffd700;
+    animation: newRecord 0.5s ease-in-out infinite alternate;
+    text-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+}
+
+/* ========================================
    Responsive for Leaderboard
 ======================================== */
 @media (max-width: 480px) {
