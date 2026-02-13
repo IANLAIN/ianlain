@@ -185,7 +185,7 @@ class GalagaAudio {
      */
     hit() {
         this.createOsc('square', 200, 0.15, 0.05);
-        this.createOsc('noise', 150, 0.1, 0.08);
+        this.createNoise(0.08);
     }
 
     /**

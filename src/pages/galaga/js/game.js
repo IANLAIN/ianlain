@@ -2,12 +2,10 @@
 
 import { 
     GAME_CONFIG, 
-    COLORS, 
     SELECTORS, 
     ENEMY_TYPE, 
     SCORING, 
-    FORMATION, 
-    ENTRY_PATTERNS
+    FORMATION 
 } from './config.js';
 import { audio } from './audio.js';
 import { 
@@ -19,9 +17,7 @@ import {
     drawScore,
     drawLives,
     drawLevelFlags,
-    drawReadyMessage,
-    drawGameOver,
-    drawTractorBeam
+    drawReadyMessage
 } from './renderers.js';
 import {
     isFirstVisit,
@@ -215,18 +211,22 @@ class GalagaGame {
         switch(e.key) {
             case 'ArrowLeft':
             case 'a':
+                e.preventDefault();
                 this.keys.left = isDown;
                 break;
             case 'ArrowRight':
             case 'd':
+                e.preventDefault();
                 this.keys.right = isDown;
                 break;
             case ' ':
             case 'z':
+                e.preventDefault();
                 this.keys.fire = isDown;
                 if (isDown) this.tryFire();
                 break;
             case 'Enter':
+                e.preventDefault();
                 if (isDown && this.state === 'MENU') this.startGame();
                 break;
         }
@@ -262,6 +262,7 @@ class GalagaGame {
     /** Restarts the game from game over screen */
     restartGame() {
         this.hideGameOver();
+        this.state = 'MENU';
         const menu = document.getElementById('startScreen');
         if (menu) menu.style.display = 'flex';
     }
@@ -528,16 +529,18 @@ class GalagaGame {
             });
             
             // Enemy bullets vs Player
-            this.enemyBullets.forEach((bullet, index) => {
+            for (let i = this.enemyBullets.length - 1; i >= 0; i--) {
+                const bullet = this.enemyBullets[i];
                 const dx = bullet.x - this.player.x;
                 const dy = bullet.y - this.player.y;
                 const dist = Math.sqrt(dx*dx + dy*dy);
                 
                 if (dist < 15) {
-                    this.enemyBullets.splice(index, 1);
+                    this.enemyBullets.splice(i, 1);
                     this.killPlayer();
+                    break; // Player already dead, stop checking
                 }
-            });
+            }
         }
     }
 
@@ -593,7 +596,7 @@ class GalagaGame {
 
     levelComplete() {
         this.state = 'LEVEL_TRANSITION';
-        audio.levelClear && audio.levelClear();
+        audio.stageClear();
         
         setTimeout(() => {
             this.level++;
@@ -657,10 +660,10 @@ class GalagaGame {
         });
         
         // Draw Explosions
-        this.explosions.forEach((exp, index) => {
+        this.explosions = this.explosions.filter(exp => {
             drawExplosion(this.ctx, exp);
             exp.timer++;
-            if (exp.timer > 20) this.explosions.splice(index, 1);
+            return exp.timer <= 20;
         });
         
         this.drawUI();
@@ -669,9 +672,7 @@ class GalagaGame {
             drawReadyMessage(this.ctx, this.canvas.width, this.canvas.height);
         }
         
-        if (this.state === 'GAME_OVER') {
-            drawGameOver(this.ctx, this.canvas.width, this.canvas.height, this.score);
-        }
+        // Game over visual handled by HTML overlay (showGameOver)
     }
 
     drawStars() {

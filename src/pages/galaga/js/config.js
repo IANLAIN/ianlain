@@ -103,21 +103,6 @@ export const ENTRY_PATTERNS = Object.freeze({
 });
 
 // ============================================================================
-// COOKIE MANAGER
-// ============================================================================
-
-export const CookieManager = {
-    get: () => {
-        const match = document.cookie.split('; ').find(row => row.startsWith('galaga_highscore='));
-        return match ? parseInt(decodeURIComponent(match.split('=')[1])) || 0 : 0;
-    },
-    set: (score) => {
-        const expires = new Date(Date.now() + 365 * 864e5).toUTCString();
-        document.cookie = `galaga_highscore=${score}; expires=${expires}; path=/; SameSite=Lax`;
-    }
-};
-
-// ============================================================================
 // DIVING ATTACK CONFIGURATION
 // ============================================================================
 
@@ -312,49 +297,4 @@ export const SELECTORS = Object.freeze({
         RIGHT: 'touchRight',
         FIRE: 'touchFire'
     }
-});
-
-// ============================================================================
-// STORAGE
-// ============================================================================
-
-/** Cookie utilities for high score persistence */
-export const CookieManager = {
-    COOKIE_NAME: 'iansGalagaHighScore',
-    
-    /**
-     * Save high score to cookie
-     * @param {number} value - Score to save
-     * @param {number} [days=365] - Cookie expiration in days
-     */
-    set(value, days = 365) {
-        const expires = new Date(Date.now() + days * 864e5).toUTCString();
-        document.cookie = `${this.COOKIE_NAME}=${encodeURIComponent(value)}; expires=${expires}; path=/; SameSite=Lax`;
-    },
-    
-    /**
-     * Retrieve high score from cookie
-     * @returns {number} Stored high score or 0
-     */
-    get() {
-        const value = document.cookie.split('; ').find(row => row.startsWith(this.COOKIE_NAME + '='));
-        return value ? parseInt(decodeURIComponent(value.split('=')[1])) || 0 : 0;
-    }
-};
-
-// ============================================================================
-// GAME STATE ENUM
-// ============================================================================
-
-/** @enum {string} Game state machine states */
-export const GAME_STATE = Object.freeze({
-    TITLE: 'title',
-    STAGE_INTRO: 'stageIntro',
-    ENTRY_PHASE: 'entryPhase',      // Enemies entering formation
-    ATTACK_PHASE: 'attackPhase',    // Normal gameplay
-    CHALLENGING: 'challenging',      // Bonus stage
-    STAGE_CLEAR: 'stageClear',
-    PLAYER_DEATH: 'playerDeath',
-    GAME_OVER: 'gameOver',
-    PAUSED: 'paused'
 });
