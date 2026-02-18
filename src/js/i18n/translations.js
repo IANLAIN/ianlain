@@ -21,7 +21,10 @@ export const translations = {
                 title: "Academic Background",
                 degree: "Systems & Computer Engineering",
                 university: "Universidad Tecnológica de Pereira",
-                status: "In Progress"
+                status: "In Progress",
+                degree2: "Defensive Cybersecurity & Data Protection",
+                institution2: "Self-directed study",
+                status2: "Junior"
             }
         },
         interests: {
@@ -45,6 +48,10 @@ export const translations = {
             astronomy: {
                 title: "Computational Astronomy",
                 description: "Bridging the gap between celestial mechanics and data science to unravel the mysteries of the cosmos through computational astrophysics."
+            },
+            arts: {
+                title: "Arts & Philosophy",
+                description: "Greek philosophy formalized logic and harmony — the same structures that led to Boolean algebra and modern computing. Mathematics, art, and philosophy share a common root."
             }
         },
         contact: {
@@ -73,7 +80,10 @@ export const translations = {
                 title: "Formación Académica",
                 degree: "Ingeniería de Sistemas y Computación",
                 university: "Universidad Tecnológica de Pereira",
-                status: "En Curso"
+                status: "En Curso",
+                degree2: "Ciberseguridad Defensiva y Protección de Datos",
+                institution2: "Estudio autodidacta",
+                status2: "Junior"
             }
         },
         interests: {
@@ -97,6 +107,10 @@ export const translations = {
             astronomy: {
                 title: "Astronomía Computacional",
                 description: "Uniendo la mecánica celeste y la ciencia de datos para desentrañar los misterios del cosmos a través de la astrofísica computacional."
+            },
+            arts: {
+                title: "Artes y Filosofía",
+                description: "La filosofía griega formalizó la lógica y la armonía — las mismas estructuras que derivaron en el álgebra booleana y la computación moderna. Matemáticas, arte y filosofía comparten una raíz común."
             }
         },
         contact: {
@@ -125,7 +139,10 @@ export const translations = {
                 title: "Éducation",
                 degree: "Génie des Systèmes et Informatique",
                 university: "Universidad Tecnológica de Pereira, Colombie",
-                status: "Étudiant Actuel"
+                status: "Étudiant Actuel",
+                degree2: "Cybersécurité Défensive et Protection des Données",
+                institution2: "Étude autodidacte",
+                status2: "Junior"
             }
         },
         interests: {
@@ -149,6 +166,10 @@ export const translations = {
             astronomy: {
                 title: "Astronomie Computationnelle",
                 description: "Combler le fossé entre la mécanique céleste et la science des données pour percer les mystères du cosmos grâce à l'astrophysique computationnelle."
+            },
+            arts: {
+                title: "Arts et Philosophie",
+                description: "La philosophie grecque a formalisé la logique et l'harmonie — les mêmes structures qui ont mené à l'algèbre booléenne et à l'informatique moderne. Mathématiques, art et philosophie partagent une racine commune."
             }
         },
         contact: {
@@ -177,7 +198,10 @@ export const translations = {
                 title: "教育背景",
                 degree: "系统与计算机工程",
                 university: "哥伦比亚佩雷拉科技大学",
-                status: "在读学生"
+                status: "在读学生",
+                degree2: "防御性网络安全与数据保护",
+                institution2: "自学",
+                status2: "初级"
             }
         },
         interests: {
@@ -201,6 +225,10 @@ export const translations = {
             astronomy: {
                 title: "计算天文学",
                 description: "通过计算天体物理学，弥合天体力学与数据科学之间的鸿沟，揭开宇宙的奥秘。"
+            },
+            arts: {
+                title: "艺术与哲学",
+                description: "希腊哲学将逻辑与和谐形式化——正是这些结构催生了布尔代数和现代计算。数学、艺术与哲学同根同源。"
             }
         },
         contact: {
