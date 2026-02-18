@@ -12,7 +12,6 @@
 @import './components/_navbar.css';
 @import './components/_cards.css';
 @import './components/_buttons.css';
-@import './components/_search.css';
 
 /* Sections: page-specific styles */
 @import './sections/_hero.css';

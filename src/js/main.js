@@ -6,7 +6,6 @@ import { initPrefetch } from './core/prefetch.js';
 import { Router } from './core/router.js';
 import { initNavigation } from './components/navigation.js';
 import { initAnimations, revealSections, createScrollToTop } from './components/animations.js';
-import { initSearch } from './components/search.js';
 import { I18N } from './i18n/i18n.js';
 import { initHypercube } from './features/hypercube.js';
 
@@ -16,7 +15,6 @@ function init() {
     Router.init();
     I18N.init();
     initNavigation();
-    initSearch();
     initAnimations();
     createScrollToTop();
     revealSections();

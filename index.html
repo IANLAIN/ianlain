@@ -67,9 +67,6 @@
             </ul>
             
             <div class="nav-right">
-                <button class="search-toggle" id="searchToggle" title="Search" aria-label="Search">
-                    <i class="fas fa-search"></i>
-                </button>
                 <div class="language-selector">
                     <button class="lang-btn active" data-lang="en" title="English">EN</button>
                     <button class="lang-btn" data-lang="es" title="Español">ES</button>
@@ -84,27 +81,6 @@
             </div>
         </div>
     </nav>
-
-    <!-- Search Overlay -->
-    <div class="search-overlay" id="searchOverlay">
-        <div class="search-container">
-            <form class="search-form" id="searchForm" action="https://duckduckgo.com/" method="GET" target="_blank">
-                <div class="search-input-wrapper">
-                    <i class="fas fa-search search-icon"></i>
-                    <input type="text" name="q" class="search-input" id="searchInput" 
-                           placeholder="Search the web with DuckDuckGo..." 
-                           autocomplete="off" autofocus>
-                    <button type="button" class="search-close" id="searchClose" aria-label="Close search">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                <div class="search-hint">
-                    <span><kbd>Enter</kbd> to search</span>
-                    <span><kbd>Esc</kbd> to close</span>
-                </div>
-            </form>
-        </div>
-    </div>
 
     <section id="home" class="hero">
         <canvas id="hypercube-canvas" class="hypercube-bg"></canvas>
