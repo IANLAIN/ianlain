@@ -5,16 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Open Science & Tech News Feed">
     <title>IanLain | News</title>
-    
-    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="../../assets/images/favicon.svg">
-    
-    <!-- Styles -->
     <link rel="stylesheet" href="../../css/main.css">
     <link rel="stylesheet" href="css/news.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Router -->
     <script type="module" src="../../js/core/router-init.js"></script>
 </head>
 <body>
@@ -27,11 +20,8 @@
                     <span class="logo-bracket">/&gt;</span>
                 </div>
             </a>
-            
             <div class="nav-right">
-                <a href="/" class="back-link">
-                    <i class="fas fa-arrow-left"></i> Back
-                </a>
+                <a href="/" class="back-link">← Back</a>
             </div>
         </div>
     </nav>
@@ -39,8 +29,8 @@
     <main class="news-container">
         <header class="news-header">
             <h1 class="news-title">Latest <span class="highlight">Insights</span></h1>
-            <p class="news-subtitle">Curated developments in Science, Mathematics, Technology & Security</p>
-            
+            <p class="news-subtitle">Curated developments in Science, Technology & Security</p>
+
             <div class="news-controls">
                 <div class="news-filters">
                     <button class="filter-btn active" data-category="all">All</button>
@@ -49,20 +39,17 @@
                     <button class="filter-btn" data-category="science">Science</button>
                     <button class="filter-btn" data-category="security">Security</button>
                 </div>
-                
-                <div class="news-sort">
-                    <select id="sortSelect" class="sort-select">
-                        <option value="date-desc">Newest First</option>
-                        <option value="date-asc">Oldest First</option>
-                        <option value="read-asc">Short Read</option>
-                        <option value="read-desc">Long Read</option>
-                    </select>
-                </div>
+                <select id="sortSelect" class="sort-select">
+                    <option value="date-desc">Newest</option>
+                    <option value="date-asc">Oldest</option>
+                    <option value="source-asc">Source</option>
+                </select>
             </div>
+
+            <p class="news-stats" id="newsStats"></p>
         </header>
 
-        <div class="news-grid" id="newsGrid">
-            <!-- Loading State -->
+        <div class="feed-list" id="newsList">
             <div class="loader">
                 <div class="spinner"></div>
                 <p>Fetching open data...</p>
