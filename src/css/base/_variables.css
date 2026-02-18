@@ -153,7 +153,7 @@
     --z-fixed: 100;      /* Fixed elements like navbar */
     --z-dropdown: 100;
     --z-sticky: 500;
-    --z-modal-backdrop: 1400;
+    --z-modal-backdrop: 900;
     --z-modal: 1000;     /* Modals and overlays */
     --z-popover: 1600;
     --z-tooltip: 1700;

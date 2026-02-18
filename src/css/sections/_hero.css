@@ -100,14 +100,13 @@
 }
 
 .hero-subtitle {
-    font-size: var(--font-size-lg);
+    font-size: 0.9rem;
     color: var(--primary);
     font-weight: 500;
     margin-bottom: var(--space-4);
     opacity: 0.9;
     letter-spacing: 0.02em;
     text-transform: uppercase;
-    font-size: 0.9rem;
 }
 
 .hero-description {

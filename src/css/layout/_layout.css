@@ -9,13 +9,8 @@
     padding-inline: var(--section-padding-x);
 }
 
-.container--fluid {
-    max-width: 100%;
-}
-
-.container--narrow {
-    max-width: 850px;
-}
+/* Variants: .container--fluid, .container--narrow
+   Uncomment when needed */
 
 /* ==================== SECTIONS ==================== */
 

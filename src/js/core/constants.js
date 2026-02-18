@@ -1,6 +1,6 @@
 // App-wide configuration and constants
 
-/** Route mappings: clean URL → real path (Keep synced with router-init.js and 404.html) */
+/** Route mappings: clean URL → real path (Keep synced with 404.html) */
 export const ROUTES = {
     '/': '/index.html',
     '/game': '/src/pages/galaga/index.html',

@@ -10,6 +10,7 @@
 
 :root {
     --bg-color: #050505;
+    --primary: #06b6d4;
     --crt-curvature: 3px;
     --crt-scanline-opacity: 0.15;
     --crt-glow: 0 0 10px rgba(6, 182, 212, 0.5);
@@ -238,14 +239,6 @@ canvas {
     box-shadow: 0 0 15px #fff;
 }
 
-.back-link {
-    transition: color 0.2s ease;
-}
-
-.back-link:hover {
-    color: #06b6d4 !important;
-}
-
 /* ========================================
    Responsive Adjustments
 ======================================== */
@@ -315,7 +308,7 @@ canvas {
 }
 
 .galaga-subtitle {
-    color: #06b6d4;
+    color: var(--primary);
     margin-bottom: 30px;
     font-size: 12px;
 }
@@ -332,6 +325,10 @@ canvas {
     font-size: 10px;
     text-decoration: none;
     transition: color 0.2s ease;
+}
+
+.back-link:hover {
+    color: var(--primary);
 }
 
 /* ========================================
@@ -352,8 +349,8 @@ canvas {
 
 .username-input {
     background: rgba(0, 0, 0, 0.8);
-    border: 2px solid #06b6d4;
-    color: #06b6d4;
+    border: 2px solid var(--primary);
+    color: var(--primary);
     font-family: 'Press Start 2P', monospace;
     font-size: 14px;
     padding: 12px 20px;
@@ -396,17 +393,17 @@ canvas {
 ======================================== */
 .btn-secondary {
     background: transparent;
-    border: 2px solid #06b6d4;
-    color: #06b6d4;
+    border: 2px solid var(--primary);
+    color: var(--primary);
     margin-top: 15px;
     font-size: 12px;
     padding: 12px 25px;
 }
 
 .btn-secondary:hover {
-    background: #06b6d4;
+    background: var(--primary);
     color: #000;
-    box-shadow: 0 0 15px #06b6d4;
+    box-shadow: 0 0 15px var(--primary);
 }
 
 /* ========================================
@@ -438,9 +435,9 @@ canvas {
 }
 
 .leaderboard-table th {
-    color: #06b6d4;
+    color: var(--primary);
     padding: 10px 5px;
-    border-bottom: 2px solid #06b6d4;
+    border-bottom: 2px solid var(--primary);
     text-align: center;
 }
 
@@ -558,7 +555,7 @@ canvas {
 }
 
 .high-score-text {
-    color: #06b6d4;
+    color: var(--primary);
     font-size: 14px;
     text-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
 }

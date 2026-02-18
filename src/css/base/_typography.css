@@ -43,17 +43,9 @@ p {
     color: var(--text-muted);
 }
 
-.lead {
-    font-size: var(--font-size-lg);
-    line-height: var(--line-height-relaxed);
-}
-
-.small {
-    font-size: var(--font-size-sm);
-}
-
 /* ==================== TEXT UTILITIES ==================== */
 /* Clases utilitarias disponibles para uso futuro:
+   .lead, .small,
    .text-gradient, .text-gradient-tech, .text-primary, .text-secondary,
    .text-muted, .text-cyan, .text-purple, .text-emerald,
    .text-center, .text-left, .text-right,
