@@ -1,0 +1,127 @@
+/* Navigation bar and mobile menu */
+
+/* ==================== NAVBAR ==================== */
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: var(--z-fixed);
+    background: var(--color-bg-secondary);
+    border-bottom: var(--border-thick);
+    box-shadow: var(--shadow-md);
+}
+
+.nav-container {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: var(--space-3) var(--space-6);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* ==================== LOGO ==================== */
+
+.logo {
+    display: flex;
+    align-items: center;
+    z-index: calc(var(--z-fixed) + 1);
+    transition: transform var(--transition-fast);
+}
+
+.logo:hover {
+    transform: translateY(-3px);
+}
+
+.logo-icon {
+    display: flex;
+    align-items: center;
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-black);
+    font-family: var(--font-family-mono);
+    letter-spacing: 0.02em;
+    background: var(--color-bg-elevated);
+    border: var(--border-thick);
+    padding: 0.4rem 0.65rem;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+}
+
+.logo-bracket {
+    color: var(--primary);
+}
+
+.logo-letter {
+    margin: 0 0.1rem;
+    color: var(--text);
+    font-size: 1.6rem;
+}
+
+/* ==================== NAV RIGHT ==================== */
+
+.nav-right {
+    display: flex;
+    align-items: center;
+}
+
+/* ==================== LANGUAGE SELECTOR ==================== */
+
+.language-selector {
+    display: flex;
+    gap: 0.2rem;
+    padding: 0.25rem;
+    background: var(--color-bg-elevated);
+    border: var(--border-thin);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+}
+
+.lang-btn {
+    padding: 0.45rem 0.75rem;
+    border-radius: var(--radius-sm);
+    color: var(--text-muted);
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-xs);
+    background: transparent;
+    border: 2px solid transparent;
+    transition: all var(--transition-fast);
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.lang-btn:hover {
+    color: var(--text);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.lang-btn.active {
+    background: var(--primary);
+    color: #000;
+    border-color: var(--primary);
+    box-shadow: var(--shadow-sm);
+}
+
+@media (max-width: 768px) {
+    .nav-container {
+        padding: var(--space-2) var(--space-4);
+    }
+    
+    .logo-icon {
+        font-size: 1rem;
+        padding: 0.3rem 0.5rem;
+    }
+
+    .logo-letter {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .lang-btn {
+        padding: 0.35rem 0.55rem;
+        font-size: 0.65rem;
+    }
+}

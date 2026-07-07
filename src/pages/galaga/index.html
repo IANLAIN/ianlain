@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Galaga 1981 Arcade Clone">
+    <meta name="theme-color" content="#000000">
+    <title>Galaga 1981</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/src/assets/images/favicon.svg">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/galaga.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Router for clean URLs -->
+    <script type="module" src="../../js/core/router-init.js"></script>
+</head>
+<body>
+    <!-- Game Container -->
+    <div id="gameContainer">
+        <canvas id="gameCanvas"></canvas>
+        
+        <!-- Minimal Menu Overlay -->
+        <div class="galaga-menu" id="startScreen">
+            <h1 class="galaga-title">GALAGA</h1>
+            <p class="galaga-subtitle">1981 NAMCO LTD.</p>
+            
+            <button class="btn" id="startBtn">INSERT COIN</button>
+            
+            <div class="controls-hint">
+                ARROWS to Move • SPACE to Fire
+            </div>
+            <a href="/" class="back-link">
+                &larr; Back to Portfolio
+            </a>
+        </div>
+        
+        <!-- Game Over Overlay -->
+        <div class="galaga-menu game-over-screen" id="gameOverScreen" style="display: none;">
+            <h2 class="game-over-title">GAME OVER</h2>
+            <div class="score-display" id="finalScoreDisplay">
+                <p class="score-label">FINAL SCORE</p>
+                <p class="score-value" id="finalScore">0</p>
+            </div>
+            <div class="high-score-display">
+                <p class="high-score-text" id="highScoreText"></p>
+            </div>
+            <div class="game-over-buttons">
+                <button class="btn" id="playAgainBtn">PLAY AGAIN</button>
+            </div>
+        </div>
+
+        <!-- Touch Controls -->
+        <div id="touchControls">
+            <div class="touch-zone" id="touchLeft">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+            <div class="touch-zone" id="touchRight">
+                <i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="touch-zone" id="touchFire">
+                <i class="fas fa-crosshairs"></i>
+            </div>
+        </div>
+        
+        <!-- Top Controls -->
+        <div class="top-controls">
+            <a href="/" id="backBtn" class="control-btn" title="Back to Portfolio">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+            <button id="muteBtn" class="control-btn" title="Toggle Sound">
+                <i class="fas fa-volume-up" id="muteIcon"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Modular JavaScript -->
+    <script type="module" src="js/game.js"></script>
+</body>
+</html>

@@ -1,0 +1,322 @@
+/* Landing hero and modal styles */
+
+.home-page {
+    overflow: hidden;
+    background: var(--background);
+}
+
+/* ==================== BACKGROUND CANVAS ==================== */
+
+#hypercube-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.65;
+}
+
+/* Brutalist decorative elements */
+.home-page::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+        repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 20px,
+            rgba(6, 182, 212, 0.02) 20px,
+            rgba(6, 182, 212, 0.02) 21px
+        ),
+        repeating-linear-gradient(
+            -45deg,
+            transparent,
+            transparent 20px,
+            rgba(6, 182, 212, 0.02) 20px,
+            rgba(6, 182, 212, 0.02) 21px
+        );
+    z-index: 1;
+}
+
+.hero {
+    min-height: 100svh;
+    display: grid;
+    place-items: center;
+    position: relative;
+    overflow: hidden;
+    padding-top: 4.5rem;
+    padding-inline: var(--space-4);
+    z-index: 2;
+}
+
+.hero-content {
+    width: min(100%, 44rem);
+    display: grid;
+    place-items: center;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    animation: fadeSlideUp 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes fadeSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.profile-container {
+    display: grid;
+    place-items: center;
+    gap: var(--space-5);
+    padding: clamp(1.5rem, 3vw, 2.5rem);
+    border-radius: var(--radius-lg);
+    background: rgba(22, 22, 30, 0.88);
+    border: var(--border-thick);
+    box-shadow: var(--shadow-card);
+    width: min(100%, 36rem);
+}
+
+.profile-image {
+    width: clamp(7rem, 18vw, 10rem);
+    height: clamp(7rem, 18vw, 10rem);
+    border-radius: var(--radius-full);
+    object-fit: cover;
+    border: 3px solid var(--primary);
+    box-shadow: var(--shadow-md);
+    filter: grayscale(0.15) contrast(1.1);
+}
+
+.hero-title {
+    margin: 0;
+}
+
+.nickname {
+    display: block;
+    font-size: clamp(2.8rem, 8vw, 5rem);
+    font-weight: var(--font-weight-black);
+    letter-spacing: -0.05em;
+    line-height: 1;
+    color: var(--text);
+    text-shadow: 4px 4px 0px rgba(0, 0, 0, 0.5);
+}
+
+.hero-subtitle {
+    margin: 0;
+    font-size: clamp(0.8rem, 1.4vw, 1rem);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    background: var(--color-bg-elevated);
+    border: var(--border-thin);
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-sm);
+    display: inline-block;
+}
+
+.hero-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+    margin-top: var(--space-2);
+}
+
+/* ==================== SOCIAL LINKS ==================== */
+
+.hero-socials {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4);
+    margin-top: var(--space-4);
+}
+
+.social-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    padding: 0.6rem 1.2rem;
+    border-radius: var(--radius-md);
+    background: var(--color-bg-elevated);
+    border: 3px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+    color: var(--text-muted);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    transition: all var(--transition-fast);
+    cursor: pointer;
+}
+
+.social-btn svg {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+}
+
+.social-btn:hover {
+    color: var(--text);
+    background: var(--color-bg-card);
+    border-color: var(--border-color-hover);
+    box-shadow: var(--shadow-button);
+    transform: translate(-2px, -2px);
+}
+
+/* ==================== GAME MODAL (Brutalist) ==================== */
+
+.game-modal {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-modal);
+    display: grid;
+    place-items: center;
+    padding: var(--space-4);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--duration-normal) var(--ease-out), visibility var(--duration-normal) var(--ease-out);
+}
+
+.game-modal.is-open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.game-modal__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+}
+
+.game-modal__panel {
+    position: relative;
+    width: min(100%, 36rem);
+    padding: clamp(2.5rem, 5vw, 4rem);
+    background: var(--color-bg-card);
+    border: var(--border-thick);
+    border-color: var(--color-neon-red);
+    box-shadow: var(--shadow-xl), 0 0 40px rgba(255, 42, 42, 0.12);
+    text-align: center;
+    display: grid;
+    gap: var(--space-6);
+    place-items: center;
+    transform: scale(0.9);
+    transition: transform var(--duration-normal) var(--ease-out);
+    border-radius: var(--radius-lg);
+}
+
+.game-modal.is-open .game-modal__panel {
+    transform: scale(1);
+}
+
+.game-modal__close {
+    position: absolute;
+    top: var(--space-3);
+    right: var(--space-3);
+    width: 2.5rem;
+    height: 2.5rem;
+    background: var(--color-bg-elevated);
+    border: 3px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    color: var(--text);
+    font-size: 1.4rem;
+    font-weight: var(--font-weight-bold);
+    line-height: 1;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    transition: all var(--transition-fast);
+    box-shadow: var(--shadow-sm);
+}
+
+.game-modal__close:hover {
+    background: var(--color-neon-red);
+    color: #000;
+    border-color: #000;
+    transform: scale(1.1);
+}
+
+.game-modal__title {
+    margin: 0;
+    font-size: var(--font-size-6xl);
+    font-weight: var(--font-weight-black);
+    line-height: 1;
+    letter-spacing: -0.06em;
+    color: var(--color-neon-red);
+    text-shadow: 
+        4px 4px 0px rgba(0, 0, 0, 0.8),
+        0 0 20px rgba(255, 42, 42, 0.4);
+    text-wrap: balance;
+    animation: losePulse 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite alternate;
+}
+
+@keyframes losePulse {
+    from {
+        transform: scale(1);
+        text-shadow: 4px 4px 0px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 42, 42, 0.3);
+    }
+    to {
+        transform: scale(1.04);
+        text-shadow: 6px 6px 0px rgba(0, 0, 0, 0.8), 0 0 40px rgba(255, 42, 42, 0.6);
+    }
+}
+
+.game-modal__link {
+    justify-self: center;
+}
+
+/* ==================== RESPONSIVE ==================== */
+
+@media (max-width: 768px) {
+    .hero {
+        padding-top: 4rem;
+    }
+
+    .profile-container {
+        padding: 1.5rem;
+        gap: var(--space-4);
+    }
+
+    .hero-actions {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .hero-actions .action-btn {
+        width: min(100%, 18rem);
+    }
+
+    .game-modal__panel {
+        padding: 2rem;
+        gap: var(--space-5);
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-container {
+        padding: 1.25rem;
+    }
+
+    .hero-subtitle {
+        letter-spacing: 0.1em;
+        font-size: clamp(0.7rem, 3.5vw, 0.85rem);
+    }
+
+    .game-modal__panel {
+        padding: 1.5rem;
+    }
+}

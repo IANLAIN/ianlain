@@ -1,0 +1,19 @@
+<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <!-- Logo: <I/> with transparent background -->
+  <g transform="translate(32, 32)">
+    <!-- Left bracket < -->
+    <text x="-24" y="10" font-family="'Courier New', monospace" font-size="28" font-weight="bold" fill="#06b6d4" text-anchor="middle">
+      &lt;
+    </text>
+    
+    <!-- Letter I -->
+    <text x="-8" y="10" font-family="'Courier New', monospace" font-size="32" font-weight="bold" fill="#f0f9ff" text-anchor="middle">
+      I
+    </text>
+    
+    <!-- Right bracket / -->
+    <text x="16" y="10" font-family="'Courier New', monospace" font-size="28" font-weight="bold" fill="#06b6d4" text-anchor="middle">
+      /&gt;
+    </text>
+  </g>
+</svg>
